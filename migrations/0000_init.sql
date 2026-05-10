@@ -77,7 +77,7 @@ CREATE TABLE `profile` (
   `congressional_district` TEXT,
   `state_legislative_lower_district` TEXT,
   `state_legislative_upper_district` TEXT,
-  `representatives_cache` TEXT,        -- JSON-encoded Representative[]
+  `representatives_cache` TEXT,
   `representatives_cached_at` INTEGER,
   `created_at` INTEGER NOT NULL,
   `updated_at` INTEGER NOT NULL
