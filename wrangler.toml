@@ -28,7 +28,7 @@ pages_build_output_dir = "./dist"
 [[d1_databases]]
 binding = "DB"
 database_name = "americansforpropriety"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "8a2ff9e8-c79a-4c4a-9f1b-338e2eda0499"
 
 ## Optional: Astro Sessions KV (not currently used; auth runs through Better
 ## Auth's own session store backed by D1). Leave commented unless we adopt
