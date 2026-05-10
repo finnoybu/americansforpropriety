@@ -10,8 +10,10 @@ interface Env {
   // Better Auth
   BETTER_AUTH_SECRET: string;
 
-  // Outbound email
-  RESEND_API_KEY?: string;
+  // Outbound email (AWS SES via SigV4)
+  AWS_ACCESS_KEY_ID?: string;
+  AWS_SECRET_ACCESS_KEY?: string;
+  AWS_REGION?: string;
   EMAIL_FROM?: string;
 
   // AI / lookup services

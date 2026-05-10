@@ -13,7 +13,9 @@ export function getEnv(ctx: APIContext | AstroGlobal): Env {
   return {
     DB: undefined as unknown as D1Database,
     BETTER_AUTH_SECRET: proc.BETTER_AUTH_SECRET ?? "",
-    RESEND_API_KEY: proc.RESEND_API_KEY,
+    AWS_ACCESS_KEY_ID: proc.AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY: proc.AWS_SECRET_ACCESS_KEY,
+    AWS_REGION: proc.AWS_REGION,
     EMAIL_FROM: proc.EMAIL_FROM,
     ANTHROPIC_API_KEY: proc.ANTHROPIC_API_KEY ?? "",
     GEOCODIO_API_KEY: proc.GEOCODIO_API_KEY ?? "",

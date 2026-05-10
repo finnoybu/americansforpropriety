@@ -6,7 +6,7 @@
 //   - 60-minute link expiry (matches what /signin and /privacy say users
 //     should expect).
 //   - Sessions are stored in D1 via Better Auth's Drizzle adapter.
-//   - Magic-link emails go out through Resend.
+//   - Magic-link emails go out through AWS SES.
 //
 // This module is server-only. Never import it from a client-side script.
 
@@ -14,14 +14,16 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { magicLink } from "better-auth/plugins";
 import { drizzle } from "drizzle-orm/d1";
-import { Resend } from "resend";
+import { AwsClient } from "aws4fetch";
 import * as schema from "~/db/schema";
 
 interface AuthInitOptions {
   d1: D1Database;
   baseUrl: string;
   authSecret: string;
-  resendApiKey?: string;
+  awsAccessKeyId?: string;
+  awsSecretAccessKey?: string;
+  awsRegion?: string;
   fromAddress?: string;
 }
 
@@ -33,7 +35,9 @@ export function createAuth({
   d1,
   baseUrl,
   authSecret,
-  resendApiKey,
+  awsAccessKeyId,
+  awsSecretAccessKey,
+  awsRegion = "us-east-1",
   fromAddress = "Americans for Propriety <hello@americansforpropriety.org>",
 }: AuthInitOptions) {
   const db = drizzle(d1, { schema });
@@ -56,24 +60,55 @@ export function createAuth({
       magicLink({
         expiresIn: 60 * 60, // seconds
         sendMagicLink: async ({ email, url }) => {
-          if (!resendApiKey) {
+          if (!awsAccessKeyId || !awsSecretAccessKey) {
             // No-op in dev / unconfigured envs. Log so the link can be
             // copy-pasted from terminal output during local testing.
             console.warn(
-              `[auth] Resend not configured. Magic link for ${email}:\n${url}`,
+              `[auth] AWS SES not configured. Magic link for ${email}:\n${url}`,
             );
             return;
           }
-          const resend = new Resend(resendApiKey);
+
+          const aws = new AwsClient({
+            accessKeyId: awsAccessKeyId,
+            secretAccessKey: awsSecretAccessKey,
+            service: "ses",
+            region: awsRegion,
+          });
+
           const text = magicLinkPlainText(url);
           const html = magicLinkHtml(url);
-          await resend.emails.send({
-            from: fromAddress,
-            to: email,
-            subject: "Sign in to Americans for Propriety",
-            text,
-            html,
+
+          // SES API v2 SendEmail endpoint. The aws4fetch client signs the
+          // request with SigV4 automatically.
+          const endpoint = `https://email.${awsRegion}.amazonaws.com/v2/email/outbound-emails`;
+          const body = {
+            FromEmailAddress: fromAddress,
+            Destination: { ToAddresses: [email] },
+            Content: {
+              Simple: {
+                Subject: { Data: "Sign in to Americans for Propriety", Charset: "UTF-8" },
+                Body: {
+                  Text: { Data: text, Charset: "UTF-8" },
+                  Html: { Data: html, Charset: "UTF-8" },
+                },
+              },
+            },
+          };
+
+          const res = await aws.fetch(endpoint, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(body),
           });
+
+          if (!res.ok) {
+            const errBody = await res.text();
+            console.error(
+              `[auth] SES sendEmail failed (${res.status}): ${errBody}`,
+            );
+            throw new Error(`SES sendEmail failed: ${res.status}`);
+          }
         },
       }),
     ],

@@ -31,7 +31,7 @@ The site has two faces, on purpose.
 - [Cloudflare Pages](https://pages.cloudflare.com) — deploy target via `@astrojs/cloudflare`
 - [Cloudflare D1](https://developers.cloudflare.com/d1/) — SQLite at the edge; member accounts, action log, generated letters, AI brief drafts
 - [Better Auth](https://www.better-auth.com/) + [Drizzle ORM](https://orm.drizzle.team/) — magic-link sessions and type-safe queries
-- [Resend](https://resend.com) — outbound magic-link email
+- [AWS SES](https://aws.amazon.com/ses/) — outbound magic-link email (signed via [`aws4fetch`](https://github.com/mhart/aws4fetch))
 - [Tailwind CSS 4](https://tailwindcss.com) — design tokens in `src/styles/global.css`
 - [Anthropic Claude](https://www.anthropic.com) — letter generation; uses web search tool for "recent positions" grounding
 - [Geocodio](https://www.geocod.io) — ZIP → state, congressional district, federal + state legislators
@@ -51,7 +51,7 @@ npm run build              # type-check + production build
 npm run preview            # serves the production build via wrangler pages dev
 ```
 
-You don't strictly *need* any keys to run the dev server — visitor-facing pages work without them. To exercise the member toolkit locally, fill in `BETTER_AUTH_SECRET`, `RESEND_API_KEY` (or none, and copy the magic-link URL from the server console), `ANTHROPIC_API_KEY`, and `GEOCODIO_API_KEY`. See `.env.example`.
+You don't strictly *need* any keys to run the dev server — visitor-facing pages work without them. To exercise the member toolkit locally, fill in `BETTER_AUTH_SECRET`, the `AWS_*` variables (or skip them and copy the magic-link URL from the server console — the auth library logs it when SES isn't configured), `ANTHROPIC_API_KEY`, and `GEOCODIO_API_KEY`. See `.env.example`.
 
 > **Windows note:** running `npm install` directly on Windows will strip Linux-only platform binaries from the lockfile and break Cloudflare's `npm ci` build. Always regenerate the lockfile through WSL: `npm run lock:wsl`.
 
@@ -75,7 +75,7 @@ src/
   layouts/BaseLayout.astro
   components/                Header, Footer, Section, Logo, ThemeToggle, ...
   lib/
-    auth.ts                  Better Auth server config (magic-link + Resend)
+    auth.ts                  Better Auth server config (magic-link + AWS SES)
     auth-client.ts           Browser-side auth client
     anthropic.ts             Letter generation via Claude Messages API
     geocodio.ts              ZIP → reps lookup + normalization
@@ -129,12 +129,15 @@ openssl rand -base64 32
 
 Set as `BETTER_AUTH_SECRET` in `.env` for local dev and as an encrypted secret in Cloudflare Pages → Settings → Variables and Secrets for production.
 
-### 3. Resend (outbound email)
+### 3. AWS SES (outbound email)
 
-1. Create an account at <https://resend.com>
-2. Verify the sending domain (`americansforpropriety.org`) — add the DKIM/SPF records Resend provides to Cloudflare DNS
-3. Create an API key
-4. Set `RESEND_API_KEY=re_...` and `EMAIL_FROM="Americans for Propriety <hello@americansforpropriety.org>"`
+1. Create or sign in to an AWS account at <https://aws.amazon.com>.
+2. In the SES console (us-east-1 recommended), create a Domain identity for `americansforpropriety.org` with Easy DKIM. Paste the three CNAME records SES generates into Cloudflare DNS (DNS-only, not proxied). Wait for DKIM verification.
+3. Submit a "Request production access" form from the SES Account dashboard. Approval is typically same-day.
+4. In IAM, create a user with `AmazonSESFullAccess` (or scoped to `ses:SendEmail`). Generate access keys.
+5. Set `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION=us-east-1`, and `EMAIL_FROM="Americans for Propriety <hello@americansforpropriety.org>"`.
+
+The same AWS account can verify additional domains (other Finnoybu projects, etc.); each gets its own DKIM CNAMEs but shares the IAM user / production-access status.
 
 ### 4. Anthropic (Claude API)
 
@@ -165,7 +168,9 @@ This is configured for Cloudflare Pages with Functions (the `@astrojs/cloudflare
 3. **Bind D1** under Settings → Bindings: name `DB`, point at the `americansforpropriety` database created above.
 4. **Environment variables** (Settings → Variables and Secrets → Production):
    - `BETTER_AUTH_SECRET` (encrypted)
-   - `RESEND_API_KEY` (encrypted)
+   - `AWS_ACCESS_KEY_ID` (encrypted)
+   - `AWS_SECRET_ACCESS_KEY` (encrypted)
+   - `AWS_REGION` (plain text, e.g. `us-east-1`)
    - `EMAIL_FROM` (plain text)
    - `ANTHROPIC_API_KEY` (encrypted)
    - `GEOCODIO_API_KEY` (encrypted)

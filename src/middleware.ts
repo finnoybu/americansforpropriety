@@ -36,7 +36,9 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
       d1: env.DB,
       baseUrl: getSiteUrl(ctx),
       authSecret: env.BETTER_AUTH_SECRET,
-      resendApiKey: env.RESEND_API_KEY,
+      awsAccessKeyId: env.AWS_ACCESS_KEY_ID,
+      awsSecretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+      awsRegion: env.AWS_REGION,
       fromAddress: env.EMAIL_FROM,
     });
 

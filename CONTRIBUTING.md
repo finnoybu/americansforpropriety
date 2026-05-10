@@ -60,7 +60,7 @@ For changes that touch multiple files, add new components, or modify the site's 
 - **Git**.
 - **A GitHub account.**
 
-You do *not* need: a Cloudflare D1 binding, a `BETTER_AUTH_SECRET`, a Resend key, an Anthropic API key, or a Geocodio key, unless you're working on member-account features or the AI drafting tools specifically. The site degrades gracefully when those services aren't configured — every page that needs auth/DB checks `isDbConfigured()` first.
+You do *not* need: a Cloudflare D1 binding, a `BETTER_AUTH_SECRET`, AWS credentials, an Anthropic API key, or a Geocodio key, unless you're working on member-account features or the AI drafting tools specifically. The site degrades gracefully when those services aren't configured — every page that needs auth/DB checks `isDbConfigured()` first.
 
 ### Fork and clone
 
@@ -91,7 +91,7 @@ cp .env.example .env  # if .env.example exists; otherwise create .env
 Variables the site reads (all optional unless noted):
 
 - `BETTER_AUTH_SECRET` — required for member auth (any 32+ byte random string for local dev; production uses a secret stored in Cloudflare). Generate one with `openssl rand -base64 32`.
-- `RESEND_API_KEY`, `EMAIL_FROM` — required if you want magic-link emails to actually send. Without them, the auth library logs the magic-link URL to the server console so you can copy it manually for local testing.
+- `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `EMAIL_FROM` — required if you want magic-link emails to actually send via AWS SES. Without them, the auth library logs the magic-link URL to the server console so you can copy it manually for local testing.
 - The D1 database itself is bound via `wrangler.toml` (no env var). For local dev with `wrangler pages dev`, run `npm run db:migrate:local` to apply migrations to the local D1 emulator.
 - `ANTHROPIC_API_KEY` — required for the AI letter and brief drafters.
 - `GEOCODIO_API_KEY` — required for ZIP-to-representative lookups.
