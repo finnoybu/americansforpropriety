@@ -141,7 +141,7 @@ function magicLinkPlainText(url: string): string {
 function magicLinkHtml(url: string): string {
   // Inline-styled, plain-text-flavored. No tracking pixels, no images.
   return `<!doctype html>
-<html><body style="font-family:Georgia,'Times New Roman',serif;color:#0E1B33;background:#FAF6EE;padding:2rem;line-height:1.6;max-width:560px;margin:0 auto;">
+<html><body style="font-family:Georgia,'Times New Roman',serif;color:#0E1B33;background:#FAF6EE;padding:2rem;line-height:1.6;max-width:840px;margin:0 auto;">
   <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#B5311E;margin:0 0 1.5rem;">Americans for Propriety</p>
   <p style="font-size:1.125rem;margin:0 0 1.5rem;">You're signing in to your member account.</p>
   <p style="margin:0 0 1.5rem;">Click the link below within the next 60 minutes to complete sign-in:</p>
