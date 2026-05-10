@@ -51,10 +51,10 @@ const {
 
 const bgClass =
   tone === "warm"
-    ? "bg-[color:var(--color-paper-warm)]"
+    ? "bg-paper-warm"
     : tone === "ink"
-      ? "bg-[color:var(--color-ink)] text-[color:var(--color-paper)]"
-      : "bg-[color:var(--color-paper)]";
+      ? "bg-ink text-paper"
+      : "bg-paper";
 
 const bgVar =
   tone === "warm"
@@ -75,7 +75,7 @@ const fadeStyle =
     : `background: linear-gradient(to right, ${bgVar} 0%, ${bgVar} 18%, transparent 55%);`;
 ---
 {imageStyle === "bleed" ? (
-  <section class:list={["relative overflow-hidden border-b border-[color:var(--color-rule)]", bgClass]}>
+  <section class:list={["relative overflow-hidden border-b border-rule", bgClass]}>
     {/* Desktop: full-bleed image, absolutely positioned to the viewport edge.
         Hidden on mobile; mobile gets a stacked block above the text. */}
     <div
@@ -113,7 +113,7 @@ const fadeStyle =
     </div>
   </section>
 ) : (
-  <section class:list={["border-b border-[color:var(--color-rule)]", bgClass]}>
+  <section class:list={["border-b border-rule", bgClass]}>
     <div class:list={["container-page grid gap-10 md:grid-cols-12 md:items-center", padding]}>
       <div
         class:list={[

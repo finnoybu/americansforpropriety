@@ -20,11 +20,11 @@ const dateLabel = post.data.publishedAt.toLocaleDateString("en-US", {
   <article class="container-page py-16 md:py-24">
     <p class="eyebrow">Post · {dateLabel}</p>
     <h1 class="mt-3 max-w-4xl text-balance">{post.data.title}</h1>
-    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft">
       {post.data.summary}
     </p>
     {post.data.authors.length > 0 && (
-      <p class="mt-4 text-sm text-[color:var(--color-ink-muted)]">By {post.data.authors.join(", ")}</p>
+      <p class="mt-4 text-sm text-ink-muted">By {post.data.authors.join(", ")}</p>
     )}
 
     <hr class="my-10" />

@@ -20,10 +20,10 @@ const updated = letter.data.updatedAt.toLocaleDateString("en-US", {
   <article class="container-page py-16 md:py-24">
     <p class="eyebrow">Letter template · {letter.data.audience}</p>
     <h1 class="mt-3 max-w-4xl text-balance">{letter.data.title}</h1>
-    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft">
       {letter.data.summary}
     </p>
-    <div class="mt-6 text-sm text-[color:var(--color-ink-muted)]">
+    <div class="mt-6 text-sm text-ink-muted">
       Updated {updated} · Issue:
       <a href={`/issues/${letter.data.issue}`} class="no-underline hover:underline">
         {letter.data.issue.replace(/-/g, " ")}
@@ -36,7 +36,7 @@ const updated = letter.data.updatedAt.toLocaleDateString("en-US", {
       <Content />
     </div>
 
-    <aside class="mt-12 border-l-2 border-[color:var(--color-coral)] bg-[color:var(--color-paper-warm)] p-6">
+    <aside class="mt-12 border-l-2 border-coral bg-paper-warm p-6">
       <p class="eyebrow">How to use this</p>
       <ol class="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
         <li>Copy the body. Edit it so it sounds like you, not a campaign blast.</li>

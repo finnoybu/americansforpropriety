@@ -27,10 +27,10 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
   <Hero imageStyle="bleed">
     <p class="eyebrow">A civic project · Est. 2026</p>
     <h1 class="mt-4 text-balance">
-      Power should answer to <span class="text-[color:var(--color-coral-deep)]">people.</span>
-      Policy should answer to <span class="text-[color:var(--color-coral-deep)]">facts.</span>
+      Power should answer to <span class="text-coral-deep">people.</span>
+      Policy should answer to <span class="text-coral-deep">facts.</span>
     </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--color-ink-soft)] md:text-xl">
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">
       {site.mission}
     </p>
     <div class="mt-8 flex flex-wrap gap-3">
@@ -84,7 +84,7 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
   <Section eyebrow="Latest research" title="Briefs" tone="warm">
     <div>
       {briefs.length === 0 && (
-        <p class="text-[color:var(--color-ink-muted)]">No briefs published yet.</p>
+        <p class="text-ink-muted">No briefs published yet.</p>
       )}
       {briefs.map((b) => (
         <PostCard
@@ -107,7 +107,7 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
   <!-- LATEST NEWS -->
   <Section eyebrow="Field notes" title="Recent posts">
     {posts.length === 0 && (
-      <p class="text-[color:var(--color-ink-muted)]">First posts coming soon.</p>
+      <p class="text-ink-muted">First posts coming soon.</p>
     )}
     {posts.map((p) => (
       <PostCard

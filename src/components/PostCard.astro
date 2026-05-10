@@ -13,15 +13,15 @@ const dateLabel = date.toLocaleDateString("en-US", {
   day: "numeric",
 });
 ---
-<a href={href} class="group block border-t border-[color:var(--color-rule)] py-6 no-underline">
+<a href={href} class="group block border-t border-rule py-6 no-underline">
   <div class="flex items-baseline justify-between gap-4">
     <p class="eyebrow">{eyebrow}</p>
-    <time class="text-xs text-[color:var(--color-ink-muted)]">{dateLabel}</time>
+    <time class="text-xs text-ink-muted">{dateLabel}</time>
   </div>
-  <h3 class="mt-2 text-xl font-semibold leading-snug text-[color:var(--color-ink)] group-hover:text-[color:var(--color-coral-deep)]">
+  <h3 class="mt-2 text-xl font-semibold leading-snug text-ink group-hover:text-coral-deep">
     {title}
   </h3>
-  <p class="mt-2 max-w-2xl text-sm leading-relaxed text-[color:var(--color-ink-muted)]">
+  <p class="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted">
     {summary}
   </p>
 </a>

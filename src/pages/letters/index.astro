@@ -12,7 +12,7 @@ const letters = (await getCollection("letters")).sort(
   <Hero tone="warm" imageStyle="bleed">
     <p class="eyebrow">Engage</p>
     <h1 class="mt-3 max-w-3xl text-balance">Letters constituents actually send.</h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
       Templates designed to be personalized — not blasted. Form letters get filtered. Personal letters, written by an actual constituent, get read.
     </p>
     <img
@@ -29,10 +29,10 @@ const letters = (await getCollection("letters")).sort(
     <ul>
       {letters.map((l) => (
         <li>
-          <a href={`/letters/${l.id}`} class="block border-t border-[color:var(--color-rule)] py-6 no-underline">
+          <a href={`/letters/${l.id}`} class="block border-t border-rule py-6 no-underline">
             <p class="eyebrow">{l.data.audience} · {l.data.issue.replace(/-/g, " ")}</p>
             <h3 class="mt-2 text-xl font-semibold leading-snug">{l.data.title}</h3>
-            <p class="mt-2 max-w-2xl text-sm text-[color:var(--color-ink-muted)]">{l.data.summary}</p>
+            <p class="mt-2 max-w-2xl text-sm text-ink-muted">{l.data.summary}</p>
           </a>
         </li>
       ))}

@@ -15,12 +15,12 @@ const { items, tone = "warm" } = Astro.props;
 
 const bgClass =
   tone === "gold"
-    ? "bg-[color:var(--color-gold-soft)] text-[color:var(--color-ink)]"
+    ? "bg-gold-soft text-ink"
     : tone === "ink"
-      ? "bg-[color:var(--color-ink)] text-[color:var(--color-paper)]"
-      : "bg-[color:var(--color-paper-warm)] text-[color:var(--color-ink)]";
+      ? "bg-ink text-paper"
+      : "bg-paper-warm text-ink";
 ---
-<section class:list={["border-b border-[color:var(--color-rule)]", bgClass]}>
+<section class:list={["border-b border-rule", bgClass]}>
   <div class="container-page grid gap-8 py-10 sm:grid-cols-2 md:grid-cols-4 md:py-12">
     {items.map((item) => (
       <div>
@@ -29,8 +29,8 @@ const bgClass =
             "font-display text-4xl font-semibold leading-none md:text-5xl",
             item.emphasis
               ? tone === "ink"
-                ? "text-[color:var(--color-gold-soft)]"
-                : "text-[color:var(--color-coral-deep)]"
+                ? "text-gold-soft"
+                : "text-coral-deep"
               : "",
           ]}
         >

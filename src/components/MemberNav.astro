@@ -16,8 +16,8 @@ const items = [
       class:list={[
         "no-underline",
         isActive(item.href)
-          ? "font-semibold text-[color:var(--color-coral-deep)]"
-          : "text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-ink)]",
+          ? "font-semibold text-coral-deep"
+          : "text-ink-muted hover:text-ink",
       ]}
       aria-current={isActive(item.href) ? "page" : undefined}
     >
@@ -25,7 +25,7 @@ const items = [
     </a>
   ))}
   <form action="/api/auth/signout" method="post" class="ml-auto">
-    <button class="text-sm text-[color:var(--color-ink-muted)] underline hover:text-[color:var(--color-coral-deep)]">
+    <button class="text-sm text-ink-muted underline hover:text-coral-deep">
       Sign out
     </button>
   </form>

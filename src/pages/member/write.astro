@@ -33,16 +33,16 @@ const repOptions = reps.map((r) => ({
   <section class="container-page max-w-4xl py-12 md:py-16">
     <p class="eyebrow">Member · Drafting tool</p>
     <h1 class="mt-2">Draft a letter to your representative</h1>
-    <p class="mt-3 max-w-2xl text-[color:var(--color-ink-muted)]">
+    <p class="mt-3 max-w-2xl text-ink-muted">
       We generate a draft. You read it, edit it, and send it yourself. We never send anything on your behalf, and we don't keep your draft after you delete it.
     </p>
 
     <MemberNav />
 
     {reps.length === 0 && (
-      <div class="border-l-4 border-[color:var(--color-coral)] bg-[color:var(--color-paper-warm)] p-5">
+      <div class="border-l-4 border-coral bg-paper-warm p-5">
         <p class="font-semibold">Look up your representatives first.</p>
-        <p class="mt-1 text-sm text-[color:var(--color-ink-muted)]">We need to know who you're writing to.</p>
+        <p class="mt-1 text-sm text-ink-muted">We need to know who you're writing to.</p>
         <a class="btn btn-primary mt-4" href="/member/setup">Add ZIP & look up reps</a>
       </div>
     )}
@@ -54,7 +54,7 @@ const repOptions = reps.map((r) => ({
           <select
             required
             name="rep_combo"
-            class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 focus:border-[color:var(--color-ink)] focus:outline-none"
+            class="mt-2 w-full border border-rule bg-paper px-3 py-2 focus:border-ink focus:outline-none"
           >
             <option value="">— Choose a representative —</option>
             {repOptions.map((o) => (
@@ -77,7 +77,7 @@ const repOptions = reps.map((r) => ({
             maxlength="500"
             value={presetIssue}
             placeholder="e.g., Medicare drug price negotiation, PRO Act, transmission permitting"
-            class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 focus:border-[color:var(--color-ink)] focus:outline-none"
+            class="mt-2 w-full border border-rule bg-paper px-3 py-2 focus:border-ink focus:outline-none"
           />
         </label>
 
@@ -85,7 +85,7 @@ const repOptions = reps.map((r) => ({
           <span class="eyebrow">My position</span>
           <select
             name="stance"
-            class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 focus:border-[color:var(--color-ink)] focus:outline-none"
+            class="mt-2 w-full border border-rule bg-paper px-3 py-2 focus:border-ink focus:outline-none"
           >
             <option value="support">I support action</option>
             <option value="oppose">I oppose the current direction</option>
@@ -99,11 +99,11 @@ const repOptions = reps.map((r) => ({
             type="checkbox"
             name="enable_web_search"
             checked
-            class="h-4 w-4 accent-[color:var(--color-coral)]"
+            class="h-4 w-4 accent-coral"
           />
           <span class="text-sm">
             Use recent statements & votes
-            <span class="block text-xs text-[color:var(--color-ink-muted)]">Slower, costs more, more accurate.</span>
+            <span class="block text-xs text-ink-muted">Slower, costs more, more accurate.</span>
           </span>
         </label>
 
@@ -112,7 +112,7 @@ const repOptions = reps.map((r) => ({
             <span class="default-label">Draft this letter</span>
             <span class="loading-label hidden">Drafting...</span>
           </button>
-          <span id="write-status" class="ml-3 text-sm text-[color:var(--color-ink-muted)]"></span>
+          <span id="write-status" class="ml-3 text-sm text-ink-muted"></span>
         </div>
       </form>
     )}
@@ -120,19 +120,19 @@ const repOptions = reps.map((r) => ({
     <section id="output" class="mt-12 hidden">
       <p class="eyebrow">Draft</p>
       <h2 class="mt-2 text-xl">Read it, edit it, send it yourself.</h2>
-      <p class="mt-2 text-sm text-[color:var(--color-ink-muted)]">
+      <p class="mt-2 text-sm text-ink-muted">
         Personalize at least one paragraph with a specific local detail before sending.
       </p>
       <textarea
         id="letter-body"
         rows="20"
-        class="mt-4 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper-warm)] p-4 font-display text-base leading-relaxed focus:border-[color:var(--color-ink)] focus:outline-none"
+        class="mt-4 w-full border border-rule bg-paper-warm p-4 font-display text-base leading-relaxed focus:border-ink focus:outline-none"
       ></textarea>
       <div class="mt-4 flex flex-wrap gap-3">
         <button id="copy-btn" class="btn btn-ghost" type="button">Copy to clipboard</button>
         <button id="log-sent-btn" class="btn btn-primary" type="button">I sent this</button>
         <button id="regen-btn" class="btn btn-ghost" type="button">Regenerate</button>
-        <span id="action-status" class="self-center text-sm text-[color:var(--color-ink-muted)]"></span>
+        <span id="action-status" class="self-center text-sm text-ink-muted"></span>
       </div>
     </section>
   </section>

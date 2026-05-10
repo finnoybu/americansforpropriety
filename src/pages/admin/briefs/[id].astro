@@ -36,7 +36,7 @@ const ISSUES = [
       <a href="/admin/briefs" class="underline">← All briefs</a> · {brief.status}
     </p>
     <h1 class="mt-2">Edit brief</h1>
-    <p class="mt-2 text-sm text-[color:var(--color-ink-muted)]">
+    <p class="mt-2 text-sm text-ink-muted">
       Generated {new Date(brief.created_at).toLocaleString("en-US")} · {brief.model}
       {brief.used_web_search && " · with web search"}
     </p>
@@ -48,7 +48,7 @@ const ISSUES = [
           name="title"
           value={brief.title}
           maxlength="200"
-          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 text-lg"
+          class="mt-2 w-full border border-rule bg-paper px-3 py-2 text-lg"
         />
       </label>
 
@@ -58,7 +58,7 @@ const ISSUES = [
           name="slug"
           value={brief.slug}
           pattern="[a-z0-9-]+"
-          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 font-mono"
+          class="mt-2 w-full border border-rule bg-paper px-3 py-2 font-mono"
         />
       </label>
 
@@ -68,13 +68,13 @@ const ISSUES = [
           name="summary"
           rows="2"
           maxlength="400"
-          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2"
+          class="mt-2 w-full border border-rule bg-paper px-3 py-2"
         >{brief.summary}</textarea>
       </label>
 
       <label class="block">
         <span class="eyebrow">Issue</span>
-        <select name="issue" class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2">
+        <select name="issue" class="mt-2 w-full border border-rule bg-paper px-3 py-2">
           {ISSUES.map(([slug, label]) => (
             <option value={slug} selected={slug === brief.issue}>{label}</option>
           ))}
@@ -86,11 +86,11 @@ const ISSUES = [
         <textarea
           name="body"
           rows="32"
-          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper-warm)] p-4 font-mono text-sm leading-relaxed"
+          class="mt-2 w-full border border-rule bg-paper-warm p-4 font-mono text-sm leading-relaxed"
         >{brief.body}</textarea>
       </label>
 
-      <div class="flex flex-wrap items-center gap-3 border-t border-[color:var(--color-rule)] pt-4">
+      <div class="flex flex-wrap items-center gap-3 border-t border-rule pt-4">
         <button type="button" data-action="save" class="btn btn-ghost">Save draft</button>
         <button type="button" data-action="publish" class="btn btn-primary">
           {brief.status === "published" ? "Update published" : "Publish"}
@@ -99,13 +99,13 @@ const ISSUES = [
           <button type="button" data-action="unpublish" class="btn btn-ghost">Unpublish</button>
         )}
         <button type="button" data-action="archive" class="btn btn-ghost">Archive</button>
-        <button type="button" data-action="delete" class="ml-auto text-sm text-[color:var(--color-coral-deep)] underline">Delete permanently</button>
-        <span id="status" class="text-sm text-[color:var(--color-ink-muted)]"></span>
+        <button type="button" data-action="delete" class="ml-auto text-sm text-coral-deep underline">Delete permanently</button>
+        <span id="status" class="text-sm text-ink-muted"></span>
       </div>
     </form>
 
     {brief.status === "published" && (
-      <p class="mt-8 border-t border-[color:var(--color-rule)] pt-6 text-sm text-[color:var(--color-ink-muted)]">
+      <p class="mt-8 border-t border-rule pt-6 text-sm text-ink-muted">
         Live at <a class="underline" href={`/briefs/${brief.slug}`}>/briefs/{brief.slug}</a>
       </p>
     )}

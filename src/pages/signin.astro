@@ -18,14 +18,14 @@ const error = Astro.url.searchParams.get("error");
   <section class="container-page max-w-2xl py-20 md:py-28">
     <p class="eyebrow">Member sign-in</p>
     <h1 class="mt-3">Sign in to draft, track, and follow up.</h1>
-    <p class="mt-6 text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
-      We send a one-time link to your email. No password. We never sell, share, or rent your address — see <a class="underline decoration-[color:var(--color-coral)]" href="/principles">Principles</a> for the full commitment.
+    <p class="mt-6 text-lg leading-relaxed text-ink-soft">
+      We send a one-time link to your email. No password. We never sell, share, or rent your address — see <a class="underline decoration-coral" href="/principles">Principles</a> for the full commitment.
     </p>
 
     {error && (
-      <div class="mt-6 border-l-4 border-[color:var(--color-coral)] bg-[color:var(--color-paper-warm)] p-4 text-sm">
+      <div class="mt-6 border-l-4 border-coral bg-paper-warm p-4 text-sm">
         <strong class="block">Sign-in failed.</strong>
-        <span class="text-[color:var(--color-ink-muted)]">{error}</span>
+        <span class="text-ink-muted">{error}</span>
       </div>
     )}
 
@@ -37,15 +37,15 @@ const error = Astro.url.searchParams.get("error");
           type="email"
           name="email"
           autocomplete="email"
-          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-4 py-3 font-medium text-[color:var(--color-ink)] focus:border-[color:var(--color-ink)] focus:outline-none"
+          class="mt-2 w-full border border-rule bg-paper px-4 py-3 font-medium text-ink focus:border-ink focus:outline-none"
           placeholder="you@example.com"
         />
       </label>
       <button type="submit" class="btn btn-ink w-full justify-center">Send me a sign-in link</button>
-      <p id="signin-status" class="text-sm text-[color:var(--color-ink-muted)]"></p>
+      <p id="signin-status" class="text-sm text-ink-muted"></p>
     </form>
 
-    <p class="mt-12 text-sm text-[color:var(--color-ink-muted)]">
+    <p class="mt-12 text-sm text-ink-muted">
       First time? Submitting your email creates an account. We store only what's needed for the member toolkit (your district, the actions you log, drafts you generate).
     </p>
   </section>
@@ -69,10 +69,10 @@ const error = Astro.url.searchParams.get("error");
       });
       if (error) {
         status.textContent = "Couldn't send: " + error.message;
-        status.className = "text-sm text-[color:var(--color-coral-deep)]";
+        status.className = "text-sm text-coral-deep";
       } else {
         status.textContent = "Check your inbox. The link is good for 60 minutes.";
-        status.className = "text-sm text-[color:var(--color-leaf)]";
+        status.className = "text-sm text-leaf";
         form.reset();
       }
     });

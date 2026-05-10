@@ -12,12 +12,12 @@ const {
   ctaHref = "/take-action",
 } = Astro.props;
 ---
-<aside class="bg-[color:var(--color-ink)] text-[color:var(--color-paper)]">
+<aside class="bg-ink text-paper">
   <div class="container-page grid items-center gap-6 py-14 md:grid-cols-12 md:py-20">
     <div class="md:col-span-8">
-      <p class="eyebrow text-[color:var(--color-gold-soft)]">Get involved</p>
-      <h2 class="mt-2 text-[color:var(--color-paper)]">{title}</h2>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-[color:var(--color-paper-warm)]">{body}</p>
+      <p class="eyebrow text-gold-soft">Get involved</p>
+      <h2 class="mt-2 text-paper">{title}</h2>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-paper-warm">{body}</p>
     </div>
     <div class="md:col-span-4 md:justify-self-end">
       <a href={ctaHref} class="btn btn-primary text-base">{ctaLabel} <span aria-hidden>→</span></a>

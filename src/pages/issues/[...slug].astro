@@ -33,12 +33,12 @@ const accentVar = {
 ---
 <BaseLayout title={issue.data.title} description={issue.data.summary} ogType="article">
   <article>
-    <header class="border-b border-[color:var(--color-rule)] bg-[color:var(--color-paper)]">
+    <header class="border-b border-rule bg-paper">
       <div class="container-page py-16 md:py-24">
         <span class="block h-1 w-16" style={`background:${accentVar}`}></span>
         <p class="eyebrow mt-5">{issue.data.eyebrow}</p>
         <h1 class="mt-3 max-w-4xl text-balance">{issue.data.headline}</h1>
-        <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[color:var(--color-ink-soft)] md:text-xl">
+        <p class="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft md:text-xl">
           {issue.data.stance}
         </p>
       </div>
@@ -50,7 +50,7 @@ const accentVar = {
           {issue.data.pillars.map((p) => (
             <div class="border-t-2 pt-5" style={`border-color:${accentVar}`}>
               <h3 class="font-display text-xl font-semibold">{p.title}</h3>
-              <p class="mt-3 text-[color:var(--color-ink-muted)]">{p.body}</p>
+              <p class="mt-3 text-ink-muted">{p.body}</p>
             </div>
           ))}
         </div>
@@ -61,7 +61,7 @@ const accentVar = {
       <Section eyebrow="Facts on file" title="What's actually true" tone="warm">
         <ul class="grid gap-4 md:grid-cols-2">
           {issue.data.facts.map((fact) => (
-            <li class="border-l-2 pl-4 text-base leading-relaxed text-[color:var(--color-ink-soft)]" style={`border-color:${accentVar}`}>
+            <li class="border-l-2 pl-4 text-base leading-relaxed text-ink-soft" style={`border-color:${accentVar}`}>
               {fact}
             </li>
           ))}
@@ -83,9 +83,9 @@ const accentVar = {
               <div class="md:col-span-4">
                 <span class="block h-1 w-10" style={`background:${accentVar}`}></span>
                 <h3 class="mt-3 font-display text-xl font-semibold">{s.title}</h3>
-                <p class="mt-2 text-[color:var(--color-ink-muted)]">{s.summary}</p>
+                <p class="mt-2 text-ink-muted">{s.summary}</p>
               </div>
-              <div class="md:col-span-8 prose-editorial !max-w-none">
+              <div class="md:col-span-8 prose-editorial max-w-none!">
                 <p>{s.body}</p>
               </div>
             </article>
@@ -106,15 +106,15 @@ const accentVar = {
           </thead>
           <tbody>
             {issue.data.keyBills.map((b) => (
-              <tr class="border-b border-[color:var(--color-rule)] align-top">
+              <tr class="border-b border-rule align-top">
                 <td class="py-3 pr-4">
                   <span class="font-semibold">{b.name}</span>
-                  <span class="block text-xs uppercase tracking-wider text-[color:var(--color-ink-muted)]">
+                  <span class="block text-xs uppercase tracking-wider text-ink-muted">
                     {b.chamber}
                   </span>
                 </td>
-                <td class="py-3 pr-4 text-[color:var(--color-ink-soft)]">{b.summary}</td>
-                <td class="py-3 pr-4 text-[color:var(--color-ink-muted)]">{b.status}</td>
+                <td class="py-3 pr-4 text-ink-soft">{b.summary}</td>
+                <td class="py-3 pr-4 text-ink-muted">{b.status}</td>
               </tr>
             ))}
           </tbody>
@@ -135,8 +135,8 @@ const accentVar = {
         <ol class="space-y-4">
           {issue.data.timeline.map((t) => (
             <li class="grid gap-3 border-l-2 pl-5 md:grid-cols-12" style={`border-color:${accentVar}`}>
-              <time class="md:col-span-2 font-mono text-sm text-[color:var(--color-ink-muted)]">{t.date}</time>
-              <span class="md:col-span-10 text-[color:var(--color-ink-soft)]">{t.event}</span>
+              <time class="md:col-span-2 font-mono text-sm text-ink-muted">{t.date}</time>
+              <span class="md:col-span-10 text-ink-soft">{t.event}</span>
             </li>
           ))}
         </ol>
@@ -149,7 +149,7 @@ const accentVar = {
           {issue.data.glossary.map((g) => (
             <div>
               <dt class="font-display text-lg font-semibold">{g.term}</dt>
-              <dd class="mt-1 text-[color:var(--color-ink-soft)]">{g.definition}</dd>
+              <dd class="mt-1 text-ink-soft">{g.definition}</dd>
             </div>
           ))}
         </dl>
@@ -179,9 +179,9 @@ const accentVar = {
               <ul class="mt-3 space-y-3">
                 {letters.map((l) => (
                   <li>
-                    <a href={`/letters/${l.id}`} class="block border-t border-[color:var(--color-rule)] py-3 no-underline">
+                    <a href={`/letters/${l.id}`} class="block border-t border-rule py-3 no-underline">
                       <span class="font-semibold">{l.data.title}</span>
-                      <span class="block text-sm text-[color:var(--color-ink-muted)]">{l.data.summary}</span>
+                      <span class="block text-sm text-ink-muted">{l.data.summary}</span>
                     </a>
                   </li>
                 ))}
@@ -193,10 +193,10 @@ const accentVar = {
               <p class="eyebrow">Actions</p>
               <ul class="mt-3 space-y-3">
                 {actions.map((a) => (
-                  <li class="border-t border-[color:var(--color-rule)] py-3">
+                  <li class="border-t border-rule py-3">
                     <span class="font-semibold">{a.data.title}</span>
-                    <span class="block text-sm text-[color:var(--color-ink-muted)]">{a.data.summary}</span>
-                    <a href={a.data.href} class="mt-2 inline-block text-sm font-semibold text-[color:var(--color-coral-deep)] no-underline hover:underline">
+                    <span class="block text-sm text-ink-muted">{a.data.summary}</span>
+                    <a href={a.data.href} class="mt-2 inline-block text-sm font-semibold text-coral-deep no-underline hover:underline">
                       {a.data.cta} →
                     </a>
                   </li>

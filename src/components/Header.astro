@@ -5,13 +5,13 @@ const { pathname } = Astro.url;
 const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
-<header class="border-b border-[color:var(--color-rule)] bg-[color:var(--color-paper)]">
+<header class="border-b border-rule bg-paper">
   <div class="container-page flex items-center justify-between gap-6 py-4">
     <a href="/" class="flex items-baseline gap-2 no-underline">
-      <span class="font-display text-xl font-semibold tracking-tight text-[color:var(--color-ink)]">
+      <span class="font-display text-xl font-semibold tracking-tight text-ink">
         {site.name}
       </span>
-      <span class="hidden text-xs uppercase tracking-[0.18em] text-[color:var(--color-ink-muted)] sm:inline">
+      <span class="hidden text-xs uppercase tracking-[0.18em] text-ink-muted sm:inline">
         Civic project
       </span>
     </a>
@@ -23,8 +23,8 @@ const isActive = (href: string) =>
           class:list={[
             "text-sm font-medium no-underline",
             isActive(item.href)
-              ? "text-[color:var(--color-coral-deep)]"
-              : "text-[color:var(--color-ink)] hover:text-[color:var(--color-coral-deep)]",
+              ? "text-coral-deep"
+              : "text-ink hover:text-coral-deep",
           ]}
           aria-current={isActive(item.href) ? "page" : undefined}
         >
@@ -33,7 +33,7 @@ const isActive = (href: string) =>
       ))}
       <a
         href="/signin"
-        class="text-sm font-medium text-[color:var(--color-ink)] no-underline hover:text-[color:var(--color-coral-deep)]"
+        class="text-sm font-medium text-ink no-underline hover:text-coral-deep"
       >
         Sign in
       </a>
@@ -44,7 +44,7 @@ const isActive = (href: string) =>
       <summary class="cursor-pointer list-none p-2 text-sm font-medium" aria-label="Open menu">
         Menu
       </summary>
-      <div class="absolute left-0 right-0 z-40 border-t border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-5 py-4 shadow-md">
+      <div class="absolute left-0 right-0 z-40 border-t border-rule bg-paper px-5 py-4 shadow-md">
         <ul class="flex flex-col gap-3">
           {nav.map((item) => (
             <li>

@@ -17,7 +17,7 @@ const profile = Astro.locals.profile;
     <div class="grid gap-10 md:grid-cols-2">
       <section>
         <h2 class="text-xl">Your ZIP</h2>
-        <p class="mt-2 text-sm text-[color:var(--color-ink-muted)]">
+        <p class="mt-2 text-sm text-ink-muted">
           We use this to find your federal and state representatives. We store the ZIP, your state, and your district numbers — not your full address.
         </p>
 
@@ -30,7 +30,7 @@ const profile = Astro.locals.profile;
               inputmode="numeric"
               pattern="\d{5}"
               maxlength="5"
-              class="mt-2 w-40 border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 font-mono text-lg focus:border-[color:var(--color-ink)] focus:outline-none"
+              class="mt-2 w-40 border border-rule bg-paper px-3 py-2 font-mono text-lg focus:border-ink focus:outline-none"
               value={profile?.zip ?? ""}
               placeholder="10001"
             />
@@ -43,27 +43,27 @@ const profile = Astro.locals.profile;
       <section>
         <h2 class="text-xl">Account</h2>
         <dl class="mt-4 space-y-2 text-sm">
-          <div class="flex justify-between gap-4 border-t border-[color:var(--color-rule)] pt-2">
-            <dt class="text-[color:var(--color-ink-muted)]">Email</dt>
+          <div class="flex justify-between gap-4 border-t border-rule pt-2">
+            <dt class="text-ink-muted">Email</dt>
             <dd>{Astro.locals.user.email}</dd>
           </div>
-          <div class="flex justify-between gap-4 border-t border-[color:var(--color-rule)] pt-2">
-            <dt class="text-[color:var(--color-ink-muted)]">State</dt>
+          <div class="flex justify-between gap-4 border-t border-rule pt-2">
+            <dt class="text-ink-muted">State</dt>
             <dd>{profile?.state ?? "—"}</dd>
           </div>
-          <div class="flex justify-between gap-4 border-t border-[color:var(--color-rule)] pt-2">
-            <dt class="text-[color:var(--color-ink-muted)]">US House district</dt>
+          <div class="flex justify-between gap-4 border-t border-rule pt-2">
+            <dt class="text-ink-muted">US House district</dt>
             <dd>{profile?.congressional_district ?? "—"}</dd>
           </div>
-          <div class="flex justify-between gap-4 border-t border-[color:var(--color-rule)] pt-2">
-            <dt class="text-[color:var(--color-ink-muted)]">State legislative</dt>
+          <div class="flex justify-between gap-4 border-t border-rule pt-2">
+            <dt class="text-ink-muted">State legislative</dt>
             <dd>
               Lower {profile?.state_legislative_lower_district ?? "—"} · Upper {profile?.state_legislative_upper_district ?? "—"}
             </dd>
           </div>
         </dl>
 
-        <p class="mt-6 text-xs text-[color:var(--color-ink-muted)]">
+        <p class="mt-6 text-xs text-ink-muted">
           Want your account deleted? Email <code>privacy@americansforpropriety.org</code>. We'll erase your row and any drafts within 7 days.
         </p>
       </section>
@@ -77,7 +77,7 @@ const profile = Astro.locals.profile;
       e.preventDefault();
       const zip = new FormData(form).get("zip");
       status.textContent = "Looking up...";
-      status.className = "text-sm text-[color:var(--color-ink-muted)]";
+      status.className = "text-sm text-ink-muted";
       const res = await fetch("/api/reps/lookup", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -86,11 +86,11 @@ const profile = Astro.locals.profile;
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         status.textContent = data.message || data.error || "Lookup failed.";
-        status.className = "text-sm text-[color:var(--color-coral-deep)]";
+        status.className = "text-sm text-coral-deep";
         return;
       }
       status.textContent = `Saved. Found ${data.representatives?.length ?? 0} representatives. Reloading...`;
-      status.className = "text-sm text-[color:var(--color-leaf)]";
+      status.className = "text-sm text-leaf";
       setTimeout(() => location.reload(), 700);
     });
   </script>
