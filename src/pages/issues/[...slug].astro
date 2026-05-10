@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import Hero from "~/components/Hero.astro";
 import Section from "~/components/Section.astro";
 import PostCard from "~/components/PostCard.astro";
 import ActionBanner from "~/components/ActionBanner.astro";
@@ -36,19 +37,24 @@ const accentVar = {
   title={issue.data.title}
   description={issue.data.summary}
   ogType="article"
-  ogImage="/hero/issues-senate-chamber.png"
+  ogImage={`/hero/issues/${issue.id}.png`}
 >
   <article>
-    <header class="border-b border-rule bg-paper">
-      <div class="container-page py-16 md:py-24">
-        <span class="block h-1 w-16" style={`background:${accentVar}`}></span>
-        <p class="eyebrow mt-5">{issue.data.eyebrow}</p>
-        <h1 class="mt-3 max-w-4xl text-balance">{issue.data.headline}</h1>
-        <p class="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft md:text-xl">
-          {issue.data.stance}
-        </p>
-      </div>
-    </header>
+    <Hero tone="warm" imageStyle="bleed">
+      <span class="block h-1 w-16" style={`background:${accentVar}`}></span>
+      <p class="eyebrow mt-5">{issue.data.eyebrow}</p>
+      <h1 class="mt-3 max-w-4xl text-balance">{issue.data.headline}</h1>
+      <p class="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft md:text-xl">
+        {issue.data.stance}
+      </p>
+      <img
+        slot="visual"
+        src={`/hero/issues/${issue.id}.png`}
+        alt=""
+        class="h-full w-full object-cover"
+        loading="eager"
+      />
+    </Hero>
 
     {issue.data.pillars.length > 0 && (
       <Section eyebrow="Pillars" title="Where we plant our flag">
