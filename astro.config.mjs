@@ -13,7 +13,18 @@ export default defineConfig({
     platformProxy: { enabled: true },
     imageService: "compile",
   }),
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      // Exclude auth-gated and API routes from the public sitemap. They're
+      // SSR-only and crawlers should not index them even if they happen to
+      // be discoverable.
+      filter: (page) =>
+        !page.includes("/admin/") &&
+        !page.includes("/api/") &&
+        !page.includes("/member/"),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
