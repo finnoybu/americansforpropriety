@@ -1,0 +1,92 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+
+const reviewed = "May 10, 2026";
+---
+<BaseLayout
+  title="Accessibility"
+  description="Our standards, what we've built toward them, what we know is still imperfect, and how to report a barrier."
+>
+  <section class="border-b border-rule bg-paper">
+    <div class="container-page py-20 md:py-28">
+      <p class="eyebrow">Accessibility</p>
+      <h1 class="mt-3 max-w-4xl text-balance">
+        A site about democratic limits should be usable by everyone subject to them.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        This page describes the accessibility standards we hold this site to, what we've built toward them, what we know is still imperfect, and how to report a barrier you've encountered.
+      </p>
+      <p class="mt-3 text-sm text-ink-muted">Last reviewed {reviewed}.</p>
+    </div>
+  </section>
+
+  <Section eyebrow="01" title="The standard">
+    <div class="prose-editorial">
+      <p>
+        We design and develop this site to conform to the Web Content Accessibility Guidelines (WCAG) 2.1, level AA, published by the W3C Web Accessibility Initiative. This is the conformance level referenced by Section 508 of the US Rehabilitation Act and by the European EN 301 549 standard.
+      </p>
+      <p>
+        Conformance to a standard is not a permanent state. We treat it as an ongoing commitment: every new component, page, and tool is reviewed against it before launch, and the site as a whole is re-reviewed as it changes.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="02" title="What we've built toward it" tone="warm">
+    <div class="prose-editorial">
+      <ul>
+        <li><strong>Semantic HTML.</strong> Headings are real headings, lists are real lists, links are real links, buttons are real buttons. Custom components include the ARIA roles and properties needed when native semantics aren't sufficient.</li>
+        <li><strong>Keyboard navigation.</strong> Every interactive element on the site can be reached and operated using the keyboard alone. Focus is visible. The first link on every page is a "skip to content" link that lets keyboard users bypass the header.</li>
+        <li><strong>Screen-reader support.</strong> Images include text alternatives. Decorative images use empty <code>alt</code> attributes so they aren't announced. Icon-only controls (the theme toggle, mobile-menu button) carry accessible names.</li>
+        <li><strong>Color contrast.</strong> Text and meaningful interface elements meet or exceed WCAG AA contrast ratios in both light and dark themes. The dark theme is deliberately tuned — accent colors are brightened so they remain legible against a dark background.</li>
+        <li><strong>Reduced motion.</strong> The site uses a small set of subtle hover transitions and theme transitions. We do not autoplay video, animate text, or rely on motion to convey meaning. <code>prefers-reduced-motion</code> is honored by default because we don't introduce motion that would conflict with it.</li>
+        <li><strong>Resizable text.</strong> All page content is built in relative units. Browser-level zoom up to 200% does not break the layout or hide content.</li>
+        <li><strong>Forms.</strong> Form fields have visible labels, programmatically associated. Errors are announced and described in text, not by color alone.</li>
+        <li><strong>Theme switching.</strong> A light/dark/system toggle is exposed in the site header. The default follows the user's operating-system preference and is preserved across sessions for users who choose explicitly.</li>
+      </ul>
+    </div>
+  </Section>
+
+  <Section eyebrow="03" title="What is still imperfect">
+    <div class="prose-editorial">
+      <p>
+        Honest reporting matters more than a green badge. As of the last review:
+      </p>
+      <ul>
+        <li>Some embedded source documents (PDFs from agencies and courts) are not themselves WCAG-conformant. Where we link to them, we describe the substance of the document in the surrounding text so a reader who cannot use the PDF still gets the relevant information.</li>
+        <li>The mobile representatives lookup is dense; we are working on an improved layout that reduces the number of visually grouped fields per representative card.</li>
+        <li>Long-form briefs use sub-headings but do not yet provide an in-page table of contents on mobile.</li>
+      </ul>
+      <p>
+        If you find a barrier we haven't listed here, we want to know.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="04" title="Report a barrier" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        Email <a href="mailto:accessibility@americansforpropriety.org">accessibility@americansforpropriety.org</a> with:
+      </p>
+      <ul>
+        <li>the URL of the page you were on;</li>
+        <li>the device, browser, and any assistive technology you were using;</li>
+        <li>what you were trying to do;</li>
+        <li>what happened (or didn't).</li>
+      </ul>
+      <p>
+        We commit to acknowledging within three business days and to providing an alternative way to access the relevant information while a fix is in flight.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="05" title="Standards and references">
+    <div class="prose-editorial">
+      <ul>
+        <li><a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener">Web Content Accessibility Guidelines 2.1</a></li>
+        <li><a href="https://www.section508.gov/" target="_blank" rel="noopener">Section 508 of the US Rehabilitation Act</a></li>
+        <li><a href="https://www.w3.org/WAI/standards-guidelines/aria/" target="_blank" rel="noopener">WAI-ARIA Authoring Practices</a></li>
+      </ul>
+    </div>
+  </Section>
+</BaseLayout>

@@ -70,6 +70,7 @@ keyBills:
     status: "Implementation phasing in; ongoing rulemaking"
   - name: "California SB 253 / Climate Corporate Data Accountability Act"
     chamber: "state"
+    state: "California"
     summary: "Requires large companies operating in California to disclose Scope 1, 2, and 3 greenhouse gas emissions."
     status: "Enacted; phased implementation through 2027"
   - name: "Federal Flood Insurance reform"

@@ -1,0 +1,151 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+
+const repoUrl = "https://github.com/finnoybu/americansforpropriety";
+
+const ways = [
+  {
+    eyebrow: "2 minutes",
+    title: "Tell us what's wrong.",
+    body: "If you read a brief, an issue page, or a news post and something is factually off — a misstated bill number, an out-of-date status, a misattributed quote — file a correction. We have a one-form template that asks for the page, the claim, and (ideally) a source. Most corrections are fixed within two business days.",
+    cta: "Open a correction issue",
+    href: `${repoUrl}/issues/new?template=correction.md`,
+  },
+  {
+    eyebrow: "5 minutes",
+    title: "Suggest a topic, a bill, a letter.",
+    body: "Something we should be covering and aren't. A bill that should be on a Key Bills table. A letter template the site should have. A state-level pattern worth aggregating. Drop a structured suggestion and we'll evaluate against the editorial calendar.",
+    cta: "Open a suggestion issue",
+    href: `${repoUrl}/issues/new?template=suggestion.md`,
+  },
+  {
+    eyebrow: "10 minutes — no setup",
+    title: "Edit a single file in the browser.",
+    body: "GitHub lets you fork the repo and edit a file directly in the web interface. This is perfect for typo fixes, adding a missing source URL, adding a state field to a state bill, or updating a bill's status. No local setup required. We've documented the exact steps in CONTRIBUTING.md.",
+    cta: "Read the editing guide",
+    href: `${repoUrl}/blob/main/CONTRIBUTING.md#editing-web-based-fork`,
+  },
+  {
+    eyebrow: "30+ minutes",
+    title: "Write a brief, build a feature, fix a bug.",
+    body: "Clone the repo, run it locally, change what needs changing, open a pull request. Code contributions go through a normal review; content contributions go through editorial review. CONTRIBUTING.md has the full setup, the conventions, and the schemas for each content type.",
+    cta: "Read the full guide",
+    href: `${repoUrl}/blob/main/CONTRIBUTING.md`,
+  },
+  {
+    eyebrow: "Ongoing",
+    title: "Watch the repo, weigh in on PRs.",
+    body: "Star or watch the repo and you'll see new PRs and issues come through. Comment on the ones you can usefully comment on. Pushback from a reader who knows the subject is one of the best signals we get.",
+    cta: "Open the repo",
+    href: repoUrl,
+  },
+];
+
+const wontWork = [
+  "Mass identical PRs that change the same line in fifty content files. Use one PR with a clear summary and we'll fan it out.",
+  "PRs that add an analytics SDK, an advertising tag, a third-party script, or anything that would put a tracker on the site. This is a hard project constraint.",
+  "Content drafts that aren't sourced. Even drafts at the idea stage should cite where the underlying claims come from.",
+  "Personal attacks on subjects, opponents, or other contributors in PR descriptions, commit messages, or issues. We won't merge them.",
+];
+---
+<BaseLayout
+  title="Contribute"
+  description="How to help maintain Americans for Propriety. Five ways to contribute, from a two-minute correction to a multi-hour code change."
+  ogImage="/hero/about-washington-monument.png"
+>
+  <section class="border-b border-rule bg-paper">
+    <div class="container-page py-20 md:py-28">
+      <p class="eyebrow">Contribute</p>
+      <h1 class="mt-3 max-w-4xl text-balance">
+        We are a small team. The site is better when you push back on it.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        Principle 06 says accountability runs both ways. The corollary is that the project's editorial integrity isn't only ours to maintain — it depends on readers who notice things, fact-check things, and tell us when we got something wrong. This page is the on-ramp.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={repoUrl} target="_blank" rel="noopener" class="btn btn-ink">
+          Open the repo on GitHub <span aria-hidden>→</span>
+        </a>
+        <a href={`${repoUrl}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener" class="btn btn-ghost">
+          Read CONTRIBUTING.md
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Section eyebrow="Why" title="Why this is open-source civic infrastructure">
+    <div class="prose-editorial">
+      <p>
+        Almost every well-funded political organization in the country runs on closed software, opaque editorial processes, and donor lists you cannot see. We've built this differently on purpose. The whole site — its code, its content schemas, its briefs, its letter templates, its correction log — is published in a public repository under a permissive license for the code and a clear editorial license for the content. You can read every line. You can fork it. You can challenge it.
+      </p>
+      <p>
+        That openness is only worth something if there are people on the other end of it. Outside contribution is a real part of how the project stays accurate as policy moves, as bills get reintroduced under new numbers, as state-level patterns shift, as our own framing ages. Help with any of that is help we can use.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="How" title="Five ways in" tone="warm">
+    <ol class="list-none space-y-12 p-0">
+      {ways.map((w) => (
+        <li class="grid gap-6 border-t border-rule pt-8 md:grid-cols-12">
+          <div class="md:col-span-3">
+            <p class="eyebrow">{w.eyebrow}</p>
+          </div>
+          <div class="md:col-span-9">
+            <h3 class="text-2xl font-semibold leading-tight">{w.title}</h3>
+            <p class="mt-3 max-w-3xl leading-relaxed text-ink-soft">{w.body}</p>
+            <p class="mt-5">
+              <a
+                href={w.href}
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-1 text-sm font-semibold text-coral-deep no-underline hover:underline"
+              >
+                {w.cta} <span aria-hidden>→</span>
+              </a>
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <Section eyebrow="Specifics" title="What we'd love help with right now">
+    <div class="prose-editorial">
+      <p>
+        These are the kinds of contributions that have outsized leverage at the project's current scale. None require deep development experience.
+      </p>
+      <ul>
+        <li><strong>State-bill backfills.</strong> Many of our Key Bills tables have entries for state-level legislation without a <code>state</code> field set. Adding one (e.g. <code>state: "Virginia"</code> in the issue's frontmatter) makes the search link land much more cleanly. Single-file edits, perfect for the web-based fork flow.</li>
+        <li><strong>Bill-status updates.</strong> Every Key Bills row has a free-text <code>status</code> field. Bills move. If you spot one that's progressed, been renumbered, or died, send a one-line correction.</li>
+        <li><strong>Letter-template improvements.</strong> Cleaner argument, more concrete ask, better personalization placeholders. Letters are templates, not finished mail — every improvement helps the people who use them.</li>
+        <li><strong>Brief drafts.</strong> Short, sourced explainers on a current policy question. Editorial review applies. See CONTRIBUTING.md §"Briefs" for the schema and conventions.</li>
+        <li><strong>Accessibility audits.</strong> Run a screen reader on a brief. Tab through the homepage. Try the rep-lookup form with voice control. Tell us what's broken — even partial reports are useful.</li>
+        <li><strong>Performance and bundle-size work.</strong> The site is small but every kilobyte costs someone on a slow connection. Improvements there are quietly valuable.</li>
+      </ul>
+    </div>
+  </Section>
+
+  <Section eyebrow="Won't work" title="What we won't merge" tone="warm">
+    <ul class="space-y-3 text-ink-soft">
+      {wontWork.map((w) => (
+        <li class="border-l-2 border-coral pl-4 leading-relaxed">{w}</li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section eyebrow="Conduct" title="The basics">
+    <div class="prose-editorial">
+      <p>
+        Project spaces (issues, pull requests, discussions) follow a <a href={`${repoUrl}/blob/main/.github/CODE_OF_CONDUCT.md`} target="_blank" rel="noopener">Code of Conduct</a>. The short version: be respectful of people, rigorous about claims, and operate in good faith. Disagreement on the merits is welcome — that's most of what makes the project work. Personal attacks, harassment, and bad-faith argument are not.
+      </p>
+      <p>
+        Code contributions are licensed under MIT (see <a href={`${repoUrl}/blob/main/LICENSE`} target="_blank" rel="noopener">LICENSE</a>). Editorial content is licensed under the site's <a href="/terms">Terms of Use</a>, with full attribution to contributing authors. By submitting a PR you agree to those terms.
+      </p>
+      <p>
+        Questions that aren't ready to be issues can go in <a href={`${repoUrl}/discussions`} target="_blank" rel="noopener">Discussions</a> or to <a href="mailto:hello@americansforpropriety.org">hello@americansforpropriety.org</a>.
+      </p>
+    </div>
+  </Section>
+</BaseLayout>

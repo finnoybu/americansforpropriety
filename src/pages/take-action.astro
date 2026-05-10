@@ -3,6 +3,11 @@ import { getCollection } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import Section from "~/components/Section.astro";
 import Hero from "~/components/Hero.astro";
+import SearchFilter from "~/components/SearchFilter.astro";
+import { getIssueLabels } from "~/lib/issue-labels";
+import { issueOrder } from "~/config/site";
+
+const issueLabels = await getIssueLabels();
 
 const actions = await getCollection("actions");
 const letters = await getCollection("letters");
@@ -10,12 +15,48 @@ const urgencyOrder = { high: 0, medium: 1, low: 2 } as const;
 const sortedActions = [...actions].sort(
   (a, b) => urgencyOrder[a.data.urgency] - urgencyOrder[b.data.urgency],
 );
+
+const actionIssueCounts = sortedActions.reduce<Record<string, number>>((acc, a) => {
+  acc[a.data.issue] = (acc[a.data.issue] ?? 0) + 1;
+  return acc;
+}, {});
+const actionIssueOptions = issueOrder
+  .filter((slug) => actionIssueCounts[slug])
+  .map((slug) => ({
+    value: slug,
+    label: issueLabels[slug] ?? slug,
+    count: actionIssueCounts[slug],
+  }));
+
+const urgencyCounts = sortedActions.reduce<Record<string, number>>((acc, a) => {
+  acc[a.data.urgency] = (acc[a.data.urgency] ?? 0) + 1;
+  return acc;
+}, {});
+const urgencyOptions = (["high", "medium", "low"] as const)
+  .filter((u) => urgencyCounts[u])
+  .map((u) => ({ value: u, label: u, count: urgencyCounts[u] }));
+
+const letterIssueCounts = letters.reduce<Record<string, number>>((acc, l) => {
+  acc[l.data.issue] = (acc[l.data.issue] ?? 0) + 1;
+  return acc;
+}, {});
+const letterIssueOptions = issueOrder
+  .filter((slug) => letterIssueCounts[slug])
+  .map((slug) => ({
+    value: slug,
+    label: issueLabels[slug] ?? slug,
+    count: letterIssueCounts[slug],
+  }));
 ---
-<BaseLayout title="Take action" description="A short list of things you can do this week.">
+<BaseLayout
+  title="Take action"
+  description="A short list of things you can do this week."
+  ogImage="/hero/take-action-lincoln.png"
+>
   <Hero tone="ink" imageStyle="bleed">
     <p class="eyebrow text-gold-soft">Take action</p>
     <h1 class="mt-3 max-w-4xl text-balance text-paper">
-      A short list. Pick three things you can actually do this week.
+      Make a short list. Pick three things you can actually do this week.
     </h1>
     <p class="mt-6 max-w-2xl text-lg leading-relaxed text-paper-warm">
       We don't run mass-email pipelines or auto-generated outreach. The actions below are small, real, and worth your time.
@@ -30,46 +71,74 @@ const sortedActions = [...actions].sort(
   </Hero>
 
   <Section eyebrow="Pick Three" title="Active asks">
-    <ul class="space-y-6">
-      {sortedActions.map((a) => (
-        <li class="grid gap-4 border-t border-rule pt-6 md:grid-cols-12">
-          <div class="md:col-span-2">
-            <span class:list={[
-              "inline-block rounded-sm px-2 py-1 text-xs font-semibold uppercase tracking-wider",
-              a.data.urgency === "high"
-                ? "bg-coral text-paper"
-                : a.data.urgency === "medium"
-                  ? "bg-gold-soft text-ink"
-                  : "bg-rule text-ink"
-            ]}>
-              {a.data.urgency}
-            </span>
-          </div>
-          <div class="md:col-span-7">
-            <h3 class="text-xl font-semibold leading-snug">{a.data.title}</h3>
-            <p class="mt-2 text-ink-muted">{a.data.summary}</p>
-          </div>
-          <div class="md:col-span-3 md:justify-self-end">
-            <a href={a.data.href} class="btn btn-primary">{a.data.cta}</a>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <SearchFilter
+      scope="actions"
+      placeholder="Search actions by title, ask, or topic…"
+      totalLabel="actions"
+      filters={[
+        { key: "urgency", label: "Urgency", options: urgencyOptions },
+        { key: "issue", label: "Issue area", options: actionIssueOptions },
+      ]}
+    >
+      <ul class="list-none space-y-6 p-0">
+        {sortedActions.map((a) => (
+          <li
+            data-card
+            data-search={`${a.data.title} ${a.data.summary} ${a.data.cta} ${issueLabels[a.data.issue] ?? ""} ${a.data.urgency}`.toLowerCase()}
+            data-issue={a.data.issue}
+            data-urgency={a.data.urgency}
+            class="grid gap-4 border-t border-rule pt-6 md:grid-cols-12"
+          >
+            <div class="md:col-span-2">
+              <span class:list={[
+                "inline-block rounded-sm px-2 py-1 text-xs font-semibold uppercase tracking-wider",
+                a.data.urgency === "high"
+                  ? "bg-coral text-paper"
+                  : a.data.urgency === "medium"
+                    ? "bg-gold-soft text-ink"
+                    : "bg-rule text-ink"
+              ]}>
+                {a.data.urgency}
+              </span>
+            </div>
+            <div class="md:col-span-7">
+              <h3 class="text-xl font-semibold leading-snug">{a.data.title}</h3>
+              <p class="mt-2 text-ink-muted">{a.data.summary}</p>
+            </div>
+            <div class="md:col-span-3 md:justify-self-end">
+              <a href={a.data.href} class="btn btn-primary">{a.data.cta}</a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </SearchFilter>
   </Section>
 
   <Section eyebrow="Letter templates" title="Ready to send" tone="warm">
-    <ul class="grid gap-6 md:grid-cols-2">
-      {letters.map((l) => (
-        <li class="card-issue">
-          <p class="eyebrow">{l.data.audience}</p>
-          <h3 class="mt-2 text-lg font-semibold leading-snug">
-            <a href={`/letters/${l.id}`} class="no-underline hover:text-coral-deep">
-              {l.data.title}
-            </a>
-          </h3>
-          <p class="mt-3 text-sm text-ink-muted">{l.data.summary}</p>
-        </li>
-      ))}
-    </ul>
+    <SearchFilter
+      scope="action-letters"
+      placeholder="Search letters by title or audience…"
+      totalLabel="letters"
+      filters={[{ key: "issue", label: "Issue area", options: letterIssueOptions }]}
+    >
+      <ul class="list-none grid gap-6 p-0 md:grid-cols-2">
+        {letters.map((l) => (
+          <li
+            data-card
+            data-search={`${l.data.title} ${l.data.summary} ${l.data.audience} ${issueLabels[l.data.issue] ?? ""}`.toLowerCase()}
+            data-issue={l.data.issue}
+            class="card-issue"
+          >
+            <p class="eyebrow">{l.data.audience}</p>
+            <h3 class="mt-2 text-lg font-semibold leading-snug">
+              <a href={`/letters/${l.id}`} class="no-underline hover:text-coral-deep">
+                {l.data.title}
+              </a>
+            </h3>
+            <p class="mt-3 text-sm text-ink-muted">{l.data.summary}</p>
+          </li>
+        ))}
+      </ul>
+    </SearchFilter>
   </Section>
 </BaseLayout>

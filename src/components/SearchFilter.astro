@@ -1,0 +1,206 @@
+---
+interface FilterOption {
+  value: string;
+  label: string;
+  count?: number;
+}
+interface FilterDef {
+  key: string;
+  label: string;
+  options: FilterOption[];
+}
+interface Props {
+  scope: string;
+  placeholder?: string;
+  filters?: FilterDef[];
+  totalLabel?: string;
+}
+const {
+  scope,
+  placeholder = "Search by keyword…",
+  filters = [],
+  totalLabel = "items",
+} = Astro.props;
+---
+<div class="search-filter mt-6 mb-2" data-search-scope={scope}>
+  <div class="flex flex-col gap-3 border-y border-rule py-4 md:flex-row md:items-center md:gap-6">
+    <label class="relative block grow">
+      <span class="sr-only">Search</span>
+      <input
+        type="search"
+        data-search-input
+        placeholder={placeholder}
+        autocomplete="off"
+        spellcheck="false"
+        class="w-full border border-rule bg-paper px-4 py-2.5 text-base text-ink placeholder:text-ink-muted focus:border-ink focus:outline-none"
+      />
+    </label>
+    <p class="text-sm text-ink-muted whitespace-nowrap">
+      <span data-result-count>—</span> <span>{totalLabel}</span>
+      <button
+        type="button"
+        data-reset
+        class="ml-3 hidden text-coral-deep underline underline-offset-2 hover:text-ink"
+      >Reset</button>
+    </p>
+  </div>
+
+  {filters.map((f) => (
+    <div class="mt-4 flex flex-wrap items-baseline gap-x-4 gap-y-2" data-filter-key={f.key}>
+      <span class="eyebrow shrink-0">{f.label}</span>
+      <button
+        type="button"
+        data-filter-value=""
+        class="filter-chip is-active"
+      >All</button>
+      {f.options.map((o) => (
+        <button
+          type="button"
+          data-filter-value={o.value}
+          class="filter-chip"
+        >
+          {o.label}{o.count !== undefined ? <span class="ml-1 text-ink-muted">({o.count})</span> : null}
+        </button>
+      ))}
+    </div>
+  ))}
+</div>
+
+<slot />
+
+<p data-empty-state class="mt-10 hidden border-l-2 border-coral pl-4 text-ink-muted" data-search-scope-empty={scope}>
+  Nothing matches that combination. Try clearing a filter or searching a different term.
+</p>
+
+<style>
+  .filter-chip {
+    border: 1px solid var(--color-rule);
+    background: var(--color-paper);
+    color: var(--color-ink-muted);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: border-color 120ms, color 120ms, background 120ms;
+  }
+  .filter-chip:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+  .filter-chip.is-active {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+  [data-card][hidden] {
+    display: none !important;
+  }
+</style>
+
+<script>
+  type ChipEl = HTMLButtonElement;
+
+  function setupScope(root: HTMLElement) {
+    const scope = root.getAttribute("data-search-scope")!;
+    const input = root.querySelector<HTMLInputElement>("[data-search-input]");
+    const resultEl = root.querySelector<HTMLElement>("[data-result-count]");
+    const resetBtn = root.querySelector<HTMLButtonElement>("[data-reset]");
+    const filterRows = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-filter-key]"),
+    );
+
+    // Cards live in a sibling container after the SearchFilter component, marked
+    // with [data-card]. We collect any [data-card] under the same nearest
+    // section-level parent that owns this scope.
+    const parent = root.parentElement!;
+    const cards = Array.from(
+      parent.querySelectorAll<HTMLElement>("[data-card]"),
+    );
+    const emptyState = parent.querySelector<HTMLElement>(
+      `[data-search-scope-empty="${scope}"]`,
+    );
+
+    const state: Record<string, string> = {};
+    let query = "";
+
+    function tokensFor(value: string): string[] {
+      // value may be space-separated for multi-value facets (e.g. tags).
+      return value
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(Boolean);
+    }
+
+    function matches(card: HTMLElement): boolean {
+      if (query) {
+        const haystack = (card.getAttribute("data-search") || "").toLowerCase();
+        const needles = query.toLowerCase().split(/\s+/).filter(Boolean);
+        if (!needles.every((n) => haystack.includes(n))) return false;
+      }
+      for (const [key, val] of Object.entries(state)) {
+        if (!val) continue;
+        const cardVal = card.getAttribute(`data-${key}`) || "";
+        const cardTokens = tokensFor(cardVal);
+        if (!cardTokens.includes(val.toLowerCase())) return false;
+      }
+      return true;
+    }
+
+    function apply() {
+      let visible = 0;
+      for (const card of cards) {
+        const ok = matches(card);
+        card.toggleAttribute("hidden", !ok);
+        if (ok) visible++;
+      }
+      if (resultEl) resultEl.textContent = String(visible);
+      if (emptyState) emptyState.toggleAttribute("hidden", visible !== 0);
+      const anyActive =
+        Boolean(query) || Object.values(state).some(Boolean);
+      if (resetBtn) resetBtn.classList.toggle("hidden", !anyActive);
+    }
+
+    input?.addEventListener("input", (e) => {
+      query = (e.target as HTMLInputElement).value.trim();
+      apply();
+    });
+
+    for (const row of filterRows) {
+      const key = row.getAttribute("data-filter-key")!;
+      state[key] = "";
+      const chips = Array.from(
+        row.querySelectorAll<ChipEl>("[data-filter-value]"),
+      );
+      for (const chip of chips) {
+        chip.addEventListener("click", () => {
+          const value = chip.getAttribute("data-filter-value") || "";
+          state[key] = value;
+          for (const c of chips) c.classList.toggle("is-active", c === chip);
+          apply();
+        });
+      }
+    }
+
+    resetBtn?.addEventListener("click", () => {
+      query = "";
+      if (input) input.value = "";
+      for (const row of filterRows) {
+        const key = row.getAttribute("data-filter-key")!;
+        state[key] = "";
+        const chips = row.querySelectorAll<ChipEl>("[data-filter-value]");
+        chips.forEach((c, i) => c.classList.toggle("is-active", i === 0));
+      }
+      apply();
+    });
+
+    apply();
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>(
+    "[data-search-scope]",
+  )) {
+    setupScope(root);
+  }
+</script>

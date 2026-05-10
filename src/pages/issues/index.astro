@@ -4,6 +4,7 @@ import BaseLayout from "~/layouts/BaseLayout.astro";
 import Section from "~/components/Section.astro";
 import IssueCard from "~/components/IssueCard.astro";
 import Hero from "~/components/Hero.astro";
+import SearchFilter from "~/components/SearchFilter.astro";
 import { issueOrder } from "~/config/site";
 
 const all = await getCollection("issues");
@@ -11,7 +12,11 @@ const issues = issueOrder
   .map((slug) => all.find((i) => i.id === slug))
   .filter((i): i is NonNullable<typeof i> => Boolean(i));
 ---
-<BaseLayout title="Issues" description="Fourteen issue clusters where US public policy has drifted from the public good.">
+<BaseLayout
+  title="Issues"
+  description="Fourteen issue clusters where US public policy has drifted from the public good."
+  ogImage="/hero/issues-senate-chamber.png"
+>
   <Hero tone="warm" imageStyle="bleed">
     <p class="eyebrow">Our focus</p>
     <h1 class="mt-3 max-w-3xl text-balance">
@@ -30,16 +35,30 @@ const issues = issueOrder
   </Hero>
 
   <Section>
-    <div class="grid-issues">
-      {issues.map((issue) => (
-        <IssueCard
-          href={`/issues/${issue.id}`}
-          eyebrow={issue.data.eyebrow}
-          title={issue.data.short}
-          summary={issue.data.summary}
-          accent={issue.data.accent}
-        />
-      ))}
-    </div>
+    <SearchFilter
+      scope="issues"
+      placeholder="Search issues by title, stake, or pillar…"
+      totalLabel="issues"
+    >
+      <div class="grid-issues">
+        {issues.map((issue) => {
+          const pillarText = issue.data.pillars
+            .map((p) => `${p.title} ${p.body}`)
+            .join(" ");
+          const factsText = issue.data.facts.join(" ");
+          return (
+            <IssueCard
+              href={`/issues/${issue.id}`}
+              eyebrow={issue.data.eyebrow}
+              title={issue.data.short}
+              summary={issue.data.summary}
+              accent={issue.data.accent}
+              data-card
+              data-search={`${issue.data.title} ${issue.data.short} ${issue.data.summary} ${issue.data.headline} ${issue.data.stance} ${pillarText} ${factsText}`.toLowerCase()}
+            />
+          );
+        })}
+      </div>
+    </SearchFilter>
   </Section>
 </BaseLayout>

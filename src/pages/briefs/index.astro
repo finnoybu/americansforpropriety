@@ -4,19 +4,25 @@ import BaseLayout from "~/layouts/BaseLayout.astro";
 import Section from "~/components/Section.astro";
 import PostCard from "~/components/PostCard.astro";
 import Hero from "~/components/Hero.astro";
+import SearchFilter from "~/components/SearchFilter.astro";
 import { getSupabase } from "~/lib/supabase";
 import { getEnv, isSupabaseConfigured } from "~/lib/env";
+import { getIssueLabels } from "~/lib/issue-labels";
+import { issueOrder } from "~/config/site";
 
 export const prerender = false;
+
+const issueLabels = await getIssueLabels();
 
 // Static (curated) briefs from the content collection.
 const staticBriefs = (await getCollection("briefs", ({ data }) => !data.draft))
   .map((b) => ({
     href: `/briefs/${b.id}`,
-    eyebrow: `Brief · ${b.data.issue.replace(/-/g, " ")}`,
+    eyebrow: `Brief · ${(issueLabels[b.data.issue] ?? b.data.issue.replace(/-/g, " "))}`,
     title: b.data.title,
     summary: b.data.summary,
     date: b.data.publishedAt,
+    issue: b.data.issue,
     source: "static" as const,
   }));
 
@@ -27,6 +33,7 @@ let aiBriefs: Array<{
   title: string;
   summary: string;
   date: Date;
+  issue: string;
   source: "ai";
 }> = [];
 
@@ -40,10 +47,11 @@ if (isSupabaseConfigured(getEnv(Astro))) {
 
   aiBriefs = (aiRows ?? []).map((b: any) => ({
     href: `/briefs/${b.slug}`,
-    eyebrow: `Weekly · ${b.issue.replace(/-/g, " ")}`,
+    eyebrow: `Weekly · ${(issueLabels[b.issue] ?? b.issue.replace(/-/g, " "))}`,
     title: b.title,
     summary: b.summary,
     date: new Date(b.published_at),
+    issue: b.issue as string,
     source: "ai" as const,
   }));
 }
@@ -51,8 +59,24 @@ if (isSupabaseConfigured(getEnv(Astro))) {
 const all = [...staticBriefs, ...aiBriefs].sort(
   (a, b) => b.date.getTime() - a.date.getTime(),
 );
+
+const issueCounts = all.reduce<Record<string, number>>((acc, b) => {
+  acc[b.issue] = (acc[b.issue] ?? 0) + 1;
+  return acc;
+}, {});
+const issueOptions = issueOrder
+  .filter((slug) => issueCounts[slug])
+  .map((slug) => ({
+    value: slug,
+    label: issueLabels[slug] ?? slug,
+    count: issueCounts[slug],
+  }));
 ---
-<BaseLayout title="Briefs" description="Plain-language research on US public policy.">
+<BaseLayout
+  title="Briefs"
+  description="Plain-language research on US public policy."
+  ogImage="/hero/briefs-press-room.png"
+>
   <Hero tone="warm" imageStyle="bleed">
     <p class="eyebrow">Research</p>
     <h1 class="mt-3 max-w-3xl text-balance">Briefs.</h1>
@@ -69,15 +93,33 @@ const all = [...staticBriefs, ...aiBriefs].sort(
   </Hero>
 
   <Section>
-    {all.length === 0 && <p>No briefs yet.</p>}
-    {all.map((b) => (
-      <PostCard
-        href={b.href}
-        eyebrow={b.eyebrow}
-        title={b.title}
-        summary={b.summary}
-        date={b.date}
-      />
-    ))}
+    {all.length === 0 ? (
+      <p>No briefs yet.</p>
+    ) : (
+      <SearchFilter
+        scope="briefs"
+        placeholder="Search briefs by title, topic, or keyword…"
+        totalLabel="briefs"
+        filters={[{ key: "issue", label: "Issue area", options: issueOptions }]}
+      >
+        <div>
+          {all.map((b) => (
+            <div
+              data-card
+              data-search={`${b.title} ${b.summary} ${issueLabels[b.issue] ?? ""} ${b.eyebrow}`.toLowerCase()}
+              data-issue={b.issue}
+            >
+              <PostCard
+                href={b.href}
+                eyebrow={b.eyebrow}
+                title={b.title}
+                summary={b.summary}
+                date={b.date}
+              />
+            </div>
+          ))}
+        </div>
+      </SearchFilter>
+    )}
   </Section>
 </BaseLayout>

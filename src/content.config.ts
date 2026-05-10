@@ -29,6 +29,7 @@ const issues = defineCollection({
         z.object({
           name: z.string(),
           chamber: z.enum(["federal", "state"]).default("federal"),
+          state: z.string().optional(),
           summary: z.string(),
           status: z.string(),
         }),

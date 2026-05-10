@@ -1,0 +1,85 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+
+const lines = [
+  {
+    label: "General",
+    email: "hello@americansforpropriety.org",
+    body: "Anything that doesn't fit one of the other categories. Reading the issues, asking what we're working on, suggesting a topic.",
+  },
+  {
+    label: "Press",
+    email: "press@americansforpropriety.org",
+    body: "Interview requests, comment, or background on any of our briefs or positions. We respond within two business days when we can.",
+  },
+  {
+    label: "Privacy and data requests",
+    email: "privacy@americansforpropriety.org",
+    body: "Read, correct, export, or delete the data we hold on your member account. See the Privacy Policy for the full process.",
+  },
+  {
+    label: "Corrections",
+    email: "corrections@americansforpropriety.org",
+    body: "Spot something wrong? A misattributed quote, a mis-stated bill number, an out-of-date status? Tell us and we'll fix it.",
+  },
+  {
+    label: "Accessibility",
+    email: "accessibility@americansforpropriety.org",
+    body: "Report a barrier you've encountered using the site. See our Accessibility statement for the full standards we're trying to meet.",
+  },
+  {
+    label: "Tips and source material",
+    email: "tips@americansforpropriety.org",
+    body: "Documents, leaks, or insider context relevant to a brief we're working on or one we should be. We treat sources confidentially. Encrypted email is supported on request.",
+  },
+  {
+    label: "Security disclosures",
+    email: "security@americansforpropriety.org",
+    body: "Vulnerabilities, exposures, or anything that affects member data. We commit to acknowledging within 72 hours and to coordinated disclosure where reasonable.",
+  },
+];
+---
+<BaseLayout
+  title="Contact"
+  description="Email addresses for general inquiries, press, privacy requests, corrections, accessibility, tips, and security disclosures."
+>
+  <section class="border-b border-rule bg-paper">
+    <div class="container-page py-20 md:py-28">
+      <p class="eyebrow">Contact</p>
+      <h1 class="mt-3 max-w-4xl text-balance">
+        We don't run a contact form. Email reaches a person.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        We don't operate a chatbot, a ticketing system, or a contact form that funnels into a CRM you've never heard of. Each address below goes to a small group of editors. Pick the closest match.
+      </p>
+    </div>
+  </section>
+
+  <Section>
+    <ul class="space-y-10">
+      {lines.map((l) => (
+        <li class="grid gap-3 border-t border-rule pt-8 md:grid-cols-12">
+          <div class="md:col-span-4">
+            <p class="eyebrow">{l.label}</p>
+            <p class="mt-3 font-mono text-sm">
+              <a class="underline" href={`mailto:${l.email}`}>{l.email}</a>
+            </p>
+          </div>
+          <p class="md:col-span-8 text-base leading-relaxed text-ink-soft">{l.body}</p>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section eyebrow="A note on response times" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        We aim to respond to general inquiries within five business days, press inquiries within two, and privacy or security matters within three. We are a small team. If something is urgent, say so in the subject line.
+      </p>
+      <p>
+        We do not respond to bulk-sent identical messages. We do read individual messages even when we don't reply.
+      </p>
+    </div>
+  </Section>
+</BaseLayout>

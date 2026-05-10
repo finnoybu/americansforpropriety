@@ -1,0 +1,97 @@
+---
+// Three-state theme toggle: light → dark → system → light.
+// Pre-paint script in BaseLayout sets the initial data-theme on <html> from
+// localStorage / system preference, so first paint already matches user pref.
+// This component handles cycling and persistence after hydration.
+---
+<button
+  type="button"
+  data-theme-toggle
+  data-mode="system"
+  class="icon-btn"
+  aria-label="Theme"
+  title="Theme: system"
+>
+  <span class="sr-only" data-theme-sr>System theme</span>
+
+  <svg data-icon="light" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+  </svg>
+
+  <svg data-icon="dark" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+  </svg>
+
+  <svg data-icon="system" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="2" y="3" width="20" height="14" rx="2" />
+    <line x1="8" y1="21" x2="16" y2="21" />
+    <line x1="12" y1="17" x2="12" y2="21" />
+  </svg>
+</button>
+
+<style>
+  /* Icon visibility — base button styling lives in .icon-btn (global.css). */
+  [data-theme-toggle] [data-icon] {
+    display: none;
+  }
+  [data-theme-toggle][data-mode="light"] [data-icon="light"],
+  [data-theme-toggle][data-mode="dark"] [data-icon="dark"],
+  [data-theme-toggle][data-mode="system"] [data-icon="system"] {
+    display: block;
+  }
+</style>
+
+<script>
+  type Mode = "light" | "dark" | "system";
+  const STORAGE_KEY = "theme-mode";
+  const NEXT: Record<Mode, Mode> = { light: "dark", dark: "system", system: "light" };
+  const LABEL: Record<Mode, string> = {
+    light: "Light theme",
+    dark: "Dark theme",
+    system: "System theme",
+  };
+
+  function getMode(): Mode {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored === "light" || stored === "dark" ? stored : "system";
+  }
+
+  function resolveTheme(mode: Mode): "light" | "dark" {
+    if (mode === "system") {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    return mode;
+  }
+
+  function applyMode(mode: Mode) {
+    if (mode === "system") {
+      localStorage.removeItem(STORAGE_KEY);
+    } else {
+      localStorage.setItem(STORAGE_KEY, mode);
+    }
+    document.documentElement.dataset.theme = resolveTheme(mode);
+    for (const btn of document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")) {
+      btn.dataset.mode = mode;
+      btn.title = `Theme: ${mode}`;
+      const sr = btn.querySelector<HTMLElement>("[data-theme-sr]");
+      if (sr) sr.textContent = LABEL[mode];
+    }
+  }
+
+  // Initialize toggle UI to match the mode the pre-paint script already applied.
+  applyMode(getMode());
+
+  for (const btn of document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]")) {
+    btn.addEventListener("click", () => {
+      const current = (btn.dataset.mode as Mode) || "system";
+      applyMode(NEXT[current]);
+    });
+  }
+
+  // When in "system" mode, follow OS preference changes live.
+  const mql = window.matchMedia("(prefers-color-scheme: dark)");
+  mql.addEventListener("change", () => {
+    if (getMode() === "system") applyMode("system");
+  });
+</script>

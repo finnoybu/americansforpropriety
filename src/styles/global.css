@@ -1,11 +1,16 @@
 @import "tailwindcss";
 
+/* Class-based dark variant: `dark:bg-foo` activates when the document
+ * has data-theme="dark". Set by the pre-paint script in BaseLayout. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
-  /* Brand palette
-   * navy: civic gravity, the dominant ink
-   * coral: advocacy / take-action accent (used sparingly)
-   * gold: heritage / progressive-era accent
-   * cream: warm paper background
+  /* Brand palette — semantic role tokens. These are the LIGHT-mode values
+   * and are overridden under [data-theme="dark"] below.
+   *
+   * `ink`   = foreground / text (contrasts with paper)
+   * `paper` = page background
+   * accents (coral, gold, leaf) are tuned per-theme for legible contrast.
    */
   --color-ink: #0E1B33;
   --color-ink-soft: #1F2A44;
@@ -19,11 +24,48 @@
   --color-gold-soft: #E8B43C;
   --color-leaf: #2F5D3B;
 
+  /* Brand-fixed colors — do NOT change with theme. Use these in places where
+   * the brand identity must read consistently (logo internals, etc.). */
+  --brand-navy: #0E1B33;
+  --brand-cream: #FAF6EE;
+  --brand-coral: #E8473C;
+
+  /* Logo color slots — flipped in dark mode so the mark reads against either bg. */
+  --logo-disc: var(--brand-navy);
+  --logo-scale-inside: var(--brand-cream);
+  --logo-scale-outside: var(--brand-navy);
+
   --font-display: "Fraunces", "Iowan Old Style", "Georgia", "Times New Roman", serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --container-prose: 68ch;
+}
+
+/* Dark theme overrides. Variables override the light defaults declared in
+ * @theme above; Tailwind utilities resolve via var() so they pick this up. */
+:root[data-theme="dark"] {
+  --color-ink: #F2EBDB;
+  --color-ink-soft: #D9D2C2;
+  --color-ink-muted: #95A0B5;
+  --color-paper: #131A2A;
+  --color-paper-warm: #1A2236;
+  --color-rule: #2A3349;
+  --color-coral: #FF5C4D;
+  --color-coral-deep: #FF8B7C;
+  --color-gold: #E0B45A;
+  --color-gold-soft: #F5C656;
+  --color-leaf: #5BA873;
+
+  --logo-disc: var(--brand-cream);
+  --logo-scale-inside: var(--brand-navy);
+  --logo-scale-outside: var(--brand-cream);
+}
+
+/* Smooth color transitions when toggling theme. Limited to the properties
+ * that swap, so unrelated UI animations are unaffected. */
+html {
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
 @layer base {
@@ -171,4 +213,26 @@
   }
   @media (min-width: 640px) { .grid-issues { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1024px) { .grid-issues { grid-template-columns: repeat(3, 1fr); } }
+
+  /* Square icon-only button shared by ThemeToggle, GitHub link, etc. */
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid transparent;
+    color: var(--color-ink-muted);
+    background: transparent;
+    cursor: pointer;
+    transition: color 120ms, border-color 120ms, background 120ms;
+  }
+  .icon-btn:hover {
+    color: var(--color-ink);
+    border-color: var(--color-rule);
+  }
+  .icon-btn:focus-visible {
+    outline: 2px solid var(--color-coral);
+    outline-offset: 2px;
+  }
 }

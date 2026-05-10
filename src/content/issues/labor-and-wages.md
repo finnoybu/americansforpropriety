@@ -70,6 +70,7 @@ keyBills:
     status: "Proposed rule; not finalized as of late 2025"
   - name: "California AB 5 / Proposition 22"
     chamber: "state"
+    state: "California"
     summary: "AB 5 codified strict ABC test for independent contractor status; Prop 22 (passed 2020) carved out app-based drivers."
     status: "Both in force; ongoing litigation over Prop 22 scope"
   - name: "Multi-employer pension reform"

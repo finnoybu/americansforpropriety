@@ -4,12 +4,36 @@ import BaseLayout from "~/layouts/BaseLayout.astro";
 import Section from "~/components/Section.astro";
 import PostCard from "~/components/PostCard.astro";
 import Hero from "~/components/Hero.astro";
+import SearchFilter from "~/components/SearchFilter.astro";
 
 const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
 );
+
+// Tags can grow unbounded as posts accumulate. Sort by frequency and cap.
+const TAG_LIMIT = 12;
+const tagCounts = posts.reduce<Record<string, number>>((acc, p) => {
+  for (const t of p.data.tags) acc[t] = (acc[t] ?? 0) + 1;
+  return acc;
+}, {});
+const tagOptions = Object.entries(tagCounts)
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .slice(0, TAG_LIMIT)
+  .map(([value, count]) => ({
+    value,
+    label: value.replace(/-/g, " "),
+    count,
+  }));
+
+function tagLabel(t: string) {
+  return t.replace(/-/g, " ");
+}
 ---
-<BaseLayout title="News" description="Field notes from the project.">
+<BaseLayout
+  title="News"
+  description="Field notes from the project."
+  ogImage="/hero/news-press-corps.png"
+>
   <Hero tone="warm" imageStyle="bleed">
     <p class="eyebrow">Field notes</p>
     <h1 class="mt-3 max-w-3xl text-balance">News, notes, dispatches.</h1>
@@ -26,15 +50,33 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
   </Hero>
 
   <Section>
-    {posts.length === 0 && <p>No posts yet.</p>}
-    {posts.map((p) => (
-      <PostCard
-        href={`/news/${p.id}`}
-        eyebrow="Post"
-        title={p.data.title}
-        summary={p.data.summary}
-        date={p.data.publishedAt}
-      />
-    ))}
+    {posts.length === 0 ? (
+      <p>No posts yet.</p>
+    ) : (
+      <SearchFilter
+        scope="news"
+        placeholder="Search posts by headline, tag, or keyword…"
+        totalLabel="posts"
+        filters={[{ key: "tag", label: "Topic", options: tagOptions }]}
+      >
+        <div>
+          {posts.map((p) => (
+            <div
+              data-card
+              data-search={`${p.data.title} ${p.data.summary} ${p.data.tags.map(tagLabel).join(" ")}`.toLowerCase()}
+              data-tag={p.data.tags.join(" ")}
+            >
+              <PostCard
+                href={`/news/${p.id}`}
+                eyebrow="Post"
+                title={p.data.title}
+                summary={p.data.summary}
+                date={p.data.publishedAt}
+              />
+            </div>
+          ))}
+        </div>
+      </SearchFilter>
+    )}
   </Section>
 </BaseLayout>

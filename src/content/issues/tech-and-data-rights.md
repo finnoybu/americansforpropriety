@@ -82,6 +82,7 @@ keyBills:
     status: "Active in multiple states"
   - name: "California Delete Act"
     chamber: "state"
+    state: "California"
     summary: "Centralized one-step deletion of personal data from data brokers operating in California."
     status: "Enacted; in implementation"
 glossary:

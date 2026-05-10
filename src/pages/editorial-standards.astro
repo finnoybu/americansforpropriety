@@ -1,0 +1,121 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+---
+<BaseLayout
+  title="Editorial standards"
+  description="How we source, verify, edit, and disclose. The standards we ask to be judged against."
+>
+  <section class="border-b border-rule bg-paper">
+    <div class="container-page py-20 md:py-28">
+      <p class="eyebrow">Editorial standards</p>
+      <h1 class="mt-3 max-w-4xl text-balance">
+        How we source, how we verify, how we disclose.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        Principle 06 says accountability runs both ways. This page makes that concrete: the standards a brief, a letter template, or a news post on this site is supposed to clear before it goes up.
+      </p>
+    </div>
+  </section>
+
+  <Section eyebrow="01" title="Sourcing">
+    <div class="prose-editorial">
+      <p>
+        Every factual claim in a brief is sourced. Where possible we link to the primary record — a bill text, a court opinion, an agency rulemaking notice, a campaign-finance filing, a transcript. Secondary reporting is cited when we are relying on a journalist's investigation rather than the underlying record.
+      </p>
+      <p>
+        When we paraphrase, we do so without distorting the source. When a source is anonymous, we note that and explain why anonymity was warranted. We do not knowingly cite a partisan summary as if it were neutral; we identify the lens.
+      </p>
+      <p>
+        We do not pay sources. We do not accept embargoed material in exchange for favorable framing.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="02" title="Verification" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        Numbers are checked against the underlying source before publication. If a brief cites a CBO score, we read the score. If it cites a court opinion, we read the opinion, including dissents. If it cites a news report, we look at what the reporter actually wrote and whether their source supports the claim we're making about it.
+      </p>
+      <p>
+        Quotes are checked against full transcripts where one is available. We do not use an excerpt that meaningfully changes the speaker's meaning when read in context.
+      </p>
+      <p>
+        Statistics that move with time (employment numbers, polling, vote counts) are dated. We tell the reader when a figure was current as of, so they can judge whether to trust it now.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="03" title="Use of AI in our drafting">
+    <div class="prose-editorial">
+      <p>
+        Some research briefs on this site are drafted with assistance from a large language model and labeled accordingly on the page. Drafting with AI does not lower the bar; it raises it. Every AI-drafted brief is reviewed by an editor against the same sourcing and verification standards above before it is published. Footnotes and links are checked. Numerical claims are checked. Quotes are checked.
+      </p>
+      <p>
+        AI is not used for opinion or framing. The frame of a brief — what's important, who is affected, what the stakes are — is an editorial decision made by a person.
+      </p>
+      <p>
+        We do not republish AI output as the work of a named author. AI-drafted material is bylined "Editorial team" and labeled on the page.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="04" title="Independence" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        Americans for Propriety is not affiliated with a political party, a campaign committee, a 527, or any candidate for public office. We do not endorse candidates and we do not coordinate our publication schedule with one.
+      </p>
+      <p>
+        We have policy views — they are stated openly on the site, on our <a href="/issues">Issues</a> pages and in our <a href="/principles">Principles</a>. We do not pretend those views are neutral. We expect readers to bring their own.
+      </p>
+      <p>
+        We do not accept paid placements, sponsored briefs, or "thought-leadership" partnerships. No outside party has approval over what appears on this site.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="05" title="Conflicts of interest">
+    <div class="prose-editorial">
+      <p>
+        If an editor has a personal, professional, or financial relationship that would reasonably be considered a conflict on a story we are publishing — a family member at the agency in question, recent paid work for an advocacy group quoted in the piece, a financial interest in a company affected — that editor recuses from the piece. When recusal isn't practical, the conflict is disclosed on the page.
+      </p>
+      <p>
+        We disclose institutional relationships as well. Vendor and infrastructure providers material to our operations are listed on our <a href="/funding">Funding and disclosures</a> page.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="06" title="Letters" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        The letter templates published on this site are explicitly templates, not finished letters. They are written to be personalized by a constituent before sending. We do not encourage form-letter blasts — they don't work, and they are corrosive to the trust between constituents and offices that we want to strengthen.
+      </p>
+      <p>
+        Each template names its intended audience (US Senator, US Representative, State Legislator, Local Official, Federal Agency) and the issue it addresses. It cites the underlying bill, rule, or proceeding it is responding to.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="07" title="Updates and corrections">
+    <div class="prose-editorial">
+      <p>
+        Briefs and posts are updated when an underlying claim becomes outdated (a bill advances, a court ruling lands, an agency finalizes a rule). Substantive updates are dated and noted at the top of the piece.
+      </p>
+      <p>
+        Errors are corrected. We log them publicly on the <a href="/corrections">Corrections</a> page rather than silently editing. Pieces that contain a correction carry a note linking back to the log.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="08" title="What we will not publish" tone="warm">
+    <div class="prose-editorial">
+      <ul>
+        <li>Material we cannot verify, presented as if we had.</li>
+        <li>A claim sourced solely to an anonymous figure when the same claim could be made on the record by someone else.</li>
+        <li>A quote stripped of context that would change its meaning.</li>
+        <li>A piece written to advance a candidate's campaign rather than to inform a policy question.</li>
+        <li>A piece any of our editors has been paid by an interested outside party to publish.</li>
+      </ul>
+    </div>
+  </Section>
+</BaseLayout>

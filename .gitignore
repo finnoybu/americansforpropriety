@@ -3,7 +3,9 @@
 Thumbs.db
 
 # Editor / IDE
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 .idea/
 
 # Node (future-proofing, safe even if unused)

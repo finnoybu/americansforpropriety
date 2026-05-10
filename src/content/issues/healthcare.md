@@ -70,6 +70,7 @@ keyBills:
     status: "Reintroduced; not advanced"
   - name: "California single-payer (CalCare / SB 770)"
     chamber: "state"
+    state: "California"
     summary: "Phased path toward state single-payer system; SB 770 directs administration to seek federal waivers."
     status: "Active; federal waiver negotiation ongoing"
   - name: "Insulin price cap proposals"

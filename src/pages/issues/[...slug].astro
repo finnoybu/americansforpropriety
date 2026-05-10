@@ -4,6 +4,7 @@ import BaseLayout from "~/layouts/BaseLayout.astro";
 import Section from "~/components/Section.astro";
 import PostCard from "~/components/PostCard.astro";
 import ActionBanner from "~/components/ActionBanner.astro";
+import { billSearchUrl } from "~/lib/bill-search";
 
 export async function getStaticPaths() {
   const issues = await getCollection("issues");
@@ -31,7 +32,12 @@ const accentVar = {
   ink: "var(--color-ink)",
 }[issue.data.accent];
 ---
-<BaseLayout title={issue.data.title} description={issue.data.summary} ogType="article">
+<BaseLayout
+  title={issue.data.title}
+  description={issue.data.summary}
+  ogType="article"
+  ogImage="/hero/issues-senate-chamber.png"
+>
   <article>
     <header class="border-b border-rule bg-paper">
       <div class="container-page py-16 md:py-24">
@@ -108,9 +114,16 @@ const accentVar = {
             {issue.data.keyBills.map((b) => (
               <tr class="border-b border-rule align-top">
                 <td class="py-3 pr-4">
-                  <span class="font-semibold">{b.name}</span>
+                  <a
+                    href={billSearchUrl(b.name, b.chamber, b.state)}
+                    target="_blank"
+                    rel="noopener"
+                    class="font-semibold"
+                  >
+                    {b.name}
+                  </a>
                   <span class="block text-xs uppercase tracking-wider text-ink-muted">
-                    {b.chamber}
+                    {b.chamber}{b.state ? ` · ${b.state}` : ""}
                   </span>
                 </td>
                 <td class="py-3 pr-4 text-ink-soft">{b.summary}</td>

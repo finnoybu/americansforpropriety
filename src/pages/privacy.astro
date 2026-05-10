@@ -1,0 +1,138 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+
+const effective = "May 10, 2026";
+---
+<BaseLayout
+  title="Privacy"
+  description="What we collect from members, what we never collect from anyone, and what each piece of data is for."
+>
+  <section class="border-b border-rule bg-paper">
+    <div class="container-page py-20 md:py-28">
+      <p class="eyebrow">Privacy</p>
+      <h1 class="mt-3 max-w-4xl text-balance">
+        We don't watch visitors. We tell members exactly what we keep.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        This policy explains the difference. It applies to everyone who reads this site and to people who choose to open a member account.
+      </p>
+      <p class="mt-3 text-sm text-ink-muted">Effective {effective}.</p>
+    </div>
+  </section>
+
+  <Section eyebrow="Visitors" title="What we do not collect">
+    <div class="prose-editorial">
+      <p>
+        If you read the site without signing in, we don't track you. There is no analytics tag, no advertising pixel, no fingerprinting script, no session-replay tool, no Google Tag Manager, no Facebook beacon, no third-party CDN that logs your reading.
+      </p>
+      <p>
+        Standard server access logs (IP, user agent, requested path, timestamp) are produced by our hosting provider, Cloudflare Pages, for the purpose of serving the site and defending it from abuse. We do not query or analyze those logs for marketing, audience segmentation, or behavioral profiling, and we do not retain copies on our own infrastructure.
+      </p>
+      <p>
+        We do not set advertising cookies. We do not sell, rent, or share data about you, because we don't have any to sell.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Members" title="What we collect, and why" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        A member account is opt-in. You enter your email and we send a one-time sign-in link. We never set a password, because we never want to store one. Below is the complete list of what's stored once you sign up, what each item is for, and what we do not do with it.
+      </p>
+      <h3>Email address</h3>
+      <p>
+        Used to send the magic sign-in link and any account-critical message (e.g., a security disclosure that affects you specifically). We never email a newsletter or marketing campaign. We will never send anything on your behalf to a representative or any third party.
+      </p>
+      <h3>ZIP code and state</h3>
+      <p>
+        Used to look up your federal and state representatives. Stored on your member profile so you don't have to re-enter it each visit. You can edit or remove it at any time from your member settings.
+      </p>
+      <h3>Cached representatives</h3>
+      <p>
+        When you submit your ZIP, we call the Geocodio API to retrieve your federal and state legislators and store the result on your profile so subsequent page loads don't re-query the third party. The cache is rebuilt on demand from your member settings page.
+      </p>
+      <h3>Action log</h3>
+      <p>
+        If you mark an action as completed (e.g., "I called my senator about S. 1234"), we record the action ID and a timestamp on your account so you can see what you've done. We do not infer political views from this log, do not share it with anyone, and do not use it for any purpose other than showing it back to you.
+      </p>
+      <h3>Letter drafts</h3>
+      <p>
+        Letters you generate using the AI drafting tool are stored on your account so you can return to them, edit them, and copy them when you're ready to send. They are visible only to you. We do not transmit them anywhere on your behalf — sending the letter is a manual step you take using your own email or postal mail.
+      </p>
+      <h3>Authentication session</h3>
+      <p>
+        While you are signed in, we set an HTTP-only, secure cookie that holds an opaque session token. It exists only to keep you signed in across page loads. It is not used for tracking and contains no personal information.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Third parties" title="Who else handles your data, and for what">
+    <div class="prose-editorial">
+      <p>
+        We use a small number of third-party services to operate the site. Each of them has its own privacy policy that supersedes ours for the data they hold. We've listed them below with what we send and why.
+      </p>
+      <ul>
+        <li>
+          <strong>Cloudflare Pages</strong> hosts the site and provides DDoS protection. It sees all traffic and produces standard access logs.
+        </li>
+        <li>
+          <strong>Supabase</strong> stores member account data, the action log, generated letters, and the authentication session. Our database lives in a Supabase-managed Postgres instance with row-level security enforcing that you can only read and write your own records.
+        </li>
+        <li>
+          <strong>Geocodio</strong> receives your ZIP code when you ask the site to look up your representatives. We do not send your name, email, or any other personal information.
+        </li>
+        <li>
+          <strong>Anthropic</strong> processes the prompts we send when you generate a letter or when an editor generates a research brief. We send only the issue context and any details you've explicitly typed into the drafting form. We do not send your email, ZIP, action log, or other profile data.
+        </li>
+        <li>
+          <strong>Google Fonts</strong> serves the site's typefaces. Your browser fetches font files directly from Google's servers when you load a page.
+        </li>
+      </ul>
+    </div>
+  </Section>
+
+  <Section eyebrow="Your rights" title="What you can ask us to do" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        Members can do the following at any time:
+      </p>
+      <ul>
+        <li><strong>Read what we have on you.</strong> Email <a href="mailto:privacy@americansforpropriety.org">privacy@americansforpropriety.org</a> from the address on your account and we will send you a complete export of your record within 30 days.</li>
+        <li><strong>Correct what we have on you.</strong> Most fields (ZIP, state, name) can be edited directly in your member settings. For anything you can't edit there, email us.</li>
+        <li><strong>Delete your account.</strong> Email <a href="mailto:privacy@americansforpropriety.org">privacy@americansforpropriety.org</a> and we will remove your record, action log, and any letters you've drafted within 30 days. This is irreversible.</li>
+        <li><strong>Withdraw consent.</strong> You can stop using your account at any time. Once deleted, none of your data persists in our systems.</li>
+      </ul>
+      <p>
+        These rights apply regardless of where you live. If you are in California, the EU, or another jurisdiction with specific data-protection rules, the same process satisfies a CCPA, GDPR, or comparable request.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Cookies" title="What we set, and why">
+    <div class="prose-editorial">
+      <p>
+        We set exactly one cookie, and only after you sign in: an HTTP-only, secure session cookie used to keep you authenticated. It expires when your session does. We do not set any cookie for an unauthenticated visitor.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Children" title="Under 13" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        This site is not directed at children under 13, and we do not knowingly create member accounts for them. If you become aware that a child has signed up, please email us and we will delete the account.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Changes" title="When this policy changes">
+    <div class="prose-editorial">
+      <p>
+        If we make a substantive change to this policy — adding a third-party service, changing what we collect, expanding what we do with member data — we will update the effective date at the top of this page and email any active members at least 14 days before the change takes effect. Editorial revisions (clarification, formatting, typo fixes) do not trigger a notice.
+      </p>
+      <p>
+        Questions about anything on this page can go to <a href="mailto:privacy@americansforpropriety.org">privacy@americansforpropriety.org</a>.
+      </p>
+    </div>
+  </Section>
+</BaseLayout>

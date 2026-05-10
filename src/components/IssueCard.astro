@@ -1,12 +1,13 @@
 ---
-interface Props {
+import type { HTMLAttributes } from "astro/types";
+interface Props extends Omit<HTMLAttributes<"a">, "href" | "title"> {
   href: string;
   eyebrow: string;
   title: string;
   summary: string;
   accent?: "coral" | "gold" | "leaf" | "ink";
 }
-const { href, eyebrow, title, summary, accent = "coral" } = Astro.props;
+const { href, eyebrow, title, summary, accent = "coral", ...rest } = Astro.props;
 const accentVar = {
   coral: "var(--color-coral)",
   gold: "var(--color-gold)",
@@ -14,7 +15,7 @@ const accentVar = {
   ink: "var(--color-ink)",
 }[accent];
 ---
-<a href={href} class="card-issue group no-underline" style={`--accent:${accentVar}`}>
+<a href={href} {...rest} class="card-issue group no-underline" style={`--accent:${accentVar}`}>
   <span class="block h-1 w-10" style={`background:${accentVar}`}></span>
   <p class="eyebrow mt-4">{eyebrow}</p>
   <h3 class="mt-2 text-xl font-semibold leading-tight text-ink">

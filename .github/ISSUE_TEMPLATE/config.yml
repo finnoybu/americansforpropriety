@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Privacy or data request
+    url: mailto:privacy@americansforpropriety.org
+    about: For requests to read, correct, export, or delete data on your member account.
+  - name: Press inquiry
+    url: mailto:press@americansforpropriety.org
+    about: For interview requests, comment, or background on a brief or position.
+  - name: Security disclosure
+    url: mailto:security@americansforpropriety.org
+    about: For vulnerabilities, exposures, or anything affecting member data. Please do not open a public issue.
+  - name: Confidential tip
+    url: mailto:tips@americansforpropriety.org
+    about: For documents, leaks, or insider context relevant to a brief. Sources are treated confidentially.

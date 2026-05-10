@@ -3,12 +3,45 @@ import { getCollection } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import Section from "~/components/Section.astro";
 import Hero from "~/components/Hero.astro";
+import SearchFilter from "~/components/SearchFilter.astro";
+import { getIssueLabels } from "~/lib/issue-labels";
+import { issueOrder } from "~/config/site";
+
+const issueLabels = await getIssueLabels();
 
 const letters = (await getCollection("letters")).sort(
   (a, b) => b.data.updatedAt.getTime() - a.data.updatedAt.getTime(),
 );
+
+const issueCounts = letters.reduce<Record<string, number>>((acc, l) => {
+  acc[l.data.issue] = (acc[l.data.issue] ?? 0) + 1;
+  return acc;
+}, {});
+const issueOptions = issueOrder
+  .filter((slug) => issueCounts[slug])
+  .map((slug) => ({
+    value: slug,
+    label: issueLabels[slug] ?? slug,
+    count: issueCounts[slug],
+  }));
+
+const audienceCounts = letters.reduce<Record<string, number>>((acc, l) => {
+  acc[l.data.audience] = (acc[l.data.audience] ?? 0) + 1;
+  return acc;
+}, {});
+const audienceOptions = Object.entries(audienceCounts)
+  .sort((a, b) => b[1] - a[1])
+  .map(([label, count]) => ({
+    value: label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+    label,
+    count,
+  }));
 ---
-<BaseLayout title="Letters" description="Constituent letter templates with judgment built in.">
+<BaseLayout
+  title="Letters"
+  description="Constituent letter templates with judgment built in."
+  ogImage="/hero/letters-rotunda.png"
+>
   <Hero tone="warm" imageStyle="bleed">
     <p class="eyebrow">Engage</p>
     <h1 class="mt-3 max-w-3xl text-balance">Letters constituents actually send.</h1>
@@ -25,17 +58,41 @@ const letters = (await getCollection("letters")).sort(
   </Hero>
 
   <Section>
-    {letters.length === 0 && <p>No letters yet.</p>}
-    <ul>
-      {letters.map((l) => (
-        <li>
-          <a href={`/letters/${l.id}`} class="block border-t border-rule py-6 no-underline">
-            <p class="eyebrow">{l.data.audience} · {l.data.issue.replace(/-/g, " ")}</p>
-            <h3 class="mt-2 text-xl font-semibold leading-snug">{l.data.title}</h3>
-            <p class="mt-2 max-w-2xl text-sm text-ink-muted">{l.data.summary}</p>
-          </a>
-        </li>
-      ))}
-    </ul>
+    {letters.length === 0 ? (
+      <p>No letters yet.</p>
+    ) : (
+      <SearchFilter
+        scope="letters"
+        placeholder="Search letters by title, topic, or recipient…"
+        totalLabel="letters"
+        filters={[
+          { key: "issue", label: "Issue area", options: issueOptions },
+          { key: "audience", label: "Audience", options: audienceOptions },
+        ]}
+      >
+        <ul class="list-none p-0">
+          {letters.map((l) => {
+            const audienceSlug = l.data.audience
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-|-$/g, "");
+            return (
+              <li
+                data-card
+                data-search={`${l.data.title} ${l.data.summary} ${l.data.audience} ${issueLabels[l.data.issue] ?? ""}`.toLowerCase()}
+                data-issue={l.data.issue}
+                data-audience={audienceSlug}
+              >
+                <a href={`/letters/${l.id}`} class="block border-t border-rule py-6 no-underline">
+                  <p class="eyebrow">{l.data.audience} · {issueLabels[l.data.issue] ?? l.data.issue.replace(/-/g, " ")}</p>
+                  <h3 class="mt-2 text-xl font-semibold leading-snug">{l.data.title}</h3>
+                  <p class="mt-2 max-w-2xl text-sm text-ink-muted">{l.data.summary}</p>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </SearchFilter>
+    )}
   </Section>
 </BaseLayout>

@@ -76,7 +76,12 @@ const dateLabel = view.date.toLocaleDateString("en-US", {
 const issueLabel = view.issue.replace(/-/g, " ");
 const StaticContent = view.StaticContent;
 ---
-<BaseLayout title={view.title} description={view.summary} ogType="article">
+<BaseLayout
+  title={view.title}
+  description={view.summary}
+  ogType="article"
+  ogImage="/hero/briefs-press-room.png"
+>
   <article class="container-page py-16 md:py-24">
     <p class="eyebrow">
       <a href={`/issues/${view.issue}`} class="no-underline hover:underline">

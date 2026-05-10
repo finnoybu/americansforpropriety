@@ -1,0 +1,57 @@
+---
+interface Props {
+  class?: string;
+  size?: number;
+  title?: string;
+}
+const { class: className = "", size, title = "Americans for Propriety" } = Astro.props;
+const sizeStyle = size ? `width:${size}px;height:${size}px;` : "";
+// Unique IDs per instance so multiple <Logo>s in the same document don't
+// collide on defs. Astro renders this on the server, so the value is stable
+// for any one render.
+const uid = Math.random().toString(36).slice(2, 9);
+const clipId = `afp-logo-clip-${uid}`;
+const scalesId = `afp-logo-scales-${uid}`;
+---
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  role="img"
+  aria-label={title}
+  class={className}
+  style={sizeStyle}
+>
+  <defs>
+    <clipPath id={clipId}>
+      <circle cx="50" cy="58" r="34" />
+    </clipPath>
+    <g id={scalesId}>
+      <circle cx="50" cy="11" r="3" />
+      <rect x="48.5" y="11" width="3" height="62" />
+      <rect x="14" y="28" width="72" height="4" />
+      <line x1="20" y1="32" x2="20" y2="42" stroke-width="2" />
+      <line x1="80" y1="32" x2="80" y2="42" stroke-width="2" />
+      <path d="M 8 42 Q 20 56 32 42" fill="none" stroke-width="4" stroke-linecap="round" />
+      <path d="M 68 42 Q 80 56 92 42" fill="none" stroke-width="4" stroke-linecap="round" />
+      <path d="M 38 73 L 62 73 L 66 84 L 34 84 Z" />
+    </g>
+  </defs>
+
+  <circle cx="50" cy="58" r="34" fill="var(--logo-disc)" />
+
+  <use
+    href={`#${scalesId}`}
+    fill="var(--logo-scale-outside)"
+    stroke="var(--logo-scale-outside)"
+  />
+
+  <g clip-path={`url(#${clipId})`}>
+    <use
+      href={`#${scalesId}`}
+      fill="var(--logo-scale-inside)"
+      stroke="var(--logo-scale-inside)"
+    />
+  </g>
+
+  <rect x="22" y="93" width="56" height="2.5" fill="var(--brand-coral)" />
+</svg>

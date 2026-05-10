@@ -1,0 +1,115 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+---
+<BaseLayout
+  title="Funding and disclosures"
+  description="Where the money comes from, where it does not, and the institutional relationships we disclose."
+>
+  <section class="border-b border-rule bg-paper">
+    <div class="container-page py-20 md:py-28">
+      <p class="eyebrow">Funding and disclosures</p>
+      <h1 class="mt-3 max-w-4xl text-balance">
+        Principle 02 says concentrated wealth is a constitutional concern. So we tell you who funds us.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        A project that argues for limits on the political influence of money has to be honest about its own. This page lays out where our funding comes from, what we won't take, and the institutional relationships our readers have a right to see.
+      </p>
+    </div>
+  </section>
+
+  <Section eyebrow="Sources" title="Where the money comes from">
+    <div class="prose-editorial">
+      <p>
+        Americans for Propriety is funded only in support of the site itself — its hosting, infrastructure, editorial production, and the tools members use. We do not accept funding earmarked for any of the action items on the site: not for a specific letter template, a specific bill, a specific take-action page, or a specific advocacy push. The site is the product. The actions are how readers use it, on their own initiative.
+      </p>
+      <p>
+        Within that constraint, contributions come from individuals and from occasional unrestricted grants from foundations whose published priorities align with the project's principles. We are not funded by political action committees, candidate committees, party committees, super PACs, 501(c)(4) advocacy organizations operating as a campaign extension, or any entity required to register as a federal- or state-level lobbying organization.
+      </p>
+      <p>
+        Editors operate independently of any donor, and the editorial calendar is not shared with funders before publication.
+      </p>
+      <p>
+        We aim to publish an annual financial summary on this page once the project is operating on a calendar-year basis. The first such summary will cover 2026 and will appear in early 2027.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="How to contribute" title="One channel, on the record" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        Contributions are accepted through a single channel: the project's GitHub repository, via GitHub Sponsors. We use one channel intentionally — every contribution flows through a system that produces a public record we can reconcile against the annual summary on this page.
+      </p>
+      <p>
+        The repository is at <a href="https://github.com/finnoybu/americansforpropriety" target="_blank" rel="noopener">github.com/finnoybu/americansforpropriety</a>. The Sponsor button on that page is the only place we ask for money. We do not run a donate page on this site, we do not pass donations through a third-party fundraising platform, and we do not solicit by email.
+      </p>
+      <p>
+        If a contribution offered to us through any other channel would not pass the rules above, we decline it. If you'd prefer to contribute by another means for accessibility or technical reasons, write to <a href="mailto:hello@americansforpropriety.org">hello@americansforpropriety.org</a> and we'll work it out on the record.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="What we will not accept" tone="warm">
+    <div class="prose-editorial">
+      <ul>
+        <li>Contributions from corporations whose business is materially affected by federal or state policy we are likely to cover (energy, telecom, defense, finance, insurance, pharmaceuticals, agribusiness).</li>
+        <li>Contributions earmarked for specific briefs, letter templates, or issue pages.</li>
+        <li>"Sponsored content," "thought-leadership partnerships," paid placements, or any arrangement that would put outside money behind editorial output.</li>
+        <li>Anonymous contributions exceeding $250 in a calendar year.</li>
+        <li>Contributions from foreign nationals or foreign-controlled entities.</li>
+        <li>In-kind contributions of mailing lists, voter files, or audience-targeting data.</li>
+      </ul>
+      <p>
+        If a contribution offered to us would not pass these tests, we decline it. If we discover after the fact that we accepted one in error, we return it and disclose the error here.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Top contributors" title="Disclosed annually">
+    <div class="prose-editorial">
+      <p>
+        Once we are operating on a calendar-year basis, this section will list every contributor of $1,000 or more in the most recent reporting year, by name and amount. The first list will appear in early 2027 and will cover calendar year 2026.
+      </p>
+      <p>
+        Contributions below $1,000 are not individually listed. They are reported in aggregate as part of the annual summary.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Vendors and infrastructure" title="Material institutional relationships" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        We disclose vendors that handle reader or member data, that materially shape what readers see, or that we pay enough that a reasonable observer would want to know. As of {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long" })}:
+      </p>
+      <ul>
+        <li><strong>Cloudflare</strong> — site hosting and edge security.</li>
+        <li><strong>Supabase</strong> — member account database, authentication, and session storage.</li>
+        <li><strong>Geocodio</strong> — ZIP-to-representative lookups when members request them.</li>
+        <li><strong>Anthropic</strong> — large-language-model inference for the letter-drafting tool and the AI-assisted research-brief drafter.</li>
+        <li><strong>Google Fonts</strong> — typeface delivery.</li>
+      </ul>
+      <p>
+        None of these relationships involves an editorial pre-review, a content placement agreement, or any consideration outside ordinary commercial pricing.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Personal disclosures" title="Editors and conflicts">
+    <div class="prose-editorial">
+      <p>
+        Editors who work on this site disclose to one another any outside paid affiliation that could reasonably create a conflict on a piece they are working on. Where disclosure isn't enough, the editor recuses. Where recusal isn't practical, the conflict is noted on the page itself, in addition to here.
+      </p>
+      <p>
+        We do not currently maintain a public register of editor affiliations. We will add one if and when the project's editor count and public profile make it useful — at the moment, the team is small and known.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Errors and disputes" title="If you think we got this wrong" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        If you have reason to believe we have accepted funding inconsistent with the rules above, or that an undisclosed relationship is shaping our coverage, write to <a href="mailto:hello@americansforpropriety.org">hello@americansforpropriety.org</a>. We will respond on the record and, if you've identified a real problem, fix it here and on the affected pages.
+      </p>
+    </div>
+  </Section>
+</BaseLayout>

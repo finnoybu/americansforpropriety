@@ -9,16 +9,19 @@ interface Props {
   description?: string;
   pathname?: string;
   ogType?: "website" | "article";
+  ogImage?: string;
 }
 
 const {
   title,
   description = site.description,
   ogType = "website",
+  ogImage = "/hero/home-capitol.png",
 } = Astro.props;
 
 const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`;
 const canonical = new URL(Astro.url.pathname, site.url).toString();
+const ogImageUrl = new URL(ogImage, site.url).toString();
 ---
 <!doctype html>
 <html lang="en">
@@ -32,10 +35,35 @@ const canonical = new URL(Astro.url.pathname, site.url).toString();
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1536" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:alt" content={description} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {/* Pre-paint theme: runs before stylesheet, prevents FOUC by setting
+        data-theme on <html> from stored mode or system preference. */}
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme-mode");
+          var mode = stored === "light" || stored === "dark" ? stored : "system";
+          var theme =
+            mode === "system"
+              ? window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+              : mode;
+          document.documentElement.dataset.theme = theme;
+        } catch (_) {
+          /* no-op: storage disabled */
+        }
+      })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

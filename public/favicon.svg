@@ -1,7 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" fill="#0E1B33"/>
-  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central"
-        font-family="Georgia, 'Times New Roman', serif" font-weight="700"
-        font-size="34" fill="#FAF6EE">A</text>
-  <rect x="14" y="48" width="36" height="2" fill="#E8473C"/>
+
+  <!-- top knob -->
+  <circle cx="32" cy="11" r="2.5" fill="#FAF6EE"/>
+
+  <!-- vertical post -->
+  <rect x="30.5" y="11" width="3" height="38" fill="#FAF6EE"/>
+
+  <!-- crossbeam (level — balance, not tilt) -->
+  <rect x="10" y="17" width="44" height="3" fill="#FAF6EE"/>
+
+  <!-- chains -->
+  <line x1="14" y1="20" x2="14" y2="28" stroke="#FAF6EE" stroke-width="1.5"/>
+  <line x1="50" y1="20" x2="50" y2="28" stroke="#FAF6EE" stroke-width="1.5"/>
+
+  <!-- pans (open bowls) -->
+  <path d="M 6 28 Q 14 38 22 28" fill="none" stroke="#FAF6EE" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 42 28 Q 50 38 58 28" fill="none" stroke="#FAF6EE" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- base/foot -->
+  <path d="M 24 49 L 40 49 L 44 56 L 20 56 Z" fill="#FAF6EE"/>
+
+  <!-- coral baseline (brand throughline from prior favicon) -->
+  <rect x="14" y="58" width="36" height="2.5" fill="#E8473C"/>
 </svg>

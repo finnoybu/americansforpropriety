@@ -1,5 +1,7 @@
 ---
 import { site, nav } from "~/config/site";
+import Logo from "~/components/Logo.astro";
+import ThemeToggle from "~/components/ThemeToggle.astro";
 
 const { pathname } = Astro.url;
 const isActive = (href: string) =>
@@ -7,12 +9,15 @@ const isActive = (href: string) =>
 ---
 <header class="border-b border-rule bg-paper">
   <div class="container-page flex items-center justify-between gap-6 py-4">
-    <a href="/" class="flex items-baseline gap-2 no-underline">
-      <span class="font-display text-xl font-semibold tracking-tight text-ink">
-        {site.name}
-      </span>
-      <span class="hidden text-xs uppercase tracking-[0.18em] text-ink-muted sm:inline">
-        Civic project
+    <a href="/" class="flex items-center gap-3 no-underline">
+      <Logo class="h-9 w-9 shrink-0" />
+      <span class="flex items-baseline gap-2">
+        <span class="font-display text-xl font-semibold tracking-tight text-ink">
+          {site.name}
+        </span>
+        <span class="hidden text-xs uppercase tracking-[0.18em] text-ink-muted sm:inline">
+          Civic project
+        </span>
       </span>
     </a>
 
@@ -38,6 +43,19 @@ const isActive = (href: string) =>
         Sign in
       </a>
       <a href="/take-action" class="btn btn-primary">Take action</a>
+      <a
+        href="https://github.com/finnoybu/americansforpropriety"
+        target="_blank"
+        rel="noopener"
+        class="icon-btn"
+        aria-label="Open the project on GitHub"
+        title="Open the project on GitHub"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+        </svg>
+      </a>
+      <ThemeToggle />
     </nav>
 
     <details class="md:hidden">
@@ -55,6 +73,25 @@ const isActive = (href: string) =>
           ))}
           <li>
             <a href="/take-action" class="btn btn-primary mt-2 w-full justify-center">Take action</a>
+          </li>
+          <li class="mt-2 flex items-center justify-between border-t border-rule pt-3">
+            <span class="text-sm text-ink-muted">Project on GitHub</span>
+            <a
+              href="https://github.com/finnoybu/americansforpropriety"
+              target="_blank"
+              rel="noopener"
+              class="icon-btn"
+              aria-label="Open the project on GitHub"
+              title="Open the project on GitHub"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+              </svg>
+            </a>
+          </li>
+          <li class="flex items-center justify-between">
+            <span class="text-sm text-ink-muted">Theme</span>
+            <ThemeToggle />
           </li>
         </ul>
       </div>

@@ -19,3 +19,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+NOTE ON CONTENT
+
+This MIT License covers the *code* in this repository — Astro components,
+TypeScript libraries, build configuration, styles, and similar engineering
+artifacts.
+
+The *editorial content* in this repository — research briefs, issue pages,
+letter templates, news posts, and other prose published under the Americans
+for Propriety editorial banner — is © Americans for Propriety and is governed
+by the site's Terms of Use (https://americansforpropriety.org/terms), not by
+this MIT License. See also the licensing section of CONTRIBUTING.md.
+
+If your use is purely of the code (the Astro framework setup, components,
+schemas, build pipeline), the MIT License above applies cleanly. If you are
+republishing or substantially excerpting the editorial content, refer to the
+Terms of Use.

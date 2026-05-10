@@ -4,7 +4,11 @@ import Section from "~/components/Section.astro";
 import Hero from "~/components/Hero.astro";
 import { site } from "~/config/site";
 ---
-<BaseLayout title="About" description={site.mission}>
+<BaseLayout
+  title="About"
+  description={site.mission}
+  ogImage="/hero/about-washington-monument.png"
+>
   <Hero tone="warm" imageStyle="bleed">
     <p class="eyebrow">About</p>
     <h1 class="mt-3 max-w-3xl text-balance">A civic project, not a campaign.</h1>

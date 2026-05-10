@@ -1,0 +1,140 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+
+const effective = "May 10, 2026";
+---
+<BaseLayout
+  title="Terms of use"
+  description="The terms that apply when you read this site or open a member account."
+>
+  <section class="border-b border-rule bg-paper">
+    <div class="container-page py-20 md:py-28">
+      <p class="eyebrow">Terms of use</p>
+      <h1 class="mt-3 max-w-4xl text-balance">
+        The rules of the road, written like a person wrote them.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        These terms govern your use of americansforpropriety.org ("the site"). They are intentionally short. By using the site you agree to them.
+      </p>
+      <p class="mt-3 text-sm text-ink-muted">Effective {effective}.</p>
+    </div>
+  </section>
+
+  <Section eyebrow="01" title="Who runs this site">
+    <div class="prose-editorial">
+      <p>
+        Americans for Propriety is a civic project. The site is operated by the project's editorial team. We are not a campaign committee, a 527, or a federal- or state-registered lobbying organization, and we do not endorse, oppose, or coordinate with candidates for office.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="02" title="Member accounts" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        A member account is optional. You don't need one to read the site. Submitting your email address to the sign-in form creates an account; we send a one-time link to that address.
+      </p>
+      <p>
+        You are responsible for keeping the inbox you used to sign up secure. Anyone with access to that inbox can sign in to your account, request the data we hold on you, and delete the account.
+      </p>
+      <p>
+        You may not create an account using someone else's email, automate sign-in attempts, or share an account with multiple people. We may suspend or remove an account that we reasonably believe is being used in violation of these terms, with notice when feasible.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="03" title="Acceptable use">
+    <div class="prose-editorial">
+      <p>
+        Don't use the site to:
+      </p>
+      <ul>
+        <li>harass, threaten, or impersonate any elected official, staffer, or other person;</li>
+        <li>send mass identical messages to a representative's office (the site is built specifically to discourage this — see Principle 05);</li>
+        <li>scrape, mirror, or republish the site's content in bulk without attribution;</li>
+        <li>probe, scan, or attempt to circumvent any security measure;</li>
+        <li>upload, generate, or distribute material that is unlawful, defamatory, or infringes someone else's rights;</li>
+        <li>use the site to coordinate activity prohibited under federal or state campaign-finance, lobbying, or election law.</li>
+      </ul>
+      <p>
+        Disagreement with our positions is not a violation. Calling, writing, or showing up to a public hearing in your own words is not a violation. Sending a bulk-pasted form letter through our drafting tool is — and the tool is built to surface that to you before you do.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="04" title="AI-generated content" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        The letter-drafting tool and the weekly research-brief drafter use a large language model. Drafts are produced for your review and edit. They may contain errors, omissions, or interpretations you disagree with. You are responsible for what you ultimately send to a representative or share publicly under your own name.
+      </p>
+      <p>
+        We do not transmit any AI-drafted letter on your behalf. Sending is a manual step you take using your own email program, postal mail, or the representative's contact form. Research briefs marked as AI-drafted on this site are reviewed by an editor before publication and labeled as such on the page.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="05" title="Content and licensing">
+    <div class="prose-editorial">
+      <p>
+        Briefs, issues, letter templates, and news posts on this site are © {new Date().getFullYear()} Americans for Propriety. You may quote up to 250 words with attribution and a link back. Republishing entire pieces requires permission — email <a href="mailto:hello@americansforpropriety.org">hello@americansforpropriety.org</a>.
+      </p>
+      <p>
+        Letters you generate using the drafting tool, including any personalization you add, are yours. You retain full ownership of what you write and send. By using the tool you grant us a non-exclusive license to store the draft in your account so the tool keeps working.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="06" title="No warranty" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        The site, its content, and its tools are provided "as is" and without warranty of any kind. We aim to be accurate; we will not always be. Public policy moves fast, AI models make mistakes, and the people maintaining this site are mortal. If you spot an error, please tell us — see <a href="/corrections">Corrections</a>.
+      </p>
+      <p>
+        Nothing on this site is legal, financial, or political-strategy advice. If you are about to take a meaningful action — testifying, filing a complaint, contacting an agency on a contested matter — talk to someone qualified.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="07" title="Limitation of liability">
+    <div class="prose-editorial">
+      <p>
+        To the fullest extent permitted by law, the project, its volunteers, and its operators are not liable for any indirect, incidental, or consequential damages arising from your use of the site. Our total liability for any claim related to the site will not exceed one hundred U.S. dollars.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="08" title="Termination" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        You can delete your member account at any time — see the <a href="/privacy">Privacy Policy</a>. We can suspend or remove an account for violations of these terms, with notice when feasible.
+      </p>
+      <p>
+        We may also retire or substantially change the site. We will give as much notice as we reasonably can on the home page or by email to active members.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="09" title="Changes to these terms">
+    <div class="prose-editorial">
+      <p>
+        If we change these terms in a way that meaningfully affects your rights or obligations, we will update the effective date and notify active members by email at least 14 days before the change takes effect. Continued use of the site after the effective date constitutes acceptance.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="10" title="Governing law" tone="warm">
+    <div class="prose-editorial">
+      <p>
+        These terms are governed by the laws of the Commonwealth of Virginia, United States, without regard to conflict-of-laws principles. Any dispute arising under or related to these terms will be resolved in the state or federal courts located in Virginia, and you and we consent to that jurisdiction.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="11" title="Contact">
+    <div class="prose-editorial">
+      <p>
+        Questions about these terms can go to <a href="mailto:hello@americansforpropriety.org">hello@americansforpropriety.org</a>.
+      </p>
+    </div>
+  </Section>
+</BaseLayout>
