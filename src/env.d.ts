@@ -1,13 +1,24 @@
 /// <reference path="../.astro/types.d.ts" />
+/// <reference types="@cloudflare/workers-types" />
 
 type Runtime = import("@astrojs/cloudflare").Runtime<Env>;
 
 interface Env {
-  PUBLIC_SUPABASE_URL: string;
-  PUBLIC_SUPABASE_ANON_KEY: string;
-  SUPABASE_SERVICE_ROLE_KEY?: string;
+  // Cloudflare bindings
+  DB: D1Database;
+
+  // Better Auth
+  BETTER_AUTH_SECRET: string;
+
+  // Outbound email
+  RESEND_API_KEY?: string;
+  EMAIL_FROM?: string;
+
+  // AI / lookup services
   ANTHROPIC_API_KEY: string;
   GEOCODIO_API_KEY: string;
+
+  // Site config
   PUBLIC_SITE_URL?: string;
   ADMIN_EMAILS?: string;
 }
@@ -17,22 +28,22 @@ declare namespace App {
     user: {
       id: string;
       email: string;
+      name: string | null;
     } | null;
     profile: {
-      id: string;
+      userId: string;
       zip: string | null;
       state: string | null;
-      congressional_district: string | null;
-      state_legislative_lower_district: string | null;
-      state_legislative_upper_district: string | null;
-      display_name: string | null;
+      city: string | null;
+      congressionalDistrict: string | null;
+      stateLegislativeLowerDistrict: string | null;
+      stateLegislativeUpperDistrict: string | null;
+      displayName: string | null;
     } | null;
   }
 }
 
 interface ImportMetaEnv {
-  readonly PUBLIC_SUPABASE_URL: string;
-  readonly PUBLIC_SUPABASE_ANON_KEY: string;
   readonly PUBLIC_SITE_URL?: string;
 }
 interface ImportMeta {

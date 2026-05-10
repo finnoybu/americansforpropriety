@@ -1,26 +1,31 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import MemberNav from "~/components/MemberNav.astro";
-import { getSupabase } from "~/lib/supabase";
+import { getDb } from "~/db";
+import { profile as profileTable } from "~/db/schema";
 import type { Representative } from "~/lib/geocodio";
+import { eq } from "drizzle-orm";
 
 export const prerender = false;
 
 if (!Astro.locals.user) return Astro.redirect("/signin?next=/member/representatives");
 
-const supabase = getSupabase(Astro);
-const { data: profile } = await supabase
-  .from("profiles")
-  .select("zip, state, representatives_cache, representatives_cached_at")
-  .eq("id", Astro.locals.user.id)
-  .maybeSingle();
+const db = getDb(Astro);
+const [profile] = await db
+  .select({
+    zip: profileTable.zip,
+    state: profileTable.state,
+    representativesCache: profileTable.representativesCache,
+    representativesCachedAt: profileTable.representativesCachedAt,
+  })
+  .from(profileTable)
+  .where(eq(profileTable.userId, Astro.locals.user.id))
+  .limit(1);
 
-const reps: Representative[] = Array.isArray(profile?.representatives_cache)
-  ? (profile!.representatives_cache as Representative[])
+const reps: Representative[] = Array.isArray(profile?.representativesCache)
+  ? profile.representativesCache
   : [];
-const cachedAt = profile?.representatives_cached_at
-  ? new Date(profile.representatives_cached_at as string)
-  : null;
+const cachedAt = profile?.representativesCachedAt ?? null;
 
 const groups: Array<[string, Representative[]]> = [
   ["Federal — Senate", reps.filter((r) => r.level === "federal" && r.chamber === "senate")],

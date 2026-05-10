@@ -1,5 +1,7 @@
 import type { APIRoute } from "astro";
-import { getSupabaseService } from "~/lib/supabase";
+import { eq } from "drizzle-orm";
+import { getDb } from "~/db";
+import { aiBrief } from "~/db/schema";
 import { getEnv, isAdminEmail } from "~/lib/env";
 import { generateBrief } from "~/lib/anthropic";
 
@@ -47,50 +49,58 @@ export const POST: APIRoute = async (ctx) => {
   } catch (err) {
     console.error("[admin/briefs/draft] generation failed", err);
     return json(
-      { error: "generation_failed", message: err instanceof Error ? err.message : "Failed" },
+      {
+        error: "generation_failed",
+        message: err instanceof Error ? err.message : "Failed",
+      },
       502,
     );
   }
 
+  const db = getDb(ctx);
+
   // Ensure slug uniqueness — append a short suffix if collision.
-  const supabase = getSupabaseService(ctx);
   let slug = result.slug;
   for (let attempt = 0; attempt < 5; attempt++) {
-    const { data: existing } = await supabase
-      .from("ai_briefs")
-      .select("id")
-      .eq("slug", slug)
-      .maybeSingle();
+    const [existing] = await db
+      .select({ id: aiBrief.id })
+      .from(aiBrief)
+      .where(eq(aiBrief.slug, slug))
+      .limit(1);
     if (!existing) break;
     slug = `${result.slug}-${Math.random().toString(36).slice(2, 6)}`;
   }
 
-  const { data: saved, error } = await supabase
-    .from("ai_briefs")
-    .insert({
-      slug,
-      title: result.title,
-      summary: result.summary,
-      issue: issueSlug,
-      body: result.body,
-      status: "draft",
-      used_web_search: enableWebSearch,
-      model: result.model,
-      input_tokens: result.inputTokens,
-      output_tokens: result.outputTokens,
-      reading_minutes: result.readingMinutes,
-      authors: ["AfP AI Drafts"],
-      created_by: ctx.locals.user.id,
-    })
-    .select()
-    .single();
-
-  if (error) {
-    console.error("[admin/briefs/draft] insert failed", error);
-    return json({ error: "save_failed", message: error.message }, 500);
+  try {
+    const [saved] = await db
+      .insert(aiBrief)
+      .values({
+        slug,
+        title: result.title,
+        summary: result.summary,
+        issue: issueSlug,
+        body: result.body,
+        status: "draft",
+        usedWebSearch: enableWebSearch,
+        model: result.model,
+        inputTokens: result.inputTokens,
+        outputTokens: result.outputTokens,
+        readingMinutes: result.readingMinutes,
+        authors: ["AfP AI Drafts"],
+        createdBy: ctx.locals.user.id,
+      })
+      .returning();
+    return json({ brief: saved }, 201);
+  } catch (err) {
+    console.error("[admin/briefs/draft] insert failed", err);
+    return json(
+      {
+        error: "save_failed",
+        message: err instanceof Error ? err.message : "Save failed",
+      },
+      500,
+    );
   }
-
-  return json({ brief: saved }, 201);
 };
 
 function json(data: unknown, status: number): Response {

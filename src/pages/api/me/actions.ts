@@ -1,5 +1,7 @@
 import type { APIRoute } from "astro";
-import { getSupabase } from "~/lib/supabase";
+import { eq, desc } from "drizzle-orm";
+import { getDb } from "~/db";
+import { actionLog } from "~/db/schema";
 
 export const prerender = false;
 
@@ -26,43 +28,44 @@ export const POST: APIRoute = async (ctx) => {
     return json({ error: "invalid_action_type" }, 400);
   }
 
-  const supabase = getSupabase(ctx);
-  const { data, error } = await supabase
-    .from("action_log")
-    .insert({
-      user_id: ctx.locals.user.id,
-      action_type: payload.action_type,
-      issue_slug: payload.issue_slug ?? null,
-      representative_name: payload.representative_name ?? null,
-      representative_office: payload.representative_office ?? null,
-      topic: payload.topic ?? null,
-      notes: payload.notes ?? null,
-      generated_letter_id: payload.generated_letter_id ?? null,
-    })
-    .select()
-    .single();
-
-  if (error) {
-    console.error("[me/actions] insert failed", error);
+  const db = getDb(ctx);
+  try {
+    const [row] = await db
+      .insert(actionLog)
+      .values({
+        userId: ctx.locals.user.id,
+        actionType: payload.action_type,
+        issueSlug: payload.issue_slug ?? null,
+        representativeName: payload.representative_name ?? null,
+        representativeOffice: payload.representative_office ?? null,
+        topic: payload.topic ?? null,
+        notes: payload.notes ?? null,
+        generatedLetterId: payload.generated_letter_id ?? null,
+      })
+      .returning();
+    return json({ action: row }, 201);
+  } catch (err) {
+    console.error("[me/actions] insert failed", err);
     return json({ error: "insert_failed" }, 500);
   }
-
-  return json({ action: data }, 201);
 };
 
 export const GET: APIRoute = async (ctx) => {
   if (!ctx.locals.user) return json({ error: "not_authenticated" }, 401);
 
-  const supabase = getSupabase(ctx);
-  const { data, error } = await supabase
-    .from("action_log")
-    .select("*")
-    .eq("user_id", ctx.locals.user.id)
-    .order("occurred_at", { ascending: false })
-    .limit(50);
-
-  if (error) return json({ error: "query_failed" }, 500);
-  return json({ actions: data ?? [] }, 200);
+  try {
+    const db = getDb(ctx);
+    const rows = await db
+      .select()
+      .from(actionLog)
+      .where(eq(actionLog.userId, ctx.locals.user.id))
+      .orderBy(desc(actionLog.occurredAt))
+      .limit(50);
+    return json({ actions: rows }, 200);
+  } catch (err) {
+    console.error("[me/actions] query failed", err);
+    return json({ error: "query_failed" }, 500);
+  }
 };
 
 function json(data: unknown, status: number): Response {

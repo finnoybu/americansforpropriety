@@ -1,5 +1,7 @@
 import type { APIRoute } from "astro";
-import { getSupabase } from "~/lib/supabase";
+import { and, eq, gt, count } from "drizzle-orm";
+import { getDb } from "~/db";
+import { generatedLetter } from "~/db/schema";
 import { getEnv } from "~/lib/env";
 import { generateLetter } from "~/lib/anthropic";
 
@@ -29,25 +31,38 @@ export const POST: APIRoute = async (ctx) => {
   const issueSlug = sanitize(payload?.issue_slug, 200);
 
   if (!repName || !repOffice || !topic) {
-    return json({ error: "missing_fields", message: "Need representative, office, and topic." }, 400);
+    return json(
+      { error: "missing_fields", message: "Need representative, office, and topic." },
+      400,
+    );
   }
 
-  const supabase = getSupabase(ctx);
+  const db = getDb(ctx);
+  const userId = ctx.locals.user.id;
 
   // Rate limit: count generations in the last hour for this user.
-  const { data: rateData, error: rateErr } = await supabase.rpc("recent_letter_count", {
-    window_minutes: 60,
-  });
-  if (rateErr) {
-    console.error("[letters/generate] rate check failed", rateErr);
-  } else if (typeof rateData === "number" && rateData >= RATE_LIMIT_PER_HOUR) {
-    return json(
-      {
-        error: "rate_limited",
-        message: `Please wait — you can draft up to ${RATE_LIMIT_PER_HOUR} letters per hour.`,
-      },
-      429,
-    );
+  try {
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+    const [{ n }] = await db
+      .select({ n: count() })
+      .from(generatedLetter)
+      .where(
+        and(
+          eq(generatedLetter.userId, userId),
+          gt(generatedLetter.createdAt, oneHourAgo),
+        ),
+      );
+    if (n >= RATE_LIMIT_PER_HOUR) {
+      return json(
+        {
+          error: "rate_limited",
+          message: `Please wait — you can draft up to ${RATE_LIMIT_PER_HOUR} letters per hour.`,
+        },
+        429,
+      );
+    }
+  } catch (err) {
+    console.error("[letters/generate] rate check failed", err);
   }
 
   const profile = ctx.locals.profile;
@@ -59,7 +74,7 @@ export const POST: APIRoute = async (ctx) => {
       representativeOffice: repOffice,
       topic,
       stance,
-      memberCity: null,
+      memberCity: profile?.city ?? null,
       memberState: profile?.state ?? null,
       memberZip: profile?.zip ?? null,
       issueSlug: issueSlug || undefined,
@@ -69,36 +84,40 @@ export const POST: APIRoute = async (ctx) => {
   } catch (err) {
     console.error("[letters/generate] anthropic call failed", err);
     return json(
-      { error: "generation_failed", message: err instanceof Error ? err.message : "Generation failed." },
+      {
+        error: "generation_failed",
+        message: err instanceof Error ? err.message : "Generation failed.",
+      },
       502,
     );
   }
 
-  const { data: saved, error: saveErr } = await supabase
-    .from("generated_letters")
-    .insert({
-      user_id: ctx.locals.user.id,
-      representative_name: repName,
-      representative_office: repOffice,
-      topic,
-      stance,
-      body: result.body,
-      issue_slug: issueSlug || null,
-      used_web_search: enableWebSearch,
-      model: result.model,
-      input_tokens: result.inputTokens,
-      output_tokens: result.outputTokens,
-    })
-    .select()
-    .single();
-
-  if (saveErr) {
-    console.error("[letters/generate] save failed", saveErr);
+  let savedId: string | undefined;
+  try {
+    const [row] = await db
+      .insert(generatedLetter)
+      .values({
+        userId,
+        representativeName: repName,
+        representativeOffice: repOffice,
+        topic,
+        stance,
+        body: result.body,
+        issueSlug: issueSlug || null,
+        usedWebSearch: enableWebSearch,
+        model: result.model,
+        inputTokens: result.inputTokens,
+        outputTokens: result.outputTokens,
+      })
+      .returning({ id: generatedLetter.id });
+    savedId = row?.id;
+  } catch (err) {
+    console.error("[letters/generate] save failed", err);
   }
 
   return json(
     {
-      id: saved?.id,
+      id: savedId,
       body: result.body,
       model: result.model,
       used_web_search: enableWebSearch,

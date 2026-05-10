@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
-import { getSupabase } from "~/lib/supabase";
+import { getDb } from "~/db";
+import { profile as profileTable } from "~/db/schema";
 import { getEnv } from "~/lib/env";
 import { lookupReps } from "~/lib/geocodio";
 
@@ -35,29 +36,50 @@ export const POST: APIRoute = async (ctx) => {
   } catch (err) {
     console.error("[reps/lookup]", err);
     return json(
-      { error: "lookup_failed", message: err instanceof Error ? err.message : "Lookup failed." },
+      {
+        error: "lookup_failed",
+        message: err instanceof Error ? err.message : "Lookup failed.",
+      },
       502,
     );
   }
 
-  // Persist to profile (RLS: user can only update their own row).
-  const supabase = getSupabase(ctx);
-  const { error: upsertErr } = await supabase
-    .from("profiles")
-    .update({
-      zip: result.zip,
-      state: result.state,
-      city: result.city,
-      congressional_district: result.congressional_district,
-      state_legislative_lower_district: result.state_lower_district,
-      state_legislative_upper_district: result.state_upper_district,
-      representatives_cache: result.representatives,
-      representatives_cached_at: new Date().toISOString(),
-    })
-    .eq("id", ctx.locals.user.id);
+  const db = getDb(ctx);
 
-  if (upsertErr) {
-    console.error("[reps/lookup] profile update failed", upsertErr);
+  // Upsert into profile. Better Auth creates the user row but not the profile;
+  // we own profile creation here on first lookup.
+  const userId = ctx.locals.user.id;
+  const profileData = {
+    userId,
+    zip: result.zip,
+    state: result.state,
+    city: result.city,
+    congressionalDistrict: result.congressional_district,
+    stateLegislativeLowerDistrict: result.state_lower_district,
+    stateLegislativeUpperDistrict: result.state_upper_district,
+    representativesCache: result.representatives,
+    representativesCachedAt: new Date(),
+  };
+
+  try {
+    await db
+      .insert(profileTable)
+      .values(profileData)
+      .onConflictDoUpdate({
+        target: profileTable.userId,
+        set: {
+          zip: profileData.zip,
+          state: profileData.state,
+          city: profileData.city,
+          congressionalDistrict: profileData.congressionalDistrict,
+          stateLegislativeLowerDistrict: profileData.stateLegislativeLowerDistrict,
+          stateLegislativeUpperDistrict: profileData.stateLegislativeUpperDistrict,
+          representativesCache: profileData.representativesCache,
+          representativesCachedAt: profileData.representativesCachedAt,
+        },
+      });
+  } catch (err) {
+    console.error("[reps/lookup] profile upsert failed", err);
   }
 
   return json(result, 200);

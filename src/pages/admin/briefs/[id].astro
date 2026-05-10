@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import { getSupabaseService } from "~/lib/supabase";
+import { eq } from "drizzle-orm";
+import { getDb } from "~/db";
+import { aiBrief } from "~/db/schema";
 import { getEnv, isAdminEmail } from "~/lib/env";
 
 export const prerender = false;
@@ -12,12 +14,10 @@ if (!isAdminEmail(Astro.locals.user.email, env)) {
 }
 
 const id = Astro.params.id;
-const supabase = getSupabaseService(Astro);
-const { data: brief } = await supabase
-  .from("ai_briefs")
-  .select("*")
-  .eq("id", id!)
-  .maybeSingle();
+if (!id) return new Response("Not found", { status: 404 });
+
+const db = getDb(Astro);
+const [brief] = await db.select().from(aiBrief).where(eq(aiBrief.id, id)).limit(1);
 
 if (!brief) return new Response("Not found", { status: 404 });
 
@@ -37,8 +37,8 @@ const ISSUES = [
     </p>
     <h1 class="mt-2">Edit brief</h1>
     <p class="mt-2 text-sm text-ink-muted">
-      Generated {new Date(brief.created_at).toLocaleString("en-US")} · {brief.model}
-      {brief.used_web_search && " · with web search"}
+      Generated {brief.createdAt?.toLocaleString("en-US")} · {brief.model}
+      {brief.usedWebSearch && " · with web search"}
     </p>
 
     <form id="edit-form" class="mt-8 space-y-5" data-id={brief.id}>

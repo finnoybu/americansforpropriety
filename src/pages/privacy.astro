@@ -77,7 +77,10 @@ const effective = "May 10, 2026";
           <strong>Cloudflare Pages</strong> hosts the site and provides DDoS protection. It sees all traffic and produces standard access logs.
         </li>
         <li>
-          <strong>Supabase</strong> stores member account data, the action log, generated letters, and the authentication session. Our database lives in a Supabase-managed Postgres instance with row-level security enforcing that you can only read and write your own records.
+          <strong>Cloudflare D1</strong> is the database that stores member account data, the action log, and generated letters. D1 is a SQLite database that runs on Cloudflare's infrastructure; the data does not leave Cloudflare. Application code enforces that members can only read and write their own records.
+        </li>
+        <li>
+          <strong>Resend</strong> delivers magic-link sign-in emails. We send only the recipient address and the sign-in URL. Resend does not see any other account data and does not track opens or clicks.
         </li>
         <li>
           <strong>Geocodio</strong> receives your ZIP code when you ask the site to look up your representatives. We do not send your name, email, or any other personal information.

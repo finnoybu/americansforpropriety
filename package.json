@@ -8,7 +8,11 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "wrangler pages dev ./dist",
-    "astro": "astro"
+    "astro": "astro",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply americansforpropriety --local",
+    "db:migrate:prod": "wrangler d1 migrations apply americansforpropriety --remote",
+    "lock:wsl": "wsl -e bash -c \"npm install --package-lock-only\""
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -16,15 +20,18 @@
     "@astrojs/mdx": "^4.0.0",
     "@astrojs/rss": "^4.0.10",
     "@astrojs/sitemap": "^3.2.1",
-    "@supabase/ssr": "^0.5.2",
-    "@supabase/supabase-js": "^2.46.0",
     "@tailwindcss/vite": "^4.0.0",
     "astro": "^5.1.0",
+    "better-auth": "^1.0.0",
+    "drizzle-orm": "^0.45.2",
     "marked": "^14.1.0",
+    "resend": "^4.0.0",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251005.0",
+    "drizzle-kit": "^0.31.0",
     "wrangler": "^3.95.0"
   }
 }

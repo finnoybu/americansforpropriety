@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import { getSupabaseService } from "~/lib/supabase";
+import { desc } from "drizzle-orm";
+import { getDb } from "~/db";
+import { aiBrief } from "~/db/schema";
 import { getEnv, isAdminEmail } from "~/lib/env";
 
 export const prerender = false;
@@ -11,11 +13,21 @@ if (!isAdminEmail(Astro.locals.user.email, env)) {
   return new Response("Forbidden", { status: 403 });
 }
 
-const supabase = getSupabaseService(Astro);
-const { data: briefs } = await supabase
-  .from("ai_briefs")
-  .select("id, slug, title, summary, issue, status, created_at, published_at, model")
-  .order("created_at", { ascending: false })
+const db = getDb(Astro);
+const briefs = await db
+  .select({
+    id: aiBrief.id,
+    slug: aiBrief.slug,
+    title: aiBrief.title,
+    summary: aiBrief.summary,
+    issue: aiBrief.issue,
+    status: aiBrief.status,
+    createdAt: aiBrief.createdAt,
+    publishedAt: aiBrief.publishedAt,
+    model: aiBrief.model,
+  })
+  .from(aiBrief)
+  .orderBy(desc(aiBrief.createdAt))
   .limit(100);
 
 const ISSUES = [
@@ -70,10 +82,10 @@ const ISSUES = [
 
     <section class="mt-12">
       <h2 class="text-xl">Drafts and published briefs</h2>
-      {(briefs?.length ?? 0) === 0 && (
+      {briefs.length === 0 && (
         <p class="mt-4 text-sm text-ink-muted">No briefs yet. Draft one above.</p>
       )}
-      {briefs && briefs.length > 0 && (
+      {briefs.length > 0 && (
         <table class="mt-6 w-full border-collapse text-left text-sm">
           <thead>
             <tr class="border-b-2 border-rule">
@@ -85,7 +97,7 @@ const ISSUES = [
             </tr>
           </thead>
           <tbody>
-            {briefs.map((b: any) => (
+            {briefs.map((b) => (
               <tr class="border-b border-rule align-top">
                 <td class="py-3 pr-4">
                   <a href={`/admin/briefs/${b.id}`} class="font-semibold underline">{b.title}</a>
@@ -101,7 +113,7 @@ const ISSUES = [
                   ]}>{b.status}</span>
                 </td>
                 <td class="py-3 pr-4 text-ink-muted">
-                  {new Date(b.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                  {b.createdAt?.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                 </td>
                 <td class="py-3 pr-4 text-right">
                   <a href={`/admin/briefs/${b.id}`} class="text-sm font-semibold underline">Edit</a>

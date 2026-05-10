@@ -1,6 +1,9 @@
 import { defineMiddleware } from "astro:middleware";
-import { getSupabase } from "~/lib/supabase";
-import { getEnv, isSupabaseConfigured } from "~/lib/env";
+import { eq } from "drizzle-orm";
+import { getDb, isDbConfigured } from "~/db";
+import { profile as profileTable } from "~/db/schema";
+import { createAuth } from "~/lib/auth";
+import { getEnv, getSiteUrl, isAuthConfigured } from "~/lib/env";
 
 let warnedMissingConfig = false;
 
@@ -10,16 +13,18 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
   ctx.locals.user = null;
   ctx.locals.profile = null;
 
-  // Don't try to talk to Supabase on prerender — there's no request context yet.
+  // Don't try to talk to the DB during prerender — there's no request context.
   if (ctx.isPrerendered) return next();
 
-  // Skip auth entirely if Supabase isn't configured. Lets the dev server boot
-  // and visitor-facing SSR pages render even when .env is missing.
-  if (!isSupabaseConfigured(getEnv(ctx))) {
+  const env = getEnv(ctx);
+
+  // Skip auth entirely if D1 / auth secret aren't configured. Lets the dev
+  // server boot and visitor-facing SSR pages render without bindings.
+  if (!isDbConfigured(ctx) || !isAuthConfigured(env)) {
     if (!warnedMissingConfig) {
       console.warn(
-        "[middleware] Supabase env not configured; auth disabled. " +
-          "Set PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY in .env to enable.",
+        "[middleware] D1 or BETTER_AUTH_SECRET not configured; auth disabled. " +
+          "Run `wrangler d1 create americansforpropriety` and set BETTER_AUTH_SECRET to enable.",
       );
       warnedMissingConfig = true;
     }
@@ -27,21 +32,43 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
   }
 
   try {
-    const supabase = getSupabase(ctx);
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-      ctx.locals.user = { id: user.id, email: user.email ?? "" };
+    const auth = createAuth({
+      d1: env.DB,
+      baseUrl: getSiteUrl(ctx),
+      authSecret: env.BETTER_AUTH_SECRET,
+      resendApiKey: env.RESEND_API_KEY,
+      fromAddress: env.EMAIL_FROM,
+    });
 
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select(
-          "id, display_name, zip, state, congressional_district, state_legislative_lower_district, state_legislative_upper_district",
-        )
-        .eq("id", user.id)
-        .maybeSingle();
+    const session = await auth.api.getSession({
+      headers: ctx.request.headers,
+    });
 
-      if (profile) {
-        ctx.locals.profile = profile as App.Locals["profile"];
+    if (session?.user) {
+      ctx.locals.user = {
+        id: session.user.id,
+        email: session.user.email,
+        name: session.user.name ?? null,
+      };
+
+      const db = getDb(ctx);
+      const [row] = await db
+        .select()
+        .from(profileTable)
+        .where(eq(profileTable.userId, session.user.id))
+        .limit(1);
+
+      if (row) {
+        ctx.locals.profile = {
+          userId: row.userId,
+          displayName: row.displayName,
+          zip: row.zip,
+          state: row.state,
+          city: row.city,
+          congressionalDistrict: row.congressionalDistrict,
+          stateLegislativeLowerDistrict: row.stateLegislativeLowerDistrict,
+          stateLegislativeUpperDistrict: row.stateLegislativeUpperDistrict,
+        };
       }
     }
   } catch (err) {

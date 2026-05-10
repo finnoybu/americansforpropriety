@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
-import { getEnv } from "~/lib/env";
 
 export const prerender = false;
 
@@ -8,10 +7,6 @@ if (Astro.locals.user) {
   return Astro.redirect("/member");
 }
 
-const env = getEnv(Astro);
-const supabaseUrl = env.PUBLIC_SUPABASE_URL;
-const supabaseAnon = env.PUBLIC_SUPABASE_ANON_KEY;
-const siteUrl = env.PUBLIC_SITE_URL || Astro.url.origin;
 const error = Astro.url.searchParams.get("error");
 ---
 <BaseLayout title="Sign in" description="Sign in to your Americans for Propriety member account.">
@@ -50,30 +45,48 @@ const error = Astro.url.searchParams.get("error");
     </p>
   </section>
 
-  <script
-    is:inline
-    type="module"
-    define:vars={{ supabaseUrl, supabaseAnon, siteUrl }}
-  >
-    import { createClient } from "https://esm.sh/@supabase/supabase-js@2.46.0";
-    const sb = createClient(supabaseUrl, supabaseAnon, { auth: { persistSession: false } });
-    const form = document.getElementById("signin-form");
+  <script>
+    import { signIn } from "~/lib/auth-client";
+
+    const form = document.getElementById("signin-form") as HTMLFormElement | null;
     const status = document.getElementById("signin-status");
+
     form?.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = new FormData(form).get("email");
-      status.textContent = "Sending...";
-      const { error } = await sb.auth.signInWithOtp({
-        email,
-        options: { emailRedirectTo: `${siteUrl}/api/auth/callback?next=/member` },
-      });
-      if (error) {
-        status.textContent = "Couldn't send: " + error.message;
-        status.className = "text-sm text-coral-deep";
-      } else {
-        status.textContent = "Check your inbox. The link is good for 60 minutes.";
-        status.className = "text-sm text-leaf";
-        form.reset();
+      const email = String(new FormData(form).get("email") ?? "").trim();
+      if (!email) return;
+
+      if (status) {
+        status.textContent = "Sending…";
+        status.className = "text-sm text-ink-muted";
+      }
+
+      try {
+        const { error } = await signIn.magicLink({
+          email,
+          callbackURL: "/member",
+        });
+        if (error) {
+          if (status) {
+            status.textContent =
+              "Couldn't send: " + (error.message ?? "unknown error");
+            status.className = "text-sm text-coral-deep";
+          }
+        } else {
+          if (status) {
+            status.textContent =
+              "Check your inbox. The link is good for 60 minutes.";
+            status.className = "text-sm text-leaf";
+          }
+          form.reset();
+        }
+      } catch (err) {
+        if (status) {
+          status.textContent =
+            "Couldn't send: " +
+            (err instanceof Error ? err.message : String(err));
+          status.className = "text-sm text-coral-deep";
+        }
       }
     });
   </script>

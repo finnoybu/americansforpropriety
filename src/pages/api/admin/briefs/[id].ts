@@ -1,5 +1,7 @@
 import type { APIRoute } from "astro";
-import { getSupabaseService } from "~/lib/supabase";
+import { eq } from "drizzle-orm";
+import { getDb } from "~/db";
+import { aiBrief } from "~/db/schema";
 import { getEnv, isAdminEmail } from "~/lib/env";
 
 export const prerender = false;
@@ -25,7 +27,7 @@ export const PATCH: APIRoute = async (ctx) => {
     if (typeof payload?.[k] === "string") updates[k] = payload[k];
   }
   if (typeof payload?.reading_minutes === "number") {
-    updates.reading_minutes = payload.reading_minutes;
+    updates.readingMinutes = payload.reading_minutes;
   }
 
   if (typeof payload?.status === "string") {
@@ -34,8 +36,8 @@ export const PATCH: APIRoute = async (ctx) => {
     }
     updates.status = payload.status;
     if (payload.status === "published") {
-      updates.published_at = new Date().toISOString();
-      updates.published_by = ctx.locals.user!.id;
+      updates.publishedAt = new Date();
+      updates.publishedBy = ctx.locals.user!.id;
     }
   }
 
@@ -43,19 +45,25 @@ export const PATCH: APIRoute = async (ctx) => {
     return json({ error: "no_updates" }, 400);
   }
 
-  const supabase = getSupabaseService(ctx);
-  const { data, error } = await supabase
-    .from("ai_briefs")
-    .update(updates)
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) {
-    console.error("[admin/briefs/PATCH] failed", error);
-    return json({ error: "update_failed", message: error.message }, 500);
+  try {
+    const db = getDb(ctx);
+    const [row] = await db
+      .update(aiBrief)
+      .set(updates as any)
+      .where(eq(aiBrief.id, id))
+      .returning();
+    if (!row) return json({ error: "not_found" }, 404);
+    return json({ brief: row }, 200);
+  } catch (err) {
+    console.error("[admin/briefs/PATCH] failed", err);
+    return json(
+      {
+        error: "update_failed",
+        message: err instanceof Error ? err.message : "Update failed",
+      },
+      500,
+    );
   }
-  return json({ brief: data }, 200);
 };
 
 export const DELETE: APIRoute = async (ctx) => {
@@ -65,10 +73,20 @@ export const DELETE: APIRoute = async (ctx) => {
   const id = ctx.params.id;
   if (!id) return json({ error: "missing_id" }, 400);
 
-  const supabase = getSupabaseService(ctx);
-  const { error } = await supabase.from("ai_briefs").delete().eq("id", id);
-  if (error) return json({ error: "delete_failed", message: error.message }, 500);
-  return json({ ok: true }, 200);
+  try {
+    const db = getDb(ctx);
+    await db.delete(aiBrief).where(eq(aiBrief.id, id));
+    return json({ ok: true }, 200);
+  } catch (err) {
+    console.error("[admin/briefs/DELETE] failed", err);
+    return json(
+      {
+        error: "delete_failed",
+        message: err instanceof Error ? err.message : "Delete failed",
+      },
+      500,
+    );
+  }
 };
 
 async function adminGate(ctx: Parameters<APIRoute>[0]): Promise<Response | null> {

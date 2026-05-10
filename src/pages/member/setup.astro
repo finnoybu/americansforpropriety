@@ -53,12 +53,12 @@ const profile = Astro.locals.profile;
           </div>
           <div class="flex justify-between gap-4 border-t border-rule pt-2">
             <dt class="text-ink-muted">US House district</dt>
-            <dd>{profile?.congressional_district ?? "—"}</dd>
+            <dd>{profile?.congressionalDistrict ?? "—"}</dd>
           </div>
           <div class="flex justify-between gap-4 border-t border-rule pt-2">
             <dt class="text-ink-muted">State legislative</dt>
             <dd>
-              Lower {profile?.state_legislative_lower_district ?? "—"} · Upper {profile?.state_legislative_upper_district ?? "—"}
+              Lower {profile?.stateLegislativeLowerDistrict ?? "—"} · Upper {profile?.stateLegislativeUpperDistrict ?? "—"}
             </dd>
           </div>
         </dl>

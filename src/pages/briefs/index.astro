@@ -1,12 +1,13 @@
 ---
 import { getCollection } from "astro:content";
+import { eq, desc } from "drizzle-orm";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import Section from "~/components/Section.astro";
 import PostCard from "~/components/PostCard.astro";
 import Hero from "~/components/Hero.astro";
 import SearchFilter from "~/components/SearchFilter.astro";
-import { getSupabase } from "~/lib/supabase";
-import { getEnv, isSupabaseConfigured } from "~/lib/env";
+import { getDb, isDbConfigured } from "~/db";
+import { aiBrief } from "~/db/schema";
 import { getIssueLabels } from "~/lib/issue-labels";
 import { issueOrder } from "~/config/site";
 
@@ -26,7 +27,7 @@ const staticBriefs = (await getCollection("briefs", ({ data }) => !data.draft))
     source: "static" as const,
   }));
 
-// AI-drafted briefs from Supabase (published only). Skip if not configured.
+// AI-drafted briefs from D1 (published only). Skip if DB not configured.
 let aiBriefs: Array<{
   href: string;
   eyebrow: string;
@@ -37,23 +38,33 @@ let aiBriefs: Array<{
   source: "ai";
 }> = [];
 
-if (isSupabaseConfigured(getEnv(Astro))) {
-  const supabase = getSupabase(Astro);
-  const { data: aiRows } = await supabase
-    .from("ai_briefs")
-    .select("slug, title, summary, issue, published_at")
-    .eq("status", "published")
-    .order("published_at", { ascending: false });
+if (isDbConfigured(Astro)) {
+  try {
+    const db = getDb(Astro);
+    const aiRows = await db
+      .select({
+        slug: aiBrief.slug,
+        title: aiBrief.title,
+        summary: aiBrief.summary,
+        issue: aiBrief.issue,
+        publishedAt: aiBrief.publishedAt,
+      })
+      .from(aiBrief)
+      .where(eq(aiBrief.status, "published"))
+      .orderBy(desc(aiBrief.publishedAt));
 
-  aiBriefs = (aiRows ?? []).map((b: any) => ({
-    href: `/briefs/${b.slug}`,
-    eyebrow: `Weekly · ${(issueLabels[b.issue] ?? b.issue.replace(/-/g, " "))}`,
-    title: b.title,
-    summary: b.summary,
-    date: new Date(b.published_at),
-    issue: b.issue as string,
-    source: "ai" as const,
-  }));
+    aiBriefs = aiRows.map((b) => ({
+      href: `/briefs/${b.slug}`,
+      eyebrow: `Weekly · ${issueLabels[b.issue] ?? b.issue.replace(/-/g, " ")}`,
+      title: b.title,
+      summary: b.summary,
+      date: b.publishedAt ?? new Date(),
+      issue: b.issue,
+      source: "ai" as const,
+    }));
+  } catch (err) {
+    console.error("[briefs/index] ai_brief query failed", err);
+  }
 }
 
 const all = [...staticBriefs, ...aiBriefs].sort(

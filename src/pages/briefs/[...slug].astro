@@ -1,10 +1,11 @@
 ---
 import { getEntry, render } from "astro:content";
+import { and, eq } from "drizzle-orm";
 import { marked } from "marked";
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import ActionBanner from "~/components/ActionBanner.astro";
-import { getSupabase } from "~/lib/supabase";
-import { getEnv, isSupabaseConfigured } from "~/lib/env";
+import { getDb, isDbConfigured } from "~/db";
+import { aiBrief } from "~/db/schema";
 
 export const prerender = false;
 
@@ -41,28 +42,31 @@ if (staticBrief && !staticBrief.data.draft) {
     StaticContent: Content,
     isAI: false,
   };
-} else if (isSupabaseConfigured(getEnv(Astro))) {
-  // Second: look up in ai_briefs table (published only).
-  const supabase = getSupabase(Astro);
-  const { data: ai } = await supabase
-    .from("ai_briefs")
-    .select("*")
-    .eq("slug", slug)
-    .eq("status", "published")
-    .maybeSingle();
+} else if (isDbConfigured(Astro)) {
+  // Second: look up in ai_brief table (published only).
+  try {
+    const db = getDb(Astro);
+    const [ai] = await db
+      .select()
+      .from(aiBrief)
+      .where(and(eq(aiBrief.slug, slug), eq(aiBrief.status, "published")))
+      .limit(1);
 
-  if (ai) {
-    const html = marked.parse(ai.body, { gfm: true, breaks: false });
-    view = {
-      title: ai.title,
-      summary: ai.summary,
-      issue: ai.issue,
-      date: new Date(ai.published_at ?? ai.created_at),
-      authors: ai.authors ?? [],
-      readingMinutes: ai.reading_minutes ?? 6,
-      htmlBody: typeof html === "string" ? html : await html,
-      isAI: true,
-    };
+    if (ai) {
+      const html = marked.parse(ai.body, { gfm: true, breaks: false });
+      view = {
+        title: ai.title,
+        summary: ai.summary,
+        issue: ai.issue,
+        date: ai.publishedAt ?? ai.createdAt,
+        authors: ai.authors ?? [],
+        readingMinutes: ai.readingMinutes ?? 6,
+        htmlBody: typeof html === "string" ? html : await html,
+        isAI: true,
+      };
+    }
+  } catch (err) {
+    console.error("[briefs/[slug]] ai_brief query failed", err);
   }
 }
 
