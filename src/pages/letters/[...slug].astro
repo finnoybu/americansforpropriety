@@ -1,20 +1,76 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import { eq } from "drizzle-orm";
+import { getDb, isDbConfigured } from "~/db";
+import { profile as profileTable } from "~/db/schema";
+import type { Representative } from "~/lib/geocodio";
 
-export async function getStaticPaths() {
-  const letters = await getCollection("letters");
-  return letters.map((letter) => ({
-    params: { slug: letter.id },
-    props: { letter },
-  }));
-}
+export const prerender = false;
 
-const { letter } = Astro.props;
+const slug = Array.isArray(Astro.params.slug)
+  ? Astro.params.slug.join("/")
+  : (Astro.params.slug ?? "");
+
+const all = await getCollection("letters");
+const letter = all.find((l) => l.id === slug);
+if (!letter) return new Response("Not found", { status: 404 });
+
 const { Content } = await render(letter);
 const updated = letter.data.updatedAt.toLocaleDateString("en-US", {
   year: "numeric", month: "long", day: "numeric",
 });
+
+// For signed-in members with a rep cache, pre-load the reps so we can render
+// the personalize panel server-side without a client roundtrip.
+let memberReps: Representative[] = [];
+let memberProfile: { city: string | null; state: string | null; congressionalDistrict: string | null } | null = null;
+if (Astro.locals.user && isDbConfigured(Astro)) {
+  try {
+    const db = getDb(Astro);
+    const [row] = await db
+      .select({
+        city: profileTable.city,
+        state: profileTable.state,
+        congressionalDistrict: profileTable.congressionalDistrict,
+        cache: profileTable.representativesCache,
+      })
+      .from(profileTable)
+      .where(eq(profileTable.userId, Astro.locals.user.id))
+      .limit(1);
+    if (row) {
+      memberProfile = {
+        city: row.city,
+        state: row.state,
+        congressionalDistrict: row.congressionalDistrict,
+      };
+      if (Array.isArray(row.cache)) memberReps = row.cache;
+    }
+  } catch (err) {
+    console.error("[letters/[slug]] profile lookup failed", err);
+  }
+}
+
+// Filter reps by the letter's audience so the dropdown only shows relevant ones.
+function repsForAudience(reps: Representative[], audience: string): Representative[] {
+  const a = audience.toLowerCase();
+  if (a.includes("us senator")) return reps.filter((r) => r.level === "federal" && r.chamber === "senate");
+  if (a.includes("us representative")) return reps.filter((r) => r.level === "federal" && r.chamber === "house");
+  if (a.includes("state senator")) return reps.filter((r) => r.level === "state" && r.chamber === "upper");
+  if (a.includes("state representative")) return reps.filter((r) => r.level === "state" && r.chamber === "lower");
+  if (a.includes("state legislator")) return reps.filter((r) => r.level === "state");
+  // Federal agency, local official, etc. — no automatic match; show everything
+  return reps;
+}
+
+const filteredReps = repsForAudience(memberReps, letter.data.audience);
+
+// Frontmatter fields are also substitutable. Pass them as a single bag the
+// client script reads from the data attribute on the panel.
+const frontmatterContext: Record<string, string> = {};
+if (letter.data.billNumber) frontmatterContext.bill_number = letter.data.billNumber;
+if (letter.data.committee) frontmatterContext.committee = letter.data.committee;
+if (letter.data.vehicle) frontmatterContext.vehicle = letter.data.vehicle;
 ---
 <BaseLayout
   title={letter.data.title}
@@ -37,15 +93,105 @@ const updated = letter.data.updatedAt.toLocaleDateString("en-US", {
 
     <hr class="my-10" />
 
-    <div class="prose-editorial">
+    {/* Rendered template body. Placeholders like {{rep_name}} appear as text. */}
+    <div class="prose-editorial" data-letter-body>
       <Content />
     </div>
+
+    {/* Personalize panel — different state for visitors / members-without-zip /
+        members-with-reps. */}
+    <section
+      class="mt-12 border border-rule bg-paper-warm p-6"
+      data-personalize-panel
+      data-letter-slug={letter.id}
+      data-frontmatter={JSON.stringify(frontmatterContext)}
+    >
+      <p class="eyebrow">Personalize and send</p>
+
+      {!Astro.locals.user && (
+        <>
+          <p class="mt-3 text-sm leading-relaxed">
+            <a href={`/signin?next=${encodeURIComponent(`/letters/${letter.id}`)}`} class="underline">Sign in</a>
+            &nbsp;to fill in your representative's name and your local context, then copy the personalized version.
+          </p>
+          <p class="mt-2 text-sm text-ink-muted">
+            You don't have to sign in — you can also copy the template manually and edit it yourself. The placeholders in the body (<code>{`{{rep_name}}`}</code>, <code>{`{{my_city}}`}</code>, etc.) tell you what to swap in.
+          </p>
+        </>
+      )}
+
+      {Astro.locals.user && memberReps.length === 0 && (
+        <p class="mt-3 text-sm leading-relaxed">
+          You're signed in. Add your ZIP at <a href="/member/setup" class="underline">your settings</a> so we can look up your representatives, then come back here to personalize.
+        </p>
+      )}
+
+      {Astro.locals.user && memberReps.length > 0 && filteredReps.length === 0 && (
+        <p class="mt-3 text-sm text-ink-muted">
+          None of your cached representatives match this template's intended audience ({letter.data.audience}). Use the placeholders below as a guide and personalize manually.
+        </p>
+      )}
+
+      {Astro.locals.user && filteredReps.length > 0 && (
+        <div class="mt-4">
+          <label class="block">
+            <span class="eyebrow">Representative</span>
+            <select
+              data-rep-picker
+              class="mt-2 w-full max-w-md border border-rule bg-paper px-3 py-2 focus:border-ink focus:outline-none"
+            >
+              <option value="">— Choose —</option>
+              {filteredReps.map((r, i) => (
+                <option
+                  value={i}
+                  data-rep-name={r.name}
+                  data-rep-office={r.office}
+                >
+                  {r.name} — {r.office}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <p class="mt-3 text-sm text-ink-muted">
+            Picking a representative fills <code>{`{{rep_name}}`}</code>, <code>{`{{rep_office}}`}</code>, and your local context (<code>{`{{my_city}}`}</code>, <code>{`{{my_state}}`}</code>, <code>{`{{my_district}}`}</code>) into the personalized version below.
+          </p>
+
+          {memberProfile && (
+            <p
+              class="hidden"
+              data-member-profile
+              data-city={memberProfile.city ?? ""}
+              data-state={memberProfile.state ?? ""}
+              data-district={memberProfile.congressionalDistrict ?? ""}
+            ></p>
+          )}
+
+          <div class="mt-6">
+            <label class="block">
+              <span class="eyebrow">Personalized text</span>
+              <textarea
+                data-personalized
+                rows="18"
+                class="mt-2 w-full border border-rule bg-paper p-4 font-display text-base leading-relaxed focus:border-ink focus:outline-none"
+                placeholder="Pick a representative above, then edit further before copying."
+              ></textarea>
+            </label>
+
+            <div class="mt-3 flex flex-wrap gap-3">
+              <button type="button" data-action="copy" class="btn btn-ghost">Copy to clipboard</button>
+              <button type="button" data-action="log-sent" class="btn btn-primary">I sent this</button>
+              <span data-status class="self-center text-sm text-ink-muted"></span>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
 
     <aside class="mt-12 border-l-2 border-coral bg-paper-warm p-6">
       <p class="eyebrow">How to use this</p>
       <ol class="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
-        <li>Copy the body. Edit it so it sounds like you, not a campaign blast.</li>
-        <li>Personalize at least one paragraph with a specific local detail.</li>
+        <li>Personalize in your own words — at least one paragraph with a specific local detail. Form letters get filtered.</li>
         <li>Send by your representative's preferred method — most prefer their official contact form, not an attachment.</li>
         <li>If you can, follow up by phone. Calls plus letters compound.</li>
       </ol>
@@ -55,4 +201,133 @@ const updated = letter.data.updatedAt.toLocaleDateString("en-US", {
       <a href="/letters" class="btn btn-ghost">← All letters</a>
     </p>
   </article>
+
+  <script>
+    type Tokens = Record<string, string>;
+
+    function escape(s: string): string {
+      return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    function interpolate(text: string, tokens: Tokens): string {
+      let out = text;
+      for (const [key, val] of Object.entries(tokens)) {
+        const re = new RegExp(`\\{\\{\\s*${escape(key)}\\s*\\}\\}`, "g");
+        out = out.replace(re, val);
+      }
+      return out;
+    }
+
+    const panel = document.querySelector("[data-personalize-panel]") as HTMLElement | null;
+    if (panel) {
+      const slug = panel.getAttribute("data-letter-slug") ?? "";
+      const frontmatter: Tokens = JSON.parse(
+        panel.getAttribute("data-frontmatter") ?? "{}",
+      );
+      const profile = panel.querySelector("[data-member-profile]") as HTMLElement | null;
+      const memberCity = profile?.getAttribute("data-city") ?? "";
+      const memberState = profile?.getAttribute("data-state") ?? "";
+      const memberDistrict = profile?.getAttribute("data-district") ?? "";
+
+      const bodyEl = document.querySelector("[data-letter-body]") as HTMLElement | null;
+      const sourceText = bodyEl?.innerText ?? "";
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const repPicker = panel.querySelector("[data-rep-picker]") as any;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const personalized = panel.querySelector("[data-personalized]") as any;
+      const status = panel.querySelector("[data-status]") as HTMLElement | null;
+
+      function renderForRep(repName: string, repOffice: string) {
+        if (!personalized) return;
+        // Heuristic: use the last whitespace-separated segment as the
+        // surname for formal salutations ("Dear Senator {{rep_last_name}}").
+        // Edge cases like "Smith Jr." come out wrong; templates can fall back
+        // to {{rep_name}} where it matters.
+        const parts = repName.trim().split(/\s+/);
+        const repLastName = parts[parts.length - 1] ?? repName;
+        const tokens: Tokens = {
+          rep_name: repName,
+          rep_last_name: repLastName,
+          rep_office: repOffice,
+          my_city: memberCity,
+          my_state: memberState,
+          my_district: memberDistrict,
+          ...frontmatter,
+        };
+        personalized.value = interpolate(sourceText, tokens);
+      }
+
+      repPicker?.addEventListener("change", () => {
+        const opt = repPicker.options[repPicker.selectedIndex];
+        const repName = opt.getAttribute("data-rep-name") ?? "";
+        const repOffice = opt.getAttribute("data-rep-office") ?? "";
+        if (!repName) {
+          if (personalized) personalized.value = "";
+          return;
+        }
+        renderForRep(repName, repOffice);
+      });
+
+      panel.addEventListener("click", async (e) => {
+        const btn = (e.target as HTMLElement).closest<HTMLButtonElement>(
+          "[data-action]",
+        );
+        if (!btn || !status || !personalized) return;
+        const action = btn.dataset.action;
+
+        if (action === "copy") {
+          if (!personalized.value.trim()) {
+            status.textContent = "Pick a representative first.";
+            return;
+          }
+          try {
+            await navigator.clipboard.writeText(personalized.value);
+            status.textContent = "Copied. Paste into your representative's contact form.";
+            status.className = "self-center text-sm text-leaf";
+          } catch {
+            personalized.select();
+            status.textContent = "Couldn't auto-copy — text is selected, press Ctrl/Cmd+C.";
+            status.className = "self-center text-sm text-coral-deep";
+          }
+        }
+
+        if (action === "log-sent") {
+          if (!personalized.value.trim()) {
+            status.textContent = "Pick a representative first.";
+            return;
+          }
+          const opt = repPicker?.options[repPicker.selectedIndex];
+          const repName = opt?.getAttribute("data-rep-name") ?? "";
+          const repOffice = opt?.getAttribute("data-rep-office") ?? "";
+
+          status.textContent = "Logging…";
+          status.className = "self-center text-sm text-ink-muted";
+
+          try {
+            const res = await fetch("/api/me/actions", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({
+                action_type: "sent_letter",
+                letter_template_slug: slug,
+                representative_name: repName,
+                representative_office: repOffice,
+              }),
+            });
+            if (res.ok) {
+              status.textContent = "Logged. Thank you for following through.";
+              status.className = "self-center text-sm text-leaf";
+            } else {
+              status.textContent = "Couldn't log — try again later.";
+              status.className = "self-center text-sm text-coral-deep";
+            }
+          } catch {
+            status.textContent = "Couldn't log — try again later.";
+            status.className = "self-center text-sm text-coral-deep";
+          }
+        }
+      });
+    }
+  </script>
 </BaseLayout>

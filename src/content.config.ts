@@ -69,6 +69,13 @@ const letters = defineCollection({
     audience: z.string(),
     issue: z.string(),
     updatedAt: z.coerce.date(),
+    // Optional context fields the personalize-and-copy UI substitutes into
+    // body placeholders. Use them in template body as {{bill_number}},
+    // {{committee}}, etc. Editorial team updates these in frontmatter as the
+    // underlying legislation moves.
+    billNumber: z.string().optional(),
+    committee: z.string().optional(),
+    vehicle: z.string().optional(),
   }),
 });
 

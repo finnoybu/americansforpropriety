@@ -40,7 +40,7 @@ export const POST: APIRoute = async (ctx) => {
         representativeOffice: payload.representative_office ?? null,
         topic: payload.topic ?? null,
         notes: payload.notes ?? null,
-        generatedLetterId: payload.generated_letter_id ?? null,
+        letterTemplateSlug: payload.letter_template_slug ?? null,
       })
       .returning();
     return json({ action: row }, 201);

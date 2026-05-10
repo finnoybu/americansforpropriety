@@ -2,8 +2,8 @@
 title: "Support the Equality Act"
 summary: "Closes the federal gap left after Bostock by extending civil rights protections to sexual orientation and gender identity in housing, education, and federally funded programs."
 issue: "civil-rights-and-immigration"
-cta: "Open the letter generator"
-href: "/member/write?issue=civil-rights-and-immigration"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "high"
 ---
 

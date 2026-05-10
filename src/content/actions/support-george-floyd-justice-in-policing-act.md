@@ -2,8 +2,8 @@
 title: "Support reform of qualified immunity and federal use-of-force standards"
 summary: "Federal civil rights enforcement against state actors depends on qualified immunity reform that has had substantial bipartisan technical support."
 issue: "civil-rights-and-immigration"
-cta: "Open the letter generator"
-href: "/member/write?issue=civil-rights-and-immigration"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

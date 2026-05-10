@@ -2,8 +2,8 @@
 title: "Support just-cause eviction and right to counsel in your jurisdiction"
 summary: "The two most consequential tenant protections — and both are typically state-or-local-level fights."
 issue: "housing"
-cta: "Open the letter generator"
-href: "/member/write?issue=housing"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

@@ -2,8 +2,8 @@
 title: "Oppose voucher / ESA expansion in your state"
 summary: "Voucher proposals are advancing in many state legislatures. Constituent opposition has repeatedly defeated expansions when put to voters; legislative pressure is the active lever."
 issue: "education"
-cta: "Open the letter generator"
-href: "/member/write?issue=education"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "high"
 ---
 

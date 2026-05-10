@@ -2,8 +2,8 @@
 title: "Support state-court litigation and ballot measures on redistricting"
 summary: "After Rucho closed federal courts to partisan-gerrymandering claims, state-level work has produced real wins. The next round needs sustained engagement."
 issue: "democracy-and-voting"
-cta: "Open the letter generator"
-href: "/member/write?issue=democracy-and-voting"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

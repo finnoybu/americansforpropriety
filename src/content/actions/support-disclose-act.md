@@ -2,8 +2,8 @@
 title: "Support the DISCLOSE Act"
 summary: "The most achievable structural reform on money in politics. Disclosure survives Citizens United; the political opposition is donor-driven, not constitutional."
 issue: "democracy-and-voting"
-cta: "Open the letter generator"
-href: "/member/write?issue=democracy-and-voting"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

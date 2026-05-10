@@ -2,7 +2,7 @@
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import MemberNav from "~/components/MemberNav.astro";
 import { getDb } from "~/db";
-import { actionLog, generatedLetter } from "~/db/schema";
+import { actionLog } from "~/db/schema";
 import { eq, desc } from "drizzle-orm";
 
 export const prerender = false;
@@ -20,43 +20,29 @@ const actions = await db
     representativeOffice: actionLog.representativeOffice,
     occurredAt: actionLog.occurredAt,
     notes: actionLog.notes,
+    letterTemplateSlug: actionLog.letterTemplateSlug,
   })
   .from(actionLog)
   .where(eq(actionLog.userId, Astro.locals.user.id))
   .orderBy(desc(actionLog.occurredAt))
   .limit(200);
-
-const letters = await db
-  .select({
-    id: generatedLetter.id,
-    representativeName: generatedLetter.representativeName,
-    representativeOffice: generatedLetter.representativeOffice,
-    topic: generatedLetter.topic,
-    body: generatedLetter.body,
-    usedWebSearch: generatedLetter.usedWebSearch,
-    createdAt: generatedLetter.createdAt,
-  })
-  .from(generatedLetter)
-  .where(eq(generatedLetter.userId, Astro.locals.user.id))
-  .orderBy(desc(generatedLetter.createdAt))
-  .limit(50);
 ---
 <BaseLayout title="Action log">
   <section class="container-page py-12 md:py-16">
     <p class="eyebrow">Member · Action log</p>
     <h1 class="mt-2">What you've done.</h1>
     <p class="mt-3 max-w-2xl text-ink-muted">
-      A private record of letters drafted and actions logged. Nobody else sees this.
+      A private record of letters sent and actions logged. Nobody else sees this.
     </p>
 
     <MemberNav />
 
     <section class="mt-8">
-      <h2 class="text-xl">Logged actions</h2>
-      {actions.length === 0 && (
-        <p class="mt-3 text-sm text-ink-muted">No actions logged yet.</p>
-      )}
-      {actions.length > 0 && (
+      {actions.length === 0 ? (
+        <p class="mt-3 text-sm text-ink-muted">
+          No actions logged yet. After you personalize and send a letter, click "I sent this" on the letter page to log it here.
+        </p>
+      ) : (
         <ul class="mt-4">
           {actions.map((a) => (
             <li class="grid gap-2 border-t border-rule py-4 md:grid-cols-12">
@@ -68,7 +54,20 @@ const letters = await db
               <div class="md:col-span-10">
                 <p>
                   <strong>{a.actionType.replace(/_/g, " ")}</strong>
-                  {a.topic && <span class="text-ink-muted"> · {a.topic}</span>}
+                  {a.letterTemplateSlug && (
+                    <>
+                      {" · "}
+                      <a
+                        href={`/letters/${a.letterTemplateSlug}`}
+                        class="text-ink-muted no-underline hover:underline"
+                      >
+                        {a.letterTemplateSlug.replace(/-/g, " ")}
+                      </a>
+                    </>
+                  )}
+                  {a.topic && !a.letterTemplateSlug && (
+                    <span class="text-ink-muted"> · {a.topic}</span>
+                  )}
                 </p>
                 {a.representativeName && (
                   <p class="text-sm text-ink-muted">
@@ -77,33 +76,6 @@ const letters = await db
                 )}
                 {a.notes && <p class="mt-1 text-sm">{a.notes}</p>}
               </div>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-
-    <section class="mt-16">
-      <h2 class="text-xl">Drafts you've generated</h2>
-      {letters.length === 0 && (
-        <p class="mt-3 text-sm text-ink-muted">No drafts yet.</p>
-      )}
-      {letters.length > 0 && (
-        <ul class="mt-4 space-y-4">
-          {letters.map((l) => (
-            <li class="border-t border-rule pt-4">
-              <details>
-                <summary class="cursor-pointer">
-                  <span class="font-semibold">{l.representativeName}</span>
-                  <span class="text-ink-muted"> · {l.topic}</span>
-                  <time class="ml-3 text-xs text-ink-muted">
-                    {l.createdAt?.toLocaleDateString("en-US", {
-                      month: "short", day: "numeric", year: "numeric",
-                    })}
-                  </time>
-                </summary>
-                <pre class="mt-3 max-w-3xl whitespace-pre-wrap bg-paper-warm p-4 font-display text-base leading-relaxed">{l.body}</pre>
-              </details>
             </li>
           ))}
         </ul>

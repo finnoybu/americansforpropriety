@@ -2,8 +2,8 @@
 title: "Support mandatory funding for the Indian Health Service"
 summary: "IHS funding has been chronically below comparable federal health programs for decades. Mandatory funding addresses the structural cause."
 issue: "indigenous-sovereignty"
-cta: "Open the letter generator"
-href: "/member/write?issue=indigenous-sovereignty"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

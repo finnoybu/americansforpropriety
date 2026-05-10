@@ -2,8 +2,8 @@
 title: "Defend the IRA's clean-energy tax credits"
 summary: "The IRA's clean-energy provisions are the largest US climate investment in history. They are also the most consistent target for repeal."
 issue: "climate-and-energy"
-cta: "Open the letter generator"
-href: "/member/write?issue=climate-and-energy"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "high"
 ---
 

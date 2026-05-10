@@ -103,10 +103,10 @@ function shortenUrl(u: string): string {
                   ))}
                 </ul>
                 <a
-                  href={`/member/write?rep=${encodeURIComponent(rep.name)}&office=${encodeURIComponent(rep.office)}`}
+                  href="/letters"
                   class="mt-4 inline-block text-sm font-semibold underline"
                 >
-                  Draft a letter to {rep.name.split(" ").slice(-1)[0]} →
+                  Send {rep.name.split(" ").slice(-1)[0]} a letter →
                 </a>
               </article>
             ))}

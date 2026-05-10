@@ -2,8 +2,8 @@
 title: "Support the Women's Health Protection Act"
 summary: "Federal codification of pre-Dobbs abortion access. Has passed the House; Senate procedural posture is the binding constraint."
 issue: "reproductive-rights"
-cta: "Open the letter generator"
-href: "/member/write?issue=reproductive-rights"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "high"
 ---
 

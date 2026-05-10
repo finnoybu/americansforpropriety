@@ -2,8 +2,8 @@
 title: "Support the Right to IVF Act and Right to Contraception Act"
 summary: "Two narrower but politically tractable federal protections that have produced position-clarifying votes."
 issue: "reproductive-rights"
-cta: "Open the letter generator"
-href: "/member/write?issue=reproductive-rights"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "high"
 ---
 

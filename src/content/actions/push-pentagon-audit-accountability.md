@@ -2,8 +2,8 @@
 title: "Push for Pentagon audit accountability"
 summary: "Largest federal line item, never passed an audit. The reforms required are bipartisan in principle and tractable in practice."
 issue: "foreign-policy-and-war-powers"
-cta: "Open the letter generator"
-href: "/member/write?issue=foreign-policy-and-war-powers"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "low"
 ---
 

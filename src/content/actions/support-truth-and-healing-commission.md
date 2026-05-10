@@ -2,8 +2,8 @@
 title: "Support the Truth and Healing Commission on Indian Boarding Schools"
 summary: "Federal commission to investigate the Indian boarding school era — the institutional pattern that produced multi-generational trauma still being reckoned with."
 issue: "indigenous-sovereignty"
-cta: "Open the letter generator"
-href: "/member/write?issue=indigenous-sovereignty"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

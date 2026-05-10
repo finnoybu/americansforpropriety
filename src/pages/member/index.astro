@@ -2,7 +2,7 @@
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import MemberNav from "~/components/MemberNav.astro";
 import { getDb } from "~/db";
-import { actionLog, generatedLetter } from "~/db/schema";
+import { actionLog } from "~/db/schema";
 import { eq, desc } from "drizzle-orm";
 
 export const prerender = false;
@@ -22,24 +22,13 @@ const recentActions = await db
     actionType: actionLog.actionType,
     topic: actionLog.topic,
     representativeName: actionLog.representativeName,
+    letterTemplateSlug: actionLog.letterTemplateSlug,
     occurredAt: actionLog.occurredAt,
   })
   .from(actionLog)
   .where(eq(actionLog.userId, Astro.locals.user.id))
   .orderBy(desc(actionLog.occurredAt))
-  .limit(5);
-
-const recentLetters = await db
-  .select({
-    id: generatedLetter.id,
-    representativeName: generatedLetter.representativeName,
-    topic: generatedLetter.topic,
-    createdAt: generatedLetter.createdAt,
-  })
-  .from(generatedLetter)
-  .where(eq(generatedLetter.userId, Astro.locals.user.id))
-  .orderBy(desc(generatedLetter.createdAt))
-  .limit(5);
+  .limit(10);
 
 // We don't carry representativesCache through middleware (kept off the
 // Astro.locals.profile shape to keep that small). Look it up here only when
@@ -101,9 +90,9 @@ if (profile?.userId) {
         <h2 class="text-xl">Quick actions</h2>
         <ul class="mt-4 space-y-3">
           <li>
-            <a href="/member/write" class="block border-t border-rule py-3 no-underline">
-              <span class="font-semibold">Draft a letter</span>
-              <span class="block text-sm text-ink-muted">Generate a personalized draft for one of your representatives.</span>
+            <a href="/letters" class="block border-t border-rule py-3 no-underline">
+              <span class="font-semibold">Send a letter</span>
+              <span class="block text-sm text-ink-muted">Pick a template, personalize it for your representative, copy and send.</span>
             </a>
           </li>
           <li>
@@ -124,49 +113,35 @@ if (profile?.userId) {
 
     <section class="mt-16">
       <h2 class="text-xl">Recent activity</h2>
-      {recentActions.length === 0 && recentLetters.length === 0 && (
+      {recentActions.length === 0 ? (
         <p class="mt-4 text-sm text-ink-muted">
-          No activity yet. Drafting a letter or logging an action will surface here.
+          No activity yet. Sending a letter and clicking "I sent this" will surface here.
         </p>
-      )}
-      {recentLetters.length > 0 && (
-        <div class="mt-6">
-          <p class="eyebrow">Recent drafts</p>
-          <ul class="mt-3 space-y-2">
-            {recentLetters.map((l) => (
-              <li class="flex items-baseline justify-between gap-4 border-t border-rule py-2 text-sm">
-                <span>
-                  <strong>{l.representativeName}</strong>
-                  <span class="text-ink-muted"> · {l.topic}</span>
-                </span>
-                <time class="text-xs text-ink-muted">
-                  {l.createdAt?.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                </time>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {recentActions.length > 0 && (
-        <div class="mt-8">
-          <p class="eyebrow">Recent actions</p>
-          <ul class="mt-3 space-y-2">
-            {recentActions.map((a) => (
-              <li class="flex items-baseline justify-between gap-4 border-t border-rule py-2 text-sm">
-                <span>
-                  <strong>{a.actionType.replace(/_/g, " ")}</strong>
-                  {a.topic && <span class="text-ink-muted"> · {a.topic}</span>}
-                  {a.representativeName && (
-                    <span class="text-ink-muted"> · {a.representativeName}</span>
-                  )}
-                </span>
-                <time class="text-xs text-ink-muted">
-                  {a.occurredAt?.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                </time>
-              </li>
-            ))}
-          </ul>
-        </div>
+      ) : (
+        <ul class="mt-6 space-y-2">
+          {recentActions.map((a) => (
+            <li class="flex items-baseline justify-between gap-4 border-t border-rule py-2 text-sm">
+              <span>
+                <strong>{a.actionType.replace(/_/g, " ")}</strong>
+                {a.letterTemplateSlug && (
+                  <a
+                    href={`/letters/${a.letterTemplateSlug}`}
+                    class="text-ink-muted no-underline hover:underline"
+                  >
+                    {" · "}
+                    {a.letterTemplateSlug.replace(/-/g, " ")}
+                  </a>
+                )}
+                {a.representativeName && (
+                  <span class="text-ink-muted"> · {a.representativeName}</span>
+                )}
+              </span>
+              <time class="text-xs text-ink-muted">
+                {a.occurredAt?.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+              </time>
+            </li>
+          ))}
+        </ul>
       )}
     </section>
   </section>

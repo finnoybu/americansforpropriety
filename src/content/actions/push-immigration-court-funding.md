@@ -2,8 +2,8 @@
 title: "Push for immigration court funding and reform"
 summary: "Three million pending cases. Years-long waits. The fix is operational and bipartisan in principle. The political will is the missing variable."
 issue: "civil-rights-and-immigration"
-cta: "Open the letter generator"
-href: "/member/write?issue=civil-rights-and-immigration"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

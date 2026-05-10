@@ -10,9 +10,9 @@ updatedAt: 2025-10-12
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the Protecting the Right to Organize Act and to advance it for floor consideration this session.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Protecting the Right to Organize Act and to advance it for floor consideration this session.
 
 The PRO Act is the most consequential pro-labor legislation seriously considered in the United States since the 1930s. The substantive case for it is straightforward: union density in the US has fallen from 35% of workers in the 1950s to under 10% today, even as polling on union approval has reached multi-decade highs. The gap between approval and density is the gap that the PRO Act is designed to close.
 

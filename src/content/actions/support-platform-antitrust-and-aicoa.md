@@ -2,8 +2,8 @@
 title: "Support platform antitrust and the American Innovation and Choice Online Act"
 summary: "The DOJ search ruling was the easy part. The remedies fight, AICOA, and parallel cases will shape competition for the next decade."
 issue: "tech-and-data-rights"
-cta: "Open the letter generator"
-href: "/member/write?issue=tech-and-data-rights"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

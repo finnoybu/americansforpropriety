@@ -2,8 +2,8 @@
 title: "Push for Medicaid expansion in your state (if you live in a holdout)"
 summary: "Ten states still haven't expanded. Roughly 4 million Americans are in the resulting coverage gap. State-level pressure works."
 issue: "healthcare"
-cta: "Open the letter generator"
-href: "/member/write?issue=healthcare"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

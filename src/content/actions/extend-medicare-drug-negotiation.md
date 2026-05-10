@@ -2,8 +2,8 @@
 title: "Push to expand Medicare drug price negotiation"
 summary: "First round produced 38-79% price cuts on ten drugs. Expansion to a broader list — and to private payers — needs constituent pressure."
 issue: "healthcare"
-cta: "Open the letter generator"
-href: "/member/write?issue=healthcare"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "high"
 ---
 

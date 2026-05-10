@@ -2,8 +2,8 @@
 title: "Support repeal of the 2001 and 2002 AUMFs"
 summary: "Bipartisan in principle; the 2002 AUMF repeal has advanced. The 2001 repeal needs a replacement framework — and constituent pressure for it."
 issue: "foreign-policy-and-war-powers"
-cta: "Open the letter generator"
-href: "/member/write?issue=foreign-policy-and-war-powers"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

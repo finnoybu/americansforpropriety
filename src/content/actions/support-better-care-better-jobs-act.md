@@ -2,8 +2,8 @@
 title: "Support the Better Care Better Jobs Act"
 summary: "Substantial federal HCBS investment to address the 700,000-person waiting list and direct-care worker wage crisis."
 issue: "disability-justice"
-cta: "Open the letter generator"
-href: "/member/write?issue=disability-justice"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "high"
 ---
 

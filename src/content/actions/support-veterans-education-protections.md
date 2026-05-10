@@ -2,8 +2,8 @@
 title: "Defend the GI Bill against for-profit college predation"
 summary: "The 2021 90/10 reform was a win. Continued enforcement, the gainful employment rule, and borrower-defense protection for veterans need ongoing defense."
 issue: "veterans-and-service-members"
-cta: "Open the letter generator"
-href: "/member/write?issue=veterans-and-service-members"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

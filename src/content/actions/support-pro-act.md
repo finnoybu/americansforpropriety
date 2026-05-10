@@ -2,8 +2,8 @@
 title: "Tell your senators to support the PRO Act"
 summary: "The single most consequential pro-labor legislation seriously considered in three decades. Reintroduced; needs Senate movement."
 issue: "labor-and-wages"
-cta: "Open the letter generator"
-href: "/member/write?issue=labor-and-wages"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "high"
 ---
 

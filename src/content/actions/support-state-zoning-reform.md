@@ -2,8 +2,8 @@
 title: "Support state-level zoning reform where it's advancing"
 summary: "Connecticut, New York, New Jersey, Colorado, and others are considering zoning preemption reforms that have produced real housing-supply progress in OR, CA, WA, and MA."
 issue: "housing"
-cta: "Open the letter generator"
-href: "/member/write?issue=housing"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

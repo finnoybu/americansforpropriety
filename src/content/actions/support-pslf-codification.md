@@ -2,8 +2,8 @@
 title: "Support PSLF codification and IDR protection"
 summary: "PSLF works now. Codifying the 2021-2023 reforms in statute would protect the program from administrative reversal."
 issue: "education"
-cta: "Open the letter generator"
-href: "/member/write?issue=education"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

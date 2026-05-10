@@ -2,8 +2,8 @@
 title: "Write to your senators about expanding the corporate minimum tax"
 summary: "The CAMT works. Several proposals would expand it. A short letter from a constituent makes the political case visible."
 issue: "economy-and-tax-fairness"
-cta: "Open the letter generator"
-href: "/member/write?issue=economy-and-tax-fairness"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

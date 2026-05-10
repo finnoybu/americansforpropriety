@@ -2,8 +2,8 @@
 title: "Push for an independent redistricting commission in your state"
 summary: "Active campaigns in Ohio, Wisconsin, Pennsylvania, Florida, and others. The 2030 census is the deadline."
 issue: "democracy-and-voting"
-cta: "Open the letter generator"
-href: "/member/write?issue=democracy-and-voting"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

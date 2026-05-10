@@ -2,8 +2,8 @@
 title: "Support the Transformation to Competitive Integrated Employment Act"
 summary: "Phase out the disability subminimum wage. Bipartisan support in principle; legislative bandwidth has been the missing variable."
 issue: "disability-justice"
-cta: "Open the letter generator"
-href: "/member/write?issue=disability-justice"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

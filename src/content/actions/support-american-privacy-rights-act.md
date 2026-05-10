@@ -2,8 +2,8 @@
 title: "Support the American Privacy Rights Act"
 summary: "The US is the largest economy without a comprehensive federal privacy law. APRA is closer to passage than any predecessor."
 issue: "tech-and-data-rights"
-cta: "Open the letter generator"
-href: "/member/write?issue=tech-and-data-rights"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "medium"
 ---
 

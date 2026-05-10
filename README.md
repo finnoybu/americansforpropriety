@@ -21,7 +21,7 @@ We do three things: research, drafting, record-keeping.
 The site has two faces, on purpose.
 
 - **Visitors** (anonymous): static research, briefs, and letter templates. No tracking, no analytics that identify individuals, no email forms, no cookies beyond what's needed to render a page.
-- **Members** (signed in): get the personalized toolkit — rep lookup by ZIP, AI-drafted letters, and a private action log. Members give us their email and ZIP. We store the district, drafts, and actions. Nothing else. Member tooling never sends anything on the user's behalf.
+- **Members** (signed in): get the personalized toolkit — rep lookup by ZIP, hand-written letter templates that auto-personalize for the right representative when picked, and a private action log of letters they've sent. Members give us their email and ZIP. We store the district and the actions they log. Nothing else. Member tooling never sends anything on the user's behalf.
 
 ---
 
@@ -86,9 +86,8 @@ src/
       auth/[...all].ts       Catch-all Better Auth handler
       me/                    Member-scoped writes (action log)
       reps/lookup            ZIP → reps + persist to profile
-      letters/generate       Anthropic letter generator
       admin/briefs/          Brief drafting + edit endpoints
-    member/                  Authenticated UI: dashboard, setup, reps, write, actions
+    member/                  Authenticated UI: dashboard, setup, reps, actions
     admin/briefs/            Editorial UI for the brief drafter
     signin.astro
     (issues|briefs|letters|news)/
@@ -144,7 +143,7 @@ The same AWS account can verify additional domains (other Finnoybu projects, etc
 1. Create an API key at <https://console.anthropic.com>
 2. Set `ANTHROPIC_API_KEY=sk-ant-...`
 
-The letter generator defaults to `claude-opus-4-7`. Web search is on by default per request and capped at 3 searches; rate-limited to 8 generations per user per hour at the application level.
+Used by the AI brief drafter at `/admin/briefs` (admin-only, low volume). Defaults to `claude-opus-4-7` with web search enabled per request. The on-demand letter generator was removed in favor of hand-written templates with placeholder substitution, so the API key is only needed if you intend to use the brief drafter.
 
 ### 5. Geocodio
 
@@ -203,8 +202,7 @@ These are not aspirational — they're how the system is built.
 - **Member auth uses magic link only.** No password is stored. Better Auth manages session cookies; we read the session via `auth.api.getSession()` and clear it on signout.
 - **No tracking on visitor pages.** Visitor pages are statically prerendered and ship no analytics scripts.
 - **Member data ownership is enforced in app code.** Every query that reads or writes member-owned rows filters by `userId = session.user.id`. The schema has foreign keys to the Better Auth `user` table with `ON DELETE CASCADE` so deleting an account purges everything.
-- **No "send on behalf of."** The letter generator returns text; the user copies it and sends it themselves. Logging that you sent something is a separate, voluntary button click.
-- **Rate limits** on letter generation (8/hour/user, enforced via a Drizzle count query against `generated_letter`).
+- **No "send on behalf of."** Letter templates personalize client-side and the result is copied to the member's clipboard; the site never transmits anything outbound to a representative on the member's behalf. Logging that you sent something is a separate, voluntary button click.
 - **No data sales, no third-party sharing.** Period.
 
 ---

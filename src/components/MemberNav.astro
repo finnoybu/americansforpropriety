@@ -4,7 +4,7 @@ const isActive = (href: string) => pathname === href || pathname.startsWith(href
 const items = [
   { href: "/member", label: "Dashboard" },
   { href: "/member/representatives", label: "My representatives" },
-  { href: "/member/write", label: "Draft a letter" },
+  { href: "/letters", label: "Letter templates" },
   { href: "/member/actions", label: "Action log" },
   { href: "/member/setup", label: "Settings" },
 ];
@@ -24,9 +24,22 @@ const items = [
       {item.label}
     </a>
   ))}
-  <form action="/api/auth/signout" method="post" class="ml-auto">
-    <button class="text-sm text-ink-muted underline hover:text-coral-deep">
-      Sign out
-    </button>
-  </form>
+  <button
+    type="button"
+    data-signout
+    class="ml-auto text-sm text-ink-muted underline hover:text-coral-deep"
+  >
+    Sign out
+  </button>
 </nav>
+
+<script>
+  import { signOut } from "~/lib/auth-client";
+
+  for (const btn of document.querySelectorAll<HTMLButtonElement>("[data-signout]")) {
+    btn.addEventListener("click", async () => {
+      await signOut();
+      window.location.href = "/";
+    });
+  }
+</script>

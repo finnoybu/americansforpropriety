@@ -2,8 +2,8 @@
 title: "Push for VA staffing and PACT Act implementation funding"
 summary: "PACT Act delivered. Implementation requires sustained appropriations to clear backlogs and maintain healthcare capacity."
 issue: "veterans-and-service-members"
-cta: "Open the letter generator"
-href: "/member/write?issue=veterans-and-service-members"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "high"
 ---
 

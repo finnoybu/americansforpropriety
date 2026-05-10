@@ -93,7 +93,7 @@ Variables the site reads (all optional unless noted):
 - `BETTER_AUTH_SECRET` — required for member auth (any 32+ byte random string for local dev; production uses a secret stored in Cloudflare). Generate one with `openssl rand -base64 32`.
 - `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `EMAIL_FROM` — required if you want magic-link emails to actually send via AWS SES. Without them, the auth library logs the magic-link URL to the server console so you can copy it manually for local testing.
 - The D1 database itself is bound via `wrangler.toml` (no env var). For local dev with `wrangler pages dev`, run `npm run db:migrate:local` to apply migrations to the local D1 emulator.
-- `ANTHROPIC_API_KEY` — required for the AI letter and brief drafters.
+- `ANTHROPIC_API_KEY` — required for the AI brief drafter at `/admin/briefs` (admin-only). The letter side of the toolkit doesn't use AI — letters are hand-written templates with client-side placeholder substitution.
 - `GEOCODIO_API_KEY` — required for ZIP-to-representative lookups.
 - `ADMIN_EMAILS` — comma-separated list of emails treated as admin.
 - `PUBLIC_SITE_URL` — base URL for OG/canonical tags. Defaults sensibly.

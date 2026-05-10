@@ -2,8 +2,8 @@
 title: "Support the Stop Wall Street Looting Act"
 summary: "Joint and several liability for private equity owners on portfolio company debts. The single most consequential change to PE accountability."
 issue: "economy-and-tax-fairness"
-cta: "Open the letter generator"
-href: "/member/write?issue=economy-and-tax-fairness"
+cta: "Find a letter template"
+href: "/letters"
 urgency: "low"
 ---
 

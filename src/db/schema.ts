@@ -113,32 +113,13 @@ export const actionLog = sqliteTable("action_log", {
   representativeOffice: text("representative_office"),
   topic: text("topic"),
   notes: text("notes"),
-  generatedLetterId: text("generated_letter_id"),
+  // Slug of the letter template the member used (when actionType = "sent_letter").
+  // Replaces the previous generated_letter_id FK now that we no longer store
+  // AI-drafted letter bodies.
+  letterTemplateSlug: text("letter_template_slug"),
   occurredAt: integer("occurred_at", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
-  createdAt: integer("created_at", { mode: "timestamp" })
-    .notNull()
-    .$defaultFn(() => new Date()),
-});
-
-export const generatedLetter = sqliteTable("generated_letter", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
-  userId: text("user_id")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
-  representativeName: text("representative_name"),
-  representativeOffice: text("representative_office"),
-  topic: text("topic"),
-  stance: text("stance"),
-  body: text("body").notNull(),
-  issueSlug: text("issue_slug"),
-  usedWebSearch: integer("used_web_search", { mode: "boolean" }).default(false),
-  model: text("model"),
-  inputTokens: integer("input_tokens"),
-  outputTokens: integer("output_tokens"),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
@@ -180,5 +161,4 @@ export const aiBrief = sqliteTable("ai_brief", {
 export type User = typeof user.$inferSelect;
 export type Profile = typeof profile.$inferSelect;
 export type ActionLog = typeof actionLog.$inferSelect;
-export type GeneratedLetter = typeof generatedLetter.$inferSelect;
 export type AiBrief = typeof aiBrief.$inferSelect;
