@@ -1,0 +1,113 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import MemberNav from "~/components/MemberNav.astro";
+import { getSupabase } from "~/lib/supabase";
+import type { Representative } from "~/lib/geocodio";
+
+export const prerender = false;
+
+if (!Astro.locals.user) return Astro.redirect("/signin?next=/member/representatives");
+
+const supabase = getSupabase(Astro);
+const { data: profile } = await supabase
+  .from("profiles")
+  .select("zip, state, representatives_cache, representatives_cached_at")
+  .eq("id", Astro.locals.user.id)
+  .maybeSingle();
+
+const reps: Representative[] = Array.isArray(profile?.representatives_cache)
+  ? (profile!.representatives_cache as Representative[])
+  : [];
+const cachedAt = profile?.representatives_cached_at
+  ? new Date(profile.representatives_cached_at as string)
+  : null;
+
+const groups: Array<[string, Representative[]]> = [
+  ["Federal — Senate", reps.filter((r) => r.level === "federal" && r.chamber === "senate")],
+  ["Federal — House", reps.filter((r) => r.level === "federal" && r.chamber === "house")],
+  ["State — Senate (upper)", reps.filter((r) => r.level === "state" && r.chamber === "upper")],
+  ["State — House (lower)", reps.filter((r) => r.level === "state" && r.chamber === "lower")],
+];
+
+function shortenUrl(u: string): string {
+  try {
+    const url = new URL(u);
+    return url.host.replace(/^www\./, "") + (url.pathname === "/" ? "" : url.pathname);
+  } catch {
+    return u;
+  }
+}
+---
+<BaseLayout title="My representatives">
+  <section class="container-page py-12 md:py-16">
+    <p class="eyebrow">Member · Representatives</p>
+    <h1 class="mt-2">Your federal and state representatives</h1>
+    <p class="mt-3 text-sm text-[color:var(--color-ink-muted)]">
+      {profile?.zip
+        ? `Based on ZIP ${profile.zip}${cachedAt ? ", last refreshed " + cachedAt.toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" }) : ""}.`
+        : "Add your ZIP to see your representatives."}
+    </p>
+
+    <MemberNav />
+
+    {!profile?.zip && (
+      <div class="border-l-4 border-[color:var(--color-coral)] bg-[color:var(--color-paper-warm)] p-5">
+        <p class="font-semibold">Add your ZIP to look up your reps.</p>
+        <a class="btn btn-primary mt-4" href="/member/setup">Go to settings</a>
+      </div>
+    )}
+
+    {profile?.zip && reps.length === 0 && (
+      <p class="text-[color:var(--color-ink-muted)]">
+        No representatives cached. <a href="/member/setup" class="underline">Re-run the lookup.</a>
+      </p>
+    )}
+
+    {groups.map(([label, list]) =>
+      list.length > 0 ? (
+        <section class="mt-12">
+          <p class="eyebrow">{label}</p>
+          <div class="mt-4 grid gap-4 md:grid-cols-2">
+            {list.map((rep) => (
+              <article class="card-issue">
+                <p class="text-xs uppercase tracking-wider text-[color:var(--color-ink-muted)]">
+                  {rep.office}
+                </p>
+                <h3 class="mt-2 text-lg font-semibold">
+                  {rep.name}
+                  {rep.party && (
+                    <span class="ml-2 text-sm font-normal text-[color:var(--color-ink-muted)]">
+                      ({rep.party})
+                    </span>
+                  )}
+                </h3>
+                <ul class="mt-3 space-y-1 break-words text-sm">
+                  {rep.contacts.map((c) => (
+                    <li>
+                      <span class="inline-block w-20 text-[color:var(--color-ink-muted)]">{c.type}</span>
+                      {c.value.startsWith("http") || c.type === "twitter" || c.type === "facebook" ? (
+                        <a class="underline" href={c.value} target="_blank" rel="noopener">{shortenUrl(c.value)}</a>
+                      ) : c.type === "phone" ? (
+                        <a class="underline" href={`tel:${c.value.replace(/[^0-9+]/g, "")}`}>{c.value}</a>
+                      ) : c.type === "form" ? (
+                        <a class="underline" href={c.value} target="_blank" rel="noopener">Open contact form</a>
+                      ) : (
+                        <span>{c.value}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={`/member/write?rep=${encodeURIComponent(rep.name)}&office=${encodeURIComponent(rep.office)}`}
+                  class="mt-4 inline-block text-sm font-semibold underline"
+                >
+                  Draft a letter to {rep.name.split(" ").slice(-1)[0]} →
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null,
+    )}
+  </section>
+</BaseLayout>

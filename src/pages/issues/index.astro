@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+import IssueCard from "~/components/IssueCard.astro";
+import Hero from "~/components/Hero.astro";
+import { issueOrder } from "~/config/site";
+
+const all = await getCollection("issues");
+const issues = issueOrder
+  .map((slug) => all.find((i) => i.id === slug))
+  .filter((i): i is NonNullable<typeof i> => Boolean(i));
+---
+<BaseLayout title="Issues" description="Fourteen issue clusters where US public policy has drifted from the public good.">
+  <Hero tone="warm" imageStyle="bleed">
+    <p class="eyebrow">Our focus</p>
+    <h1 class="mt-3 max-w-3xl text-balance">
+      The fights worth picking, the ones we can win.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+      Fourteen issue clusters. Each has briefs that name the stakes, letters constituents can send, and a record of what we're tracking.
+    </p>
+    <img
+      slot="visual"
+      src="/hero/issues-senate-chamber.png"
+      alt="The U.S. Senate chamber."
+      class="h-full w-full object-cover"
+      loading="eager"
+    />
+  </Hero>
+
+  <Section>
+    <div class="grid-issues">
+      {issues.map((issue) => (
+        <IssueCard
+          href={`/issues/${issue.id}`}
+          eyebrow={issue.data.eyebrow}
+          title={issue.data.short}
+          summary={issue.data.summary}
+          accent={issue.data.accent}
+        />
+      ))}
+    </div>
+  </Section>
+</BaseLayout>

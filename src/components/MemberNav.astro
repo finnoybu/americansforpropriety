@@ -1,0 +1,32 @@
+---
+const { pathname } = Astro.url;
+const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
+const items = [
+  { href: "/member", label: "Dashboard" },
+  { href: "/member/representatives", label: "My representatives" },
+  { href: "/member/write", label: "Draft a letter" },
+  { href: "/member/actions", label: "Action log" },
+  { href: "/member/setup", label: "Settings" },
+];
+---
+<nav aria-label="Member" class="rule-top mb-8 flex flex-wrap gap-x-6 gap-y-2 pt-4 text-sm">
+  {items.map((item) => (
+    <a
+      href={item.href}
+      class:list={[
+        "no-underline",
+        isActive(item.href)
+          ? "font-semibold text-[color:var(--color-coral-deep)]"
+          : "text-[color:var(--color-ink-muted)] hover:text-[color:var(--color-ink)]",
+      ]}
+      aria-current={isActive(item.href) ? "page" : undefined}
+    >
+      {item.label}
+    </a>
+  ))}
+  <form action="/api/auth/signout" method="post" class="ml-auto">
+    <button class="text-sm text-[color:var(--color-ink-muted)] underline hover:text-[color:var(--color-coral-deep)]">
+      Sign out
+    </button>
+  </form>
+</nav>

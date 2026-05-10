@@ -1,0 +1,83 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+import PostCard from "~/components/PostCard.astro";
+import Hero from "~/components/Hero.astro";
+import { getSupabase } from "~/lib/supabase";
+import { getEnv, isSupabaseConfigured } from "~/lib/env";
+
+export const prerender = false;
+
+// Static (curated) briefs from the content collection.
+const staticBriefs = (await getCollection("briefs", ({ data }) => !data.draft))
+  .map((b) => ({
+    href: `/briefs/${b.id}`,
+    eyebrow: `Brief · ${b.data.issue.replace(/-/g, " ")}`,
+    title: b.data.title,
+    summary: b.data.summary,
+    date: b.data.publishedAt,
+    source: "static" as const,
+  }));
+
+// AI-drafted briefs from Supabase (published only). Skip if not configured.
+let aiBriefs: Array<{
+  href: string;
+  eyebrow: string;
+  title: string;
+  summary: string;
+  date: Date;
+  source: "ai";
+}> = [];
+
+if (isSupabaseConfigured(getEnv(Astro))) {
+  const supabase = getSupabase(Astro);
+  const { data: aiRows } = await supabase
+    .from("ai_briefs")
+    .select("slug, title, summary, issue, published_at")
+    .eq("status", "published")
+    .order("published_at", { ascending: false });
+
+  aiBriefs = (aiRows ?? []).map((b: any) => ({
+    href: `/briefs/${b.slug}`,
+    eyebrow: `Weekly · ${b.issue.replace(/-/g, " ")}`,
+    title: b.title,
+    summary: b.summary,
+    date: new Date(b.published_at),
+    source: "ai" as const,
+  }));
+}
+
+const all = [...staticBriefs, ...aiBriefs].sort(
+  (a, b) => b.date.getTime() - a.date.getTime(),
+);
+---
+<BaseLayout title="Briefs" description="Plain-language research on US public policy.">
+  <Hero tone="warm" imageStyle="bleed">
+    <p class="eyebrow">Research</p>
+    <h1 class="mt-3 max-w-3xl text-balance">Briefs.</h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+      Short, sourced explanations of policy questions in front of US legislators. Curated long-form pieces and weekly news briefs on top political headlines.
+    </p>
+    <img
+      slot="visual"
+      src="/hero/briefs-press-room.png"
+      alt="The White House press briefing room."
+      class="h-full w-full object-cover"
+      loading="eager"
+    />
+  </Hero>
+
+  <Section>
+    {all.length === 0 && <p>No briefs yet.</p>}
+    {all.map((b) => (
+      <PostCard
+        href={b.href}
+        eyebrow={b.eyebrow}
+        title={b.title}
+        summary={b.summary}
+        date={b.date}
+      />
+    ))}
+  </Section>
+</BaseLayout>

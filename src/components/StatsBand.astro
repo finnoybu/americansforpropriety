@@ -1,0 +1,43 @@
+---
+// Stats band — 4 metrics in a tinted band, AfP-style. Each item:
+//   { value: "31", label: "policy briefs", emphasis?: boolean }
+// emphasis: true highlights the value in coral (one per band, ideally).
+interface StatItem {
+  value: string;
+  label: string;
+  emphasis?: boolean;
+}
+interface Props {
+  items: StatItem[];
+  tone?: "warm" | "gold" | "ink";
+}
+const { items, tone = "warm" } = Astro.props;
+
+const bgClass =
+  tone === "gold"
+    ? "bg-[color:var(--color-gold-soft)] text-[color:var(--color-ink)]"
+    : tone === "ink"
+      ? "bg-[color:var(--color-ink)] text-[color:var(--color-paper)]"
+      : "bg-[color:var(--color-paper-warm)] text-[color:var(--color-ink)]";
+---
+<section class:list={["border-b border-[color:var(--color-rule)]", bgClass]}>
+  <div class="container-page grid gap-8 py-10 sm:grid-cols-2 md:grid-cols-4 md:py-12">
+    {items.map((item) => (
+      <div>
+        <p
+          class:list={[
+            "font-display text-4xl font-semibold leading-none md:text-5xl",
+            item.emphasis
+              ? tone === "ink"
+                ? "text-[color:var(--color-gold-soft)]"
+                : "text-[color:var(--color-coral-deep)]"
+              : "",
+          ]}
+        >
+          {item.value}
+        </p>
+        <p class="mt-2 text-sm leading-tight opacity-80">{item.label}</p>
+      </div>
+    ))}
+  </div>
+</section>

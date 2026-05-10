@@ -1,0 +1,53 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const letters = await getCollection("letters");
+  return letters.map((letter) => ({
+    params: { slug: letter.id },
+    props: { letter },
+  }));
+}
+
+const { letter } = Astro.props;
+const { Content } = await render(letter);
+const updated = letter.data.updatedAt.toLocaleDateString("en-US", {
+  year: "numeric", month: "long", day: "numeric",
+});
+---
+<BaseLayout title={letter.data.title} description={letter.data.summary} ogType="article">
+  <article class="container-page py-16 md:py-24">
+    <p class="eyebrow">Letter template · {letter.data.audience}</p>
+    <h1 class="mt-3 max-w-4xl text-balance">{letter.data.title}</h1>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+      {letter.data.summary}
+    </p>
+    <div class="mt-6 text-sm text-[color:var(--color-ink-muted)]">
+      Updated {updated} · Issue:
+      <a href={`/issues/${letter.data.issue}`} class="no-underline hover:underline">
+        {letter.data.issue.replace(/-/g, " ")}
+      </a>
+    </div>
+
+    <hr class="my-10" />
+
+    <div class="prose-editorial">
+      <Content />
+    </div>
+
+    <aside class="mt-12 border-l-2 border-[color:var(--color-coral)] bg-[color:var(--color-paper-warm)] p-6">
+      <p class="eyebrow">How to use this</p>
+      <ol class="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
+        <li>Copy the body. Edit it so it sounds like you, not a campaign blast.</li>
+        <li>Personalize at least one paragraph with a specific local detail.</li>
+        <li>Send by your representative's preferred method — most prefer their official contact form, not an attachment.</li>
+        <li>If you can, follow up by phone. Calls plus letters compound.</li>
+      </ol>
+    </aside>
+
+    <p class="mt-10">
+      <a href="/letters" class="btn btn-ghost">← All letters</a>
+    </p>
+  </article>
+</BaseLayout>

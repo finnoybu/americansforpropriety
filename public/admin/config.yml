@@ -1,0 +1,156 @@
+# Decap CMS configuration.
+#
+# This site is git-based: edits in /admin commit Markdown directly back to the
+# repository. Wire `backend.repo` and OAuth before going live. Until then,
+# `local_backend: true` lets you run the CMS against your local checkout via
+# `npx decap-server`.
+
+backend:
+  name: github
+  repo: finnoybu/americansforpropriety
+  branch: main
+
+local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: issues
+    label: Issues
+    folder: src/content/issues
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Short label, name: short, widget: string }
+      - { label: Eyebrow, name: eyebrow, widget: string, default: "Issue area" }
+      - { label: Summary, name: summary, widget: text }
+      - label: Accent
+        name: accent
+        widget: select
+        options: [coral, gold, leaf, ink]
+        default: coral
+      - { label: Order, name: order, widget: number, default: 99, value_type: int }
+      - { label: Headline, name: headline, widget: string }
+      - { label: Stance, name: stance, widget: text }
+      - label: Pillars
+        name: pillars
+        widget: list
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Body, name: body, widget: text }
+      - label: Facts
+        name: facts
+        widget: list
+        field: { label: Fact, name: fact, widget: string }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: briefs
+    label: Briefs
+    folder: src/content/briefs
+    create: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Summary, name: summary, widget: text }
+      - label: Issue
+        name: issue
+        widget: select
+        options:
+          - { label: "Economy & tax fairness", value: "economy-and-tax-fairness" }
+          - { label: "Labor & wages", value: "labor-and-wages" }
+          - { label: "Healthcare", value: "healthcare" }
+          - { label: "Climate & energy", value: "climate-and-energy" }
+          - { label: "Democracy & voting", value: "democracy-and-voting" }
+          - { label: "Civil rights & immigration", value: "civil-rights-and-immigration" }
+      - { label: Published, name: publishedAt, widget: datetime, time_format: false }
+      - label: Authors
+        name: authors
+        widget: list
+        field: { label: Author, name: author, widget: string }
+      - { label: Reading minutes, name: readingMinutes, widget: number, default: 6, value_type: int }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: letters
+    label: Letters
+    folder: src/content/letters
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Audience, name: audience, widget: string }
+      - label: Issue
+        name: issue
+        widget: select
+        options:
+          - { label: "Economy & tax fairness", value: "economy-and-tax-fairness" }
+          - { label: "Labor & wages", value: "labor-and-wages" }
+          - { label: "Healthcare", value: "healthcare" }
+          - { label: "Climate & energy", value: "climate-and-energy" }
+          - { label: "Democracy & voting", value: "democracy-and-voting" }
+          - { label: "Civil rights & immigration", value: "civil-rights-and-immigration" }
+      - { label: Updated, name: updatedAt, widget: datetime, time_format: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: actions
+    label: Actions
+    folder: src/content/actions
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Summary, name: summary, widget: text }
+      - label: Issue
+        name: issue
+        widget: select
+        options:
+          - { label: "Economy & tax fairness", value: "economy-and-tax-fairness" }
+          - { label: "Labor & wages", value: "labor-and-wages" }
+          - { label: "Healthcare", value: "healthcare" }
+          - { label: "Climate & energy", value: "climate-and-energy" }
+          - { label: "Democracy & voting", value: "democracy-and-voting" }
+          - { label: "Civil rights & immigration", value: "civil-rights-and-immigration" }
+      - { label: CTA label, name: cta, widget: string }
+      - { label: CTA href, name: href, widget: string }
+      - label: Urgency
+        name: urgency
+        widget: select
+        options: [low, medium, high]
+        default: medium
+      - { label: Expires, name: expiresAt, widget: datetime, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: posts
+    label: News
+    folder: src/content/posts
+    create: true
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Published, name: publishedAt, widget: datetime, time_format: false }
+      - label: Authors
+        name: authors
+        widget: list
+        field: { label: Author, name: author, widget: string }
+      - label: Tags
+        name: tags
+        widget: list
+        field: { label: Tag, name: tag, widget: string }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+      - { label: Body, name: body, widget: markdown }

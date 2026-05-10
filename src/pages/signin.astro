@@ -1,0 +1,80 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getEnv } from "~/lib/env";
+
+export const prerender = false;
+
+if (Astro.locals.user) {
+  return Astro.redirect("/member");
+}
+
+const env = getEnv(Astro);
+const supabaseUrl = env.PUBLIC_SUPABASE_URL;
+const supabaseAnon = env.PUBLIC_SUPABASE_ANON_KEY;
+const siteUrl = env.PUBLIC_SITE_URL || Astro.url.origin;
+const error = Astro.url.searchParams.get("error");
+---
+<BaseLayout title="Sign in" description="Sign in to your Americans for Propriety member account.">
+  <section class="container-page max-w-2xl py-20 md:py-28">
+    <p class="eyebrow">Member sign-in</p>
+    <h1 class="mt-3">Sign in to draft, track, and follow up.</h1>
+    <p class="mt-6 text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+      We send a one-time link to your email. No password. We never sell, share, or rent your address — see <a class="underline decoration-[color:var(--color-coral)]" href="/principles">Principles</a> for the full commitment.
+    </p>
+
+    {error && (
+      <div class="mt-6 border-l-4 border-[color:var(--color-coral)] bg-[color:var(--color-paper-warm)] p-4 text-sm">
+        <strong class="block">Sign-in failed.</strong>
+        <span class="text-[color:var(--color-ink-muted)]">{error}</span>
+      </div>
+    )}
+
+    <form id="signin-form" class="mt-10 space-y-4">
+      <label class="block">
+        <span class="eyebrow">Email</span>
+        <input
+          required
+          type="email"
+          name="email"
+          autocomplete="email"
+          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-4 py-3 font-medium text-[color:var(--color-ink)] focus:border-[color:var(--color-ink)] focus:outline-none"
+          placeholder="you@example.com"
+        />
+      </label>
+      <button type="submit" class="btn btn-ink w-full justify-center">Send me a sign-in link</button>
+      <p id="signin-status" class="text-sm text-[color:var(--color-ink-muted)]"></p>
+    </form>
+
+    <p class="mt-12 text-sm text-[color:var(--color-ink-muted)]">
+      First time? Submitting your email creates an account. We store only what's needed for the member toolkit (your district, the actions you log, drafts you generate).
+    </p>
+  </section>
+
+  <script
+    is:inline
+    type="module"
+    define:vars={{ supabaseUrl, supabaseAnon, siteUrl }}
+  >
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2.46.0";
+    const sb = createClient(supabaseUrl, supabaseAnon, { auth: { persistSession: false } });
+    const form = document.getElementById("signin-form");
+    const status = document.getElementById("signin-status");
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = new FormData(form).get("email");
+      status.textContent = "Sending...";
+      const { error } = await sb.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: `${siteUrl}/api/auth/callback?next=/member` },
+      });
+      if (error) {
+        status.textContent = "Couldn't send: " + error.message;
+        status.className = "text-sm text-[color:var(--color-coral-deep)]";
+      } else {
+        status.textContent = "Check your inbox. The link is good for 60 minutes.";
+        status.className = "text-sm text-[color:var(--color-leaf)]";
+        form.reset();
+      }
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,16 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+---
+<BaseLayout title="Not found" description="That page doesn't exist.">
+  <section class="container-page py-32 md:py-40">
+    <p class="eyebrow">404</p>
+    <h1 class="mt-3 text-balance">Not the page you were looking for.</h1>
+    <p class="mt-6 max-w-xl text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+      Either the link is wrong, or we moved something. Try the issues page, or head back home.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/" class="btn btn-ink">Home</a>
+      <a href="/issues" class="btn btn-ghost">Issues</a>
+    </div>
+  </section>
+</BaseLayout>

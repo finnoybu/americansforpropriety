@@ -1,0 +1,118 @@
+---
+import { getEntry, render } from "astro:content";
+import { marked } from "marked";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import ActionBanner from "~/components/ActionBanner.astro";
+import { getSupabase } from "~/lib/supabase";
+import { getEnv, isSupabaseConfigured } from "~/lib/env";
+
+export const prerender = false;
+
+const slug = Array.isArray(Astro.params.slug)
+  ? Astro.params.slug.join("/")
+  : (Astro.params.slug ?? "");
+
+if (!slug) return new Response("Not found", { status: 404 });
+
+// First: look up in the static content collection.
+const staticBrief = await getEntry("briefs", slug);
+
+let view: {
+  title: string;
+  summary: string;
+  issue: string;
+  date: Date;
+  authors: string[];
+  readingMinutes: number;
+  htmlBody?: string;
+  StaticContent?: any;
+  isAI: boolean;
+} | null = null;
+
+if (staticBrief && !staticBrief.data.draft) {
+  const { Content } = await render(staticBrief);
+  view = {
+    title: staticBrief.data.title,
+    summary: staticBrief.data.summary,
+    issue: staticBrief.data.issue,
+    date: staticBrief.data.publishedAt,
+    authors: staticBrief.data.authors,
+    readingMinutes: staticBrief.data.readingMinutes,
+    StaticContent: Content,
+    isAI: false,
+  };
+} else if (isSupabaseConfigured(getEnv(Astro))) {
+  // Second: look up in ai_briefs table (published only).
+  const supabase = getSupabase(Astro);
+  const { data: ai } = await supabase
+    .from("ai_briefs")
+    .select("*")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .maybeSingle();
+
+  if (ai) {
+    const html = marked.parse(ai.body, { gfm: true, breaks: false });
+    view = {
+      title: ai.title,
+      summary: ai.summary,
+      issue: ai.issue,
+      date: new Date(ai.published_at ?? ai.created_at),
+      authors: ai.authors ?? [],
+      readingMinutes: ai.reading_minutes ?? 6,
+      htmlBody: typeof html === "string" ? html : await html,
+      isAI: true,
+    };
+  }
+}
+
+if (!view) return new Response("Not found", { status: 404 });
+
+const dateLabel = view.date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const issueLabel = view.issue.replace(/-/g, " ");
+const StaticContent = view.StaticContent;
+---
+<BaseLayout title={view.title} description={view.summary} ogType="article">
+  <article class="container-page py-16 md:py-24">
+    <p class="eyebrow">
+      <a href={`/issues/${view.issue}`} class="no-underline hover:underline">
+        {view.isAI ? "Weekly brief" : "Brief"} · {issueLabel}
+      </a>
+    </p>
+    <h1 class="mt-3 max-w-4xl text-balance">{view.title}</h1>
+    <p class="mt-6 max-w-3xl text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+      {view.summary}
+    </p>
+    <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[color:var(--color-ink-muted)]">
+      <span>{dateLabel}</span>
+      <span aria-hidden>·</span>
+      <span>{view.readingMinutes} min read</span>
+      {view.authors.length > 0 && (
+        <>
+          <span aria-hidden>·</span>
+          <span>{view.authors.join(", ")}</span>
+        </>
+      )}
+    </div>
+
+    <hr class="my-10" />
+
+    <div class="prose-editorial">
+      {view.isAI && view.htmlBody ? (
+        <Fragment set:html={view.htmlBody} />
+      ) : StaticContent ? (
+        <StaticContent />
+      ) : null}
+    </div>
+
+    <p class="mt-12">
+      <a href="/briefs" class="btn btn-ghost">← All briefs</a>
+    </p>
+  </article>
+
+  <ActionBanner />
+</BaseLayout>

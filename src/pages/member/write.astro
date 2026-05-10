@@ -1,0 +1,239 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import MemberNav from "~/components/MemberNav.astro";
+import { getSupabase } from "~/lib/supabase";
+import type { Representative } from "~/lib/geocodio";
+
+export const prerender = false;
+
+if (!Astro.locals.user) return Astro.redirect("/signin?next=/member/write");
+
+const supabase = getSupabase(Astro);
+const { data: profile } = await supabase
+  .from("profiles")
+  .select("zip, state, representatives_cache")
+  .eq("id", Astro.locals.user.id)
+  .maybeSingle();
+
+const reps: Representative[] = Array.isArray(profile?.representatives_cache)
+  ? (profile!.representatives_cache as Representative[])
+  : [];
+
+const presetRep = Astro.url.searchParams.get("rep") ?? "";
+const presetOffice = Astro.url.searchParams.get("office") ?? "";
+const presetIssue = Astro.url.searchParams.get("issue") ?? "";
+
+const repOptions = reps.map((r) => ({
+  label: `${r.name} — ${r.office}`,
+  rep: r.name,
+  office: r.office,
+}));
+---
+<BaseLayout title="Draft a letter">
+  <section class="container-page max-w-4xl py-12 md:py-16">
+    <p class="eyebrow">Member · Drafting tool</p>
+    <h1 class="mt-2">Draft a letter to your representative</h1>
+    <p class="mt-3 max-w-2xl text-[color:var(--color-ink-muted)]">
+      We generate a draft. You read it, edit it, and send it yourself. We never send anything on your behalf, and we don't keep your draft after you delete it.
+    </p>
+
+    <MemberNav />
+
+    {reps.length === 0 && (
+      <div class="border-l-4 border-[color:var(--color-coral)] bg-[color:var(--color-paper-warm)] p-5">
+        <p class="font-semibold">Look up your representatives first.</p>
+        <p class="mt-1 text-sm text-[color:var(--color-ink-muted)]">We need to know who you're writing to.</p>
+        <a class="btn btn-primary mt-4" href="/member/setup">Add ZIP & look up reps</a>
+      </div>
+    )}
+
+    {reps.length > 0 && (
+      <form id="write-form" class="grid gap-6 md:grid-cols-2">
+        <label class="md:col-span-2 block">
+          <span class="eyebrow">Representative</span>
+          <select
+            required
+            name="rep_combo"
+            class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 focus:border-[color:var(--color-ink)] focus:outline-none"
+          >
+            <option value="">— Choose a representative —</option>
+            {repOptions.map((o) => (
+              <option
+                value={`${o.rep}|||${o.office}`}
+                selected={presetRep === o.rep && presetOffice === o.office}
+              >
+                {o.label}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label class="md:col-span-2 block">
+          <span class="eyebrow">Topic</span>
+          <input
+            required
+            name="topic"
+            type="text"
+            maxlength="500"
+            value={presetIssue}
+            placeholder="e.g., Medicare drug price negotiation, PRO Act, transmission permitting"
+            class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 focus:border-[color:var(--color-ink)] focus:outline-none"
+          />
+        </label>
+
+        <label class="block">
+          <span class="eyebrow">My position</span>
+          <select
+            name="stance"
+            class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 focus:border-[color:var(--color-ink)] focus:outline-none"
+          >
+            <option value="support">I support action</option>
+            <option value="oppose">I oppose the current direction</option>
+            <option value="ask_for_position">Ask for the rep's position</option>
+            <option value="other">Other / unspecified</option>
+          </select>
+        </label>
+
+        <label class="flex items-center gap-3 self-end pb-2">
+          <input
+            type="checkbox"
+            name="enable_web_search"
+            checked
+            class="h-4 w-4 accent-[color:var(--color-coral)]"
+          />
+          <span class="text-sm">
+            Use recent statements & votes
+            <span class="block text-xs text-[color:var(--color-ink-muted)]">Slower, costs more, more accurate.</span>
+          </span>
+        </label>
+
+        <div class="md:col-span-2">
+          <button class="btn btn-ink" type="submit">
+            <span class="default-label">Draft this letter</span>
+            <span class="loading-label hidden">Drafting...</span>
+          </button>
+          <span id="write-status" class="ml-3 text-sm text-[color:var(--color-ink-muted)]"></span>
+        </div>
+      </form>
+    )}
+
+    <section id="output" class="mt-12 hidden">
+      <p class="eyebrow">Draft</p>
+      <h2 class="mt-2 text-xl">Read it, edit it, send it yourself.</h2>
+      <p class="mt-2 text-sm text-[color:var(--color-ink-muted)]">
+        Personalize at least one paragraph with a specific local detail before sending.
+      </p>
+      <textarea
+        id="letter-body"
+        rows="20"
+        class="mt-4 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper-warm)] p-4 font-display text-base leading-relaxed focus:border-[color:var(--color-ink)] focus:outline-none"
+      ></textarea>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <button id="copy-btn" class="btn btn-ghost" type="button">Copy to clipboard</button>
+        <button id="log-sent-btn" class="btn btn-primary" type="button">I sent this</button>
+        <button id="regen-btn" class="btn btn-ghost" type="button">Regenerate</button>
+        <span id="action-status" class="self-center text-sm text-[color:var(--color-ink-muted)]"></span>
+      </div>
+    </section>
+  </section>
+
+  <script is:inline>
+    const form = document.getElementById("write-form");
+    const out = document.getElementById("output");
+    const body = document.getElementById("letter-body");
+    const statusEl = document.getElementById("write-status");
+    const actionStatus = document.getElementById("action-status");
+    let lastLetterId = null;
+    let lastTopic = null;
+    let lastRep = null;
+    let lastOffice = null;
+
+    async function generate() {
+      if (!form) return;
+      const fd = new FormData(form);
+      const repCombo = String(fd.get("rep_combo") || "");
+      const [rep, office] = repCombo.split("|||");
+      if (!rep || !office) {
+        statusEl.textContent = "Choose a representative.";
+        return;
+      }
+      const topic = String(fd.get("topic") || "").trim();
+      if (!topic) {
+        statusEl.textContent = "Add a topic.";
+        return;
+      }
+      const stance = String(fd.get("stance") || "other");
+      const enable_web_search = fd.get("enable_web_search") === "on";
+
+      lastTopic = topic;
+      lastRep = rep;
+      lastOffice = office;
+
+      form.querySelector(".default-label")?.classList.add("hidden");
+      form.querySelector(".loading-label")?.classList.remove("hidden");
+      statusEl.textContent = enable_web_search ? "Searching public record + drafting..." : "Drafting...";
+
+      try {
+        const res = await fetch("/api/letters/generate", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            representative_name: rep,
+            representative_office: office,
+            topic,
+            stance,
+            enable_web_search,
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          statusEl.textContent = data.message || data.error || "Generation failed.";
+          return;
+        }
+        lastLetterId = data.id;
+        body.value = data.body;
+        out.classList.remove("hidden");
+        statusEl.textContent = "Draft ready. Edit before sending.";
+        out.scrollIntoView({ behavior: "smooth" });
+      } finally {
+        form.querySelector(".default-label")?.classList.remove("hidden");
+        form.querySelector(".loading-label")?.classList.add("hidden");
+      }
+    }
+
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      generate();
+    });
+    document.getElementById("regen-btn")?.addEventListener("click", generate);
+
+    document.getElementById("copy-btn")?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(body.value);
+        actionStatus.textContent = "Copied.";
+      } catch {
+        actionStatus.textContent = "Copy failed — select the text and copy manually.";
+      }
+    });
+
+    document.getElementById("log-sent-btn")?.addEventListener("click", async () => {
+      actionStatus.textContent = "Logging...";
+      const res = await fetch("/api/me/actions", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          action_type: "sent_letter",
+          topic: lastTopic,
+          representative_name: lastRep,
+          representative_office: lastOffice,
+          generated_letter_id: lastLetterId,
+        }),
+      });
+      if (res.ok) {
+        actionStatus.textContent = "Logged. Thank you for following through.";
+      } else {
+        actionStatus.textContent = "Couldn't log — try again later.";
+      }
+    });
+  </script>
+</BaseLayout>

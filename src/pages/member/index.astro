@@ -1,0 +1,150 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import MemberNav from "~/components/MemberNav.astro";
+import { getSupabase } from "~/lib/supabase";
+
+export const prerender = false;
+
+if (!Astro.locals.user) {
+  return Astro.redirect("/signin?next=/member");
+}
+
+const profile = Astro.locals.profile;
+const needsSetup = !profile?.zip;
+
+const supabase = getSupabase(Astro);
+const { data: recentActions } = await supabase
+  .from("action_log")
+  .select("id, action_type, topic, representative_name, occurred_at")
+  .eq("user_id", Astro.locals.user.id)
+  .order("occurred_at", { ascending: false })
+  .limit(5);
+
+const { data: recentLetters } = await supabase
+  .from("generated_letters")
+  .select("id, representative_name, topic, created_at")
+  .eq("user_id", Astro.locals.user.id)
+  .order("created_at", { ascending: false })
+  .limit(5);
+
+const repCount =
+  Array.isArray((profile as any)?.representatives_cache)
+    ? ((profile as any).representatives_cache as unknown[]).length
+    : 0;
+---
+<BaseLayout title="Member dashboard">
+  <section class="container-page py-12 md:py-16">
+    <p class="eyebrow">Member</p>
+    <h1 class="mt-2">Welcome back.</h1>
+    <p class="mt-3 text-[color:var(--color-ink-muted)]">{Astro.locals.user.email}</p>
+
+    <MemberNav />
+
+    {needsSetup && (
+      <div class="mb-10 border-l-4 border-[color:var(--color-coral)] bg-[color:var(--color-paper-warm)] p-5">
+        <p class="font-semibold">Finish setting up your account.</p>
+        <p class="mt-1 text-sm text-[color:var(--color-ink-muted)]">
+          We need your ZIP to find your representatives. We don't store a full address.
+        </p>
+        <a href="/member/setup" class="btn btn-primary mt-4">Add your ZIP <span aria-hidden>→</span></a>
+      </div>
+    )}
+
+    <div class="grid gap-10 md:grid-cols-2">
+      <section>
+        <h2 class="text-xl">Locale</h2>
+        <dl class="mt-4 space-y-2 text-sm">
+          <div class="flex justify-between gap-4 border-t border-[color:var(--color-rule)] pt-2">
+            <dt class="text-[color:var(--color-ink-muted)]">ZIP</dt>
+            <dd>{profile?.zip ?? <em class="text-[color:var(--color-ink-muted)]">not set</em>}</dd>
+          </div>
+          <div class="flex justify-between gap-4 border-t border-[color:var(--color-rule)] pt-2">
+            <dt class="text-[color:var(--color-ink-muted)]">State</dt>
+            <dd>{profile?.state ?? "—"}</dd>
+          </div>
+          <div class="flex justify-between gap-4 border-t border-[color:var(--color-rule)] pt-2">
+            <dt class="text-[color:var(--color-ink-muted)]">Congressional district</dt>
+            <dd>{profile?.congressional_district ?? "—"}</dd>
+          </div>
+          <div class="flex justify-between gap-4 border-t border-[color:var(--color-rule)] pt-2">
+            <dt class="text-[color:var(--color-ink-muted)]">Representatives on file</dt>
+            <dd>{repCount}</dd>
+          </div>
+        </dl>
+        <a href="/member/setup" class="mt-4 inline-block text-sm font-semibold underline">Update locale</a>
+      </section>
+
+      <section>
+        <h2 class="text-xl">Quick actions</h2>
+        <ul class="mt-4 space-y-3">
+          <li>
+            <a href="/member/write" class="block border-t border-[color:var(--color-rule)] py-3 no-underline">
+              <span class="font-semibold">Draft a letter</span>
+              <span class="block text-sm text-[color:var(--color-ink-muted)]">Generate a personalized draft for one of your representatives.</span>
+            </a>
+          </li>
+          <li>
+            <a href="/member/representatives" class="block border-t border-[color:var(--color-rule)] py-3 no-underline">
+              <span class="font-semibold">See my representatives</span>
+              <span class="block text-sm text-[color:var(--color-ink-muted)]">Names, offices, and how to contact each one.</span>
+            </a>
+          </li>
+          <li>
+            <a href="/take-action" class="block border-t border-[color:var(--color-rule)] py-3 no-underline">
+              <span class="font-semibold">Browse current asks</span>
+              <span class="block text-sm text-[color:var(--color-ink-muted)]">Curated calls, testimony submissions, and templates.</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="mt-16">
+      <h2 class="text-xl">Recent activity</h2>
+      {(recentActions?.length ?? 0) === 0 && (recentLetters?.length ?? 0) === 0 && (
+        <p class="mt-4 text-sm text-[color:var(--color-ink-muted)]">
+          No activity yet. Drafting a letter or logging an action will surface here.
+        </p>
+      )}
+      {recentLetters && recentLetters.length > 0 && (
+        <div class="mt-6">
+          <p class="eyebrow">Recent drafts</p>
+          <ul class="mt-3 space-y-2">
+            {recentLetters.map((l: any) => (
+              <li class="flex items-baseline justify-between gap-4 border-t border-[color:var(--color-rule)] py-2 text-sm">
+                <span>
+                  <strong>{l.representative_name}</strong>
+                  <span class="text-[color:var(--color-ink-muted)]"> · {l.topic}</span>
+                </span>
+                <time class="text-xs text-[color:var(--color-ink-muted)]">
+                  {new Date(l.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                </time>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {recentActions && recentActions.length > 0 && (
+        <div class="mt-8">
+          <p class="eyebrow">Recent actions</p>
+          <ul class="mt-3 space-y-2">
+            {recentActions.map((a: any) => (
+              <li class="flex items-baseline justify-between gap-4 border-t border-[color:var(--color-rule)] py-2 text-sm">
+                <span>
+                  <strong>{a.action_type.replace(/_/g, " ")}</strong>
+                  {a.topic && <span class="text-[color:var(--color-ink-muted)]"> · {a.topic}</span>}
+                  {a.representative_name && (
+                    <span class="text-[color:var(--color-ink-muted)]"> · {a.representative_name}</span>
+                  )}
+                </span>
+                <time class="text-xs text-[color:var(--color-ink-muted)]">
+                  {new Date(a.occurred_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                </time>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </section>
+  </section>
+</BaseLayout>

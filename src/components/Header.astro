@@ -1,0 +1,63 @@
+---
+import { site, nav } from "~/config/site";
+
+const { pathname } = Astro.url;
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+<header class="border-b border-[color:var(--color-rule)] bg-[color:var(--color-paper)]">
+  <div class="container-page flex items-center justify-between gap-6 py-4">
+    <a href="/" class="flex items-baseline gap-2 no-underline">
+      <span class="font-display text-xl font-semibold tracking-tight text-[color:var(--color-ink)]">
+        {site.name}
+      </span>
+      <span class="hidden text-xs uppercase tracking-[0.18em] text-[color:var(--color-ink-muted)] sm:inline">
+        Civic project
+      </span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden items-center gap-6 md:flex">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            "text-sm font-medium no-underline",
+            isActive(item.href)
+              ? "text-[color:var(--color-coral-deep)]"
+              : "text-[color:var(--color-ink)] hover:text-[color:var(--color-coral-deep)]",
+          ]}
+          aria-current={isActive(item.href) ? "page" : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href="/signin"
+        class="text-sm font-medium text-[color:var(--color-ink)] no-underline hover:text-[color:var(--color-coral-deep)]"
+      >
+        Sign in
+      </a>
+      <a href="/take-action" class="btn btn-primary">Take action</a>
+    </nav>
+
+    <details class="md:hidden">
+      <summary class="cursor-pointer list-none p-2 text-sm font-medium" aria-label="Open menu">
+        Menu
+      </summary>
+      <div class="absolute left-0 right-0 z-40 border-t border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-5 py-4 shadow-md">
+        <ul class="flex flex-col gap-3">
+          {nav.map((item) => (
+            <li>
+              <a href={item.href} class="block py-1 text-base font-medium no-underline">
+                {item.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="/take-action" class="btn btn-primary mt-2 w-full justify-center">Take action</a>
+          </li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</header>

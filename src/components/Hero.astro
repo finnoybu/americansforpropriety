@@ -1,0 +1,136 @@
+---
+// Two-column hero with two visual modes:
+//
+//   imageStyle="contained" (default) — visual sits inside the right column.
+//                                      Use this for SVG illustrations, icons,
+//                                      or anything that should be box-bounded.
+//
+//   imageStyle="bleed"     — visual full-bleeds to the right edge of the
+//                            viewport, with a horizontal gradient on its left
+//                            side fading the image into the page background.
+//                            AfP-style. Use this for photographs.
+//
+// Example with a real photograph:
+//
+//   <Hero imageStyle="bleed" tone="paper">
+//     <p class="eyebrow">A civic project</p>
+//     <h1>Power should answer to people.</h1>
+//     <p>...</p>
+//     <img
+//       slot="visual"
+//       src="/hero/civic-meeting.jpg"
+//       alt=""
+//       class="h-full w-full object-cover"
+//     />
+//   </Hero>
+//
+// Or with optimized Astro Image:
+//
+//   ---
+//   import { Image } from "astro:assets";
+//   import heroImg from "~/assets/hero/civic-meeting.jpg";
+//   ---
+//   <Hero imageStyle="bleed">
+//     ...text...
+//     <Image slot="visual" src={heroImg} alt="" class="h-full w-full object-cover" />
+//   </Hero>
+//
+// Visual stacks above text on mobile in either mode.
+interface Props {
+  tone?: "paper" | "warm" | "ink";
+  visualOrder?: "right" | "left";
+  size?: "default" | "compact";
+  imageStyle?: "contained" | "bleed";
+}
+const {
+  tone = "paper",
+  visualOrder = "right",
+  size = "default",
+  imageStyle = "contained",
+} = Astro.props;
+
+const bgClass =
+  tone === "warm"
+    ? "bg-[color:var(--color-paper-warm)]"
+    : tone === "ink"
+      ? "bg-[color:var(--color-ink)] text-[color:var(--color-paper)]"
+      : "bg-[color:var(--color-paper)]";
+
+const bgVar =
+  tone === "warm"
+    ? "var(--color-paper-warm)"
+    : tone === "ink"
+      ? "var(--color-ink)"
+      : "var(--color-paper)";
+
+const padding = size === "compact" ? "py-14 md:py-20" : "py-20 md:py-24 lg:py-28";
+
+// AfP-style fade: the leftmost ~15-20% of the image area is fully the bg
+// color, the next ~30% transitions, and the right ~50% is fully visible. This
+// gives the cinematic "image bleeds out from the right" effect, with the bg
+// color visually hugging the text column.
+const fadeStyle =
+  visualOrder === "left"
+    ? `background: linear-gradient(to left, ${bgVar} 0%, ${bgVar} 18%, transparent 55%);`
+    : `background: linear-gradient(to right, ${bgVar} 0%, ${bgVar} 18%, transparent 55%);`;
+---
+{imageStyle === "bleed" ? (
+  <section class:list={["relative overflow-hidden border-b border-[color:var(--color-rule)]", bgClass]}>
+    {/* Desktop: full-bleed image, absolutely positioned to the viewport edge.
+        Hidden on mobile; mobile gets a stacked block above the text. */}
+    <div
+      class:list={[
+        "pointer-events-none absolute inset-y-0 hidden md:block",
+        visualOrder === "left" ? "left-0 w-[58%]" : "right-0 w-[58%]",
+      ]}
+    >
+      <div class="relative h-full w-full">
+        <slot name="visual" />
+        {/* Gradient fade across the image area; stops in fadeStyle define
+            where solid bg ends and transparent begins. */}
+        <div class="pointer-events-none absolute inset-0" style={fadeStyle}></div>
+      </div>
+    </div>
+
+    {/* Mobile: image stacks above text, full width, no fade. */}
+    <div class="block md:hidden">
+      <div class="aspect-[3/2] w-full overflow-hidden">
+        <slot name="visual" />
+      </div>
+    </div>
+
+    {/* Text column, kept above the image via z-index. */}
+    <div class:list={["container-page relative z-10 grid md:grid-cols-12 md:items-center", padding]}>
+      <div
+        class:list={[
+          "md:col-span-7 lg:col-span-6",
+          visualOrder === "left" ? "md:col-start-6 lg:col-start-7" : "",
+        ]}
+      >
+        <slot />
+      </div>
+      <div class="md:col-span-5 lg:col-span-6"></div>
+    </div>
+  </section>
+) : (
+  <section class:list={["border-b border-[color:var(--color-rule)]", bgClass]}>
+    <div class:list={["container-page grid gap-10 md:grid-cols-12 md:items-center", padding]}>
+      <div
+        class:list={[
+          "md:col-span-7 lg:col-span-7",
+          visualOrder === "left" ? "md:order-2" : "md:order-1",
+        ]}
+      >
+        <slot />
+      </div>
+      <div
+        class:list={[
+          "md:col-span-5 lg:col-span-5",
+          visualOrder === "left" ? "md:order-1" : "md:order-2",
+        ]}
+      >
+        <slot name="visual" />
+      </div>
+    </div>
+  </section>
+)}

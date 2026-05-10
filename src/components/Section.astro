@@ -1,0 +1,39 @@
+---
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  lede?: string;
+  tone?: "paper" | "warm" | "ink";
+  id?: string;
+}
+const { eyebrow, title, lede, tone = "paper", id } = Astro.props;
+const bg =
+  tone === "warm"
+    ? "bg-[color:var(--color-paper-warm)]"
+    : tone === "ink"
+      ? "bg-[color:var(--color-ink)] text-[color:var(--color-paper)]"
+      : "bg-[color:var(--color-paper)]";
+---
+<section id={id} class:list={["py-16 md:py-24", bg]}>
+  <div class="container-page">
+    {(eyebrow || title || lede) && (
+      <header class="mb-10 max-w-3xl">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        {title && (
+          <h2 class:list={["mt-2", tone === "ink" ? "text-[color:var(--color-paper)]" : ""]}>
+            {title}
+          </h2>
+        )}
+        {lede && (
+          <p class:list={[
+            "mt-4 max-w-2xl text-lg leading-relaxed",
+            tone === "ink" ? "text-[color:var(--color-paper-warm)]" : "text-[color:var(--color-ink-soft)]"
+          ]}>
+            {lede}
+          </p>
+        )}
+      </header>
+    )}
+    <slot />
+  </div>
+</section>

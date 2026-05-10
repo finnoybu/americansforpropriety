@@ -1,0 +1,125 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+import IssueCard from "~/components/IssueCard.astro";
+import PostCard from "~/components/PostCard.astro";
+import ActionBanner from "~/components/ActionBanner.astro";
+import Hero from "~/components/Hero.astro";
+import StatsBand from "~/components/StatsBand.astro";
+import { site, homepageIssueOrder } from "~/config/site";
+
+const allIssues = await getCollection("issues");
+const issues = homepageIssueOrder
+  .map((slug) => allIssues.find((i) => i.id === slug))
+  .filter((i): i is NonNullable<typeof i> => Boolean(i));
+
+const briefs = (await getCollection("briefs", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 4);
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 3);
+---
+<BaseLayout title={undefined} description={site.mission}>
+  <!-- HERO -->
+  <Hero imageStyle="bleed">
+    <p class="eyebrow">A civic project · Est. 2026</p>
+    <h1 class="mt-4 text-balance">
+      Power should answer to <span class="text-[color:var(--color-coral-deep)]">people.</span>
+      Policy should answer to <span class="text-[color:var(--color-coral-deep)]">facts.</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--color-ink-soft)] md:text-xl">
+      {site.mission}
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/issues" class="btn btn-ink">Read the issues <span aria-hidden>→</span></a>
+      <a href="/take-action" class="btn btn-primary">Take action</a>
+      <a href="/principles" class="btn btn-ghost">Our principles</a>
+    </div>
+    <img
+      slot="visual"
+      src="/hero/home-capitol.png"
+      alt="The U.S. Capitol at sunrise."
+      class="h-full w-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </Hero>
+
+  <!-- STATS BAND -->
+  <StatsBand
+    items={[
+      { value: "14", label: "issue clusters" },
+      { value: "31", label: "sourced policy briefs" },
+      { value: "26", label: "letter templates", emphasis: true },
+      { value: "0", label: "trackers, ads, or harvested data" },
+    ]}
+  />
+
+  <!-- ISSUES -->
+  <Section
+    eyebrow="Where we're focused"
+    title="The fights worth picking, the ones we can win."
+    lede="Six issue clusters where public policy has drifted from the public good. We track the legislation, surface the stakes, and give people a way to weigh in."
+  >
+    <div class="grid-issues">
+      {issues.map((issue) => (
+        <IssueCard
+          href={`/issues/${issue.id}`}
+          eyebrow={issue.data.eyebrow}
+          title={issue.data.short}
+          summary={issue.data.summary}
+          accent={issue.data.accent}
+        />
+      ))}
+    </div>
+    <p class="mt-10">
+      <a href="/issues" class="btn btn-ghost">See all issues <span aria-hidden>→</span></a>
+    </p>
+  </Section>
+
+  <!-- LATEST BRIEFS -->
+  <Section eyebrow="Latest research" title="Briefs" tone="warm">
+    <div>
+      {briefs.length === 0 && (
+        <p class="text-[color:var(--color-ink-muted)]">No briefs published yet.</p>
+      )}
+      {briefs.map((b) => (
+        <PostCard
+          href={`/briefs/${b.id}`}
+          eyebrow={`Brief · ${b.data.issue.replace(/-/g, " ")}`}
+          title={b.data.title}
+          summary={b.data.summary}
+          date={b.data.publishedAt}
+        />
+      ))}
+    </div>
+    <p class="mt-8">
+      <a href="/briefs" class="btn btn-ghost">All briefs <span aria-hidden>→</span></a>
+    </p>
+  </Section>
+
+  <!-- ACTION BANNER -->
+  <ActionBanner />
+
+  <!-- LATEST NEWS -->
+  <Section eyebrow="Field notes" title="Recent posts">
+    {posts.length === 0 && (
+      <p class="text-[color:var(--color-ink-muted)]">First posts coming soon.</p>
+    )}
+    {posts.map((p) => (
+      <PostCard
+        href={`/news/${p.id}`}
+        eyebrow="Post"
+        title={p.data.title}
+        summary={p.data.summary}
+        date={p.data.publishedAt}
+      />
+    ))}
+    <p class="mt-8">
+      <a href="/news" class="btn btn-ghost">All posts <span aria-hidden>→</span></a>
+    </p>
+  </Section>
+</BaseLayout>

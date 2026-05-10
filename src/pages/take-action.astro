@@ -1,0 +1,75 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+import Hero from "~/components/Hero.astro";
+
+const actions = await getCollection("actions");
+const letters = await getCollection("letters");
+const urgencyOrder = { high: 0, medium: 1, low: 2 } as const;
+const sortedActions = [...actions].sort(
+  (a, b) => urgencyOrder[a.data.urgency] - urgencyOrder[b.data.urgency],
+);
+---
+<BaseLayout title="Take action" description="A short list of things you can do this week.">
+  <Hero tone="ink" imageStyle="bleed">
+    <p class="eyebrow text-[color:var(--color-gold-soft)]">Take action</p>
+    <h1 class="mt-3 max-w-4xl text-balance text-[color:var(--color-paper)]">
+      A short list. Pick three things you can actually do this week.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--color-paper-warm)]">
+      We don't run mass-email pipelines or auto-generated outreach. The actions below are small, real, and worth your time.
+    </p>
+    <img
+      slot="visual"
+      src="/hero/take-action-lincoln.png"
+      alt="The Lincoln Memorial interior."
+      class="h-full w-full object-cover"
+      loading="eager"
+    />
+  </Hero>
+
+  <Section eyebrow="Pick Three" title="Active asks">
+    <ul class="space-y-6">
+      {sortedActions.map((a) => (
+        <li class="grid gap-4 border-t border-[color:var(--color-rule)] pt-6 md:grid-cols-12">
+          <div class="md:col-span-2">
+            <span class:list={[
+              "inline-block rounded-sm px-2 py-1 text-xs font-semibold uppercase tracking-wider",
+              a.data.urgency === "high"
+                ? "bg-[color:var(--color-coral)] text-[color:var(--color-paper)]"
+                : a.data.urgency === "medium"
+                  ? "bg-[color:var(--color-gold-soft)] text-[color:var(--color-ink)]"
+                  : "bg-[color:var(--color-rule)] text-[color:var(--color-ink)]"
+            ]}>
+              {a.data.urgency}
+            </span>
+          </div>
+          <div class="md:col-span-7">
+            <h3 class="text-xl font-semibold leading-snug">{a.data.title}</h3>
+            <p class="mt-2 text-[color:var(--color-ink-muted)]">{a.data.summary}</p>
+          </div>
+          <div class="md:col-span-3 md:justify-self-end">
+            <a href={a.data.href} class="btn btn-primary">{a.data.cta}</a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section eyebrow="Letter templates" title="Ready to send" tone="warm">
+    <ul class="grid gap-6 md:grid-cols-2">
+      {letters.map((l) => (
+        <li class="card-issue">
+          <p class="eyebrow">{l.data.audience}</p>
+          <h3 class="mt-2 text-lg font-semibold leading-snug">
+            <a href={`/letters/${l.id}`} class="no-underline hover:text-[color:var(--color-coral-deep)]">
+              {l.data.title}
+            </a>
+          </h3>
+          <p class="mt-3 text-sm text-[color:var(--color-ink-muted)]">{l.data.summary}</p>
+        </li>
+      ))}
+    </ul>
+  </Section>
+</BaseLayout>

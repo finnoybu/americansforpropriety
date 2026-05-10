@@ -1,0 +1,164 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getSupabaseService } from "~/lib/supabase";
+import { getEnv, isAdminEmail } from "~/lib/env";
+
+export const prerender = false;
+
+if (!Astro.locals.user) return Astro.redirect("/signin?next=/admin/briefs");
+const env = getEnv(Astro);
+if (!isAdminEmail(Astro.locals.user.email, env)) {
+  return new Response("Forbidden", { status: 403 });
+}
+
+const id = Astro.params.id;
+const supabase = getSupabaseService(Astro);
+const { data: brief } = await supabase
+  .from("ai_briefs")
+  .select("*")
+  .eq("id", id!)
+  .maybeSingle();
+
+if (!brief) return new Response("Not found", { status: 404 });
+
+const ISSUES = [
+  ["economy-and-tax-fairness", "Economy & tax fairness"],
+  ["labor-and-wages", "Labor & wages"],
+  ["healthcare", "Healthcare"],
+  ["climate-and-energy", "Climate & energy"],
+  ["democracy-and-voting", "Democracy & voting"],
+  ["civil-rights-and-immigration", "Civil rights & immigration"],
+] as const;
+---
+<BaseLayout title={`Edit · ${brief.title}`}>
+  <section class="container-page max-w-4xl py-12 md:py-16">
+    <p class="eyebrow">
+      <a href="/admin/briefs" class="underline">← All briefs</a> · {brief.status}
+    </p>
+    <h1 class="mt-2">Edit brief</h1>
+    <p class="mt-2 text-sm text-[color:var(--color-ink-muted)]">
+      Generated {new Date(brief.created_at).toLocaleString("en-US")} · {brief.model}
+      {brief.used_web_search && " · with web search"}
+    </p>
+
+    <form id="edit-form" class="mt-8 space-y-5" data-id={brief.id}>
+      <label class="block">
+        <span class="eyebrow">Title</span>
+        <input
+          name="title"
+          value={brief.title}
+          maxlength="200"
+          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 text-lg"
+        />
+      </label>
+
+      <label class="block">
+        <span class="eyebrow">Slug</span>
+        <input
+          name="slug"
+          value={brief.slug}
+          pattern="[a-z0-9-]+"
+          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2 font-mono"
+        />
+      </label>
+
+      <label class="block">
+        <span class="eyebrow">Summary</span>
+        <textarea
+          name="summary"
+          rows="2"
+          maxlength="400"
+          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2"
+        >{brief.summary}</textarea>
+      </label>
+
+      <label class="block">
+        <span class="eyebrow">Issue</span>
+        <select name="issue" class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2">
+          {ISSUES.map(([slug, label]) => (
+            <option value={slug} selected={slug === brief.issue}>{label}</option>
+          ))}
+        </select>
+      </label>
+
+      <label class="block">
+        <span class="eyebrow">Body (markdown)</span>
+        <textarea
+          name="body"
+          rows="32"
+          class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper-warm)] p-4 font-mono text-sm leading-relaxed"
+        >{brief.body}</textarea>
+      </label>
+
+      <div class="flex flex-wrap items-center gap-3 border-t border-[color:var(--color-rule)] pt-4">
+        <button type="button" data-action="save" class="btn btn-ghost">Save draft</button>
+        <button type="button" data-action="publish" class="btn btn-primary">
+          {brief.status === "published" ? "Update published" : "Publish"}
+        </button>
+        {brief.status === "published" && (
+          <button type="button" data-action="unpublish" class="btn btn-ghost">Unpublish</button>
+        )}
+        <button type="button" data-action="archive" class="btn btn-ghost">Archive</button>
+        <button type="button" data-action="delete" class="ml-auto text-sm text-[color:var(--color-coral-deep)] underline">Delete permanently</button>
+        <span id="status" class="text-sm text-[color:var(--color-ink-muted)]"></span>
+      </div>
+    </form>
+
+    {brief.status === "published" && (
+      <p class="mt-8 border-t border-[color:var(--color-rule)] pt-6 text-sm text-[color:var(--color-ink-muted)]">
+        Live at <a class="underline" href={`/briefs/${brief.slug}`}>/briefs/{brief.slug}</a>
+      </p>
+    )}
+  </section>
+
+  <script is:inline define:vars={{ briefId: brief.id }}>
+    const form = document.getElementById("edit-form");
+    const status = document.getElementById("status");
+
+    function payload(extra = {}) {
+      const fd = new FormData(form);
+      return {
+        title: fd.get("title"),
+        slug: fd.get("slug"),
+        summary: fd.get("summary"),
+        issue: fd.get("issue"),
+        body: fd.get("body"),
+        ...extra,
+      };
+    }
+
+    async function send(method, body) {
+      const opts = { method, headers: { "content-type": "application/json" } };
+      if (body) opts.body = JSON.stringify(body);
+      return fetch(`/api/admin/briefs/${briefId}`, opts);
+    }
+
+    form?.addEventListener("click", async (e) => {
+      const action = e.target?.dataset?.action;
+      if (!action) return;
+      e.preventDefault();
+      status.textContent = "Saving...";
+      let res;
+      if (action === "save") res = await send("PATCH", payload({ status: "draft" }));
+      else if (action === "publish") res = await send("PATCH", payload({ status: "published" }));
+      else if (action === "unpublish") res = await send("PATCH", payload({ status: "draft" }));
+      else if (action === "archive") res = await send("PATCH", payload({ status: "archived" }));
+      else if (action === "delete") {
+        if (!confirm("Delete this brief permanently?")) return;
+        res = await send("DELETE");
+      }
+      const data = await res?.json().catch(() => ({}));
+      if (!res?.ok) {
+        status.textContent = data.message || data.error || "Failed.";
+        return;
+      }
+      if (action === "delete") {
+        status.textContent = "Deleted.";
+        location.href = "/admin/briefs";
+        return;
+      }
+      status.textContent = action === "publish" ? "Published." : "Saved.";
+      if (action === "publish") setTimeout(() => location.reload(), 800);
+    });
+  </script>
+</BaseLayout>

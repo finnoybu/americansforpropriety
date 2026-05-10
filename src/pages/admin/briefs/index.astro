@@ -1,0 +1,151 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getSupabaseService } from "~/lib/supabase";
+import { getEnv, isAdminEmail } from "~/lib/env";
+
+export const prerender = false;
+
+if (!Astro.locals.user) return Astro.redirect("/signin?next=/admin/briefs");
+const env = getEnv(Astro);
+if (!isAdminEmail(Astro.locals.user.email, env)) {
+  return new Response("Forbidden", { status: 403 });
+}
+
+const supabase = getSupabaseService(Astro);
+const { data: briefs } = await supabase
+  .from("ai_briefs")
+  .select("id, slug, title, summary, issue, status, created_at, published_at, model")
+  .order("created_at", { ascending: false })
+  .limit(100);
+
+const ISSUES = [
+  ["economy-and-tax-fairness", "Economy & tax fairness"],
+  ["labor-and-wages", "Labor & wages"],
+  ["healthcare", "Healthcare"],
+  ["climate-and-energy", "Climate & energy"],
+  ["democracy-and-voting", "Democracy & voting"],
+  ["civil-rights-and-immigration", "Civil rights & immigration"],
+] as const;
+---
+<BaseLayout title="Admin · Briefs">
+  <section class="container-page py-12 md:py-16">
+    <p class="eyebrow">Admin · AI brief drafts</p>
+    <h1 class="mt-2">Brief workshop</h1>
+    <p class="mt-3 max-w-2xl text-[color:var(--color-ink-muted)]">
+      Drafts produced by the brief generator. Edit, then publish to the public site. Drafts and archived briefs are not visible to visitors.
+    </p>
+
+    <section class="mt-10 border-t border-[color:var(--color-rule)] pt-8">
+      <h2 class="text-xl">Draft a new brief</h2>
+      <form id="draft-form" class="mt-4 grid gap-4 md:grid-cols-12">
+        <label class="md:col-span-3 block">
+          <span class="eyebrow">Issue</span>
+          <select name="issue" required class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2">
+            {ISSUES.map(([slug, label]) => <option value={slug}>{label}</option>)}
+          </select>
+        </label>
+        <label class="md:col-span-7 block">
+          <span class="eyebrow">Topic / news hook</span>
+          <input
+            required
+            type="text"
+            name="topic"
+            class="mt-2 w-full border border-[color:var(--color-rule)] bg-[color:var(--color-paper)] px-3 py-2"
+            placeholder="e.g., this week's rulings on the methane fee, or recent action on the PRO Act"
+          />
+        </label>
+        <label class="md:col-span-2 flex items-end gap-2 pb-2">
+          <input type="checkbox" name="enable_web_search" checked class="h-4 w-4 accent-[color:var(--color-coral)]" />
+          <span class="text-sm">Web search</span>
+        </label>
+        <div class="md:col-span-12">
+          <button type="submit" class="btn btn-ink">
+            <span class="default-label">Draft brief</span>
+            <span class="loading-label hidden">Drafting (this can take 30-90s)...</span>
+          </button>
+          <span id="draft-status" class="ml-3 text-sm text-[color:var(--color-ink-muted)]"></span>
+        </div>
+      </form>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-xl">Drafts and published briefs</h2>
+      {(briefs?.length ?? 0) === 0 && (
+        <p class="mt-4 text-sm text-[color:var(--color-ink-muted)]">No briefs yet. Draft one above.</p>
+      )}
+      {briefs && briefs.length > 0 && (
+        <table class="mt-6 w-full border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b-2 border-[color:var(--color-rule)]">
+              <th class="py-2 pr-4 font-semibold">Title</th>
+              <th class="py-2 pr-4 font-semibold">Issue</th>
+              <th class="py-2 pr-4 font-semibold">Status</th>
+              <th class="py-2 pr-4 font-semibold">Created</th>
+              <th class="py-2 pr-4 font-semibold"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {briefs.map((b: any) => (
+              <tr class="border-b border-[color:var(--color-rule)] align-top">
+                <td class="py-3 pr-4">
+                  <a href={`/admin/briefs/${b.id}`} class="font-semibold underline">{b.title}</a>
+                  <p class="text-xs text-[color:var(--color-ink-muted)]">{b.summary}</p>
+                </td>
+                <td class="py-3 pr-4">{b.issue.replace(/-/g, " ")}</td>
+                <td class="py-3 pr-4">
+                  <span class:list={[
+                    "inline-block rounded-sm px-2 py-0.5 text-xs font-semibold uppercase",
+                    b.status === "published" ? "bg-[color:var(--color-leaf)] text-[color:var(--color-paper)]" :
+                    b.status === "archived" ? "bg-[color:var(--color-rule)]" :
+                    "bg-[color:var(--color-gold-soft)] text-[color:var(--color-ink)]"
+                  ]}>{b.status}</span>
+                </td>
+                <td class="py-3 pr-4 text-[color:var(--color-ink-muted)]">
+                  {new Date(b.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                </td>
+                <td class="py-3 pr-4 text-right">
+                  <a href={`/admin/briefs/${b.id}`} class="text-sm font-semibold underline">Edit</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </section>
+  </section>
+
+  <script is:inline>
+    const form = document.getElementById("draft-form");
+    const status = document.getElementById("draft-status");
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const body = {
+        issue: fd.get("issue"),
+        topic: fd.get("topic"),
+        enable_web_search: fd.get("enable_web_search") === "on",
+      };
+      form.querySelector(".default-label")?.classList.add("hidden");
+      form.querySelector(".loading-label")?.classList.remove("hidden");
+      status.textContent = "Drafting...";
+
+      try {
+        const res = await fetch("/api/admin/briefs/draft", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          status.textContent = data.message || data.error || "Draft failed.";
+          return;
+        }
+        status.textContent = "Draft created.";
+        location.href = `/admin/briefs/${data.brief.id}`;
+      } finally {
+        form.querySelector(".default-label")?.classList.remove("hidden");
+        form.querySelector(".loading-label")?.classList.add("hidden");
+      }
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,71 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+import Hero from "~/components/Hero.astro";
+import { site } from "~/config/site";
+---
+<BaseLayout title="About" description={site.mission}>
+  <Hero tone="warm" imageStyle="bleed">
+    <p class="eyebrow">About</p>
+    <h1 class="mt-3 max-w-3xl text-balance">A civic project, not a campaign.</h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--color-ink-soft)]">
+      {site.mission}
+    </p>
+    <img
+      slot="visual"
+      src="/hero/about-washington-monument.png"
+      alt="The Washington Monument and reflecting pool."
+      class="h-full w-full object-cover object-bottom"
+      loading="eager"
+    />
+  </Hero>
+
+  <Section>
+    <div class="prose-editorial">
+      <h2>What we do</h2>
+      <p>
+        Three things: research, drafting, and record-keeping.
+      </p>
+      <ul>
+        <li><strong>Research.</strong> Short, sourced briefs on policy questions in front of US legislators. Written for constituents.</li>
+        <li><strong>Drafting.</strong> Letter and testimony templates that constituents can personalize and send. Designed to read like a person, not a campaign.</li>
+        <li><strong>Record-keeping.</strong> Public summaries of what representatives are doing with their votes, hearings, and rulemaking authority.</li>
+      </ul>
+
+      <h2>Visitors vs. members</h2>
+      <p>
+        We treat anonymous visitors and signed-in members differently — on purpose.
+      </p>
+      <ul>
+        <li>
+          <strong>Visitors</strong> get the static research, briefs, and letter templates with no tracking, no analytics that identify individuals, no cookies beyond what's needed to load a page, and no email forms.
+        </li>
+        <li>
+          <strong>Members</strong> opt into a richer toolkit: rep lookup by ZIP, AI-drafted letters tailored to a specific representative and topic, and a private action log. Members give us their email and ZIP. We store the district, the drafts they generate, and the actions they log. Nothing else.
+        </li>
+      </ul>
+
+      <h2>What we don't do — for either</h2>
+      <ul>
+        <li>We don't run mass-email blasts, robocalls, or signature drives.</li>
+        <li>We don't send messages on a member's behalf. We generate drafts; members read, edit, and send them.</li>
+        <li>We don't sell, rent, or share member data with anyone, ever.</li>
+        <li>We don't accept anonymous money. Every dollar that funds this project is publicly disclosed.</li>
+        <li>We don't pretend to be neutral on the questions of fact our briefs document. We do try to be fair to the strongest version of opposing views.</li>
+      </ul>
+
+      <h2>Where we sit</h2>
+      <p>
+        On the current US political map, our research and policy positions land more often on the left than on the right. We don't pretend otherwise. We also don't think a republic is well served by treating every policy question as a tribal question. The form of our work — small, public, low-key, allergic to mass mobilization tactics — is deliberate.
+      </p>
+      <p>
+        The name is deliberate too. <em>Propriety</em> is what was edited out when American politics became a market for private fortune. It means the kind of restraint that allows public institutions to function — power that knows its limits, policy that respects its obligations, conduct that recognizes what is owed to a republic.
+      </p>
+
+      <h2>How to reach us</h2>
+      <p>
+        We're a small team. We read mail at <code>hello@americansforpropriety.org</code>. We respond when we can.
+      </p>
+    </div>
+  </Section>
+</BaseLayout>

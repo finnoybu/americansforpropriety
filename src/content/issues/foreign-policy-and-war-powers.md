@@ -1,0 +1,152 @@
+---
+title: "Foreign Policy & War Powers"
+short: "Foreign policy & war powers"
+eyebrow: "Issue area"
+summary: "Congressional authority over war restored; military spending subject to real oversight; arms transfers transparent; diplomacy treated as a serious tool."
+accent: "ink"
+order: 10
+headline: "Wars require authorization. Spending requires scrutiny. Diplomacy requires investment."
+stance: "We support repeal of outdated AUMFs, modernization of the War Powers Resolution, meaningful Pentagon audit and reform, transparent arms-transfer policy, and a foreign policy that uses diplomacy and development as primary tools rather than afterthoughts."
+pillars:
+  - title: "Restore congressional war authority"
+    body: "Repeal stale AUMFs (1991, 2001, 2002). Modernize the War Powers Resolution. End the executive-only war pattern that has continued for decades."
+  - title: "Pentagon accountability"
+    body: "The Department of Defense has never passed a clean financial audit. Subject the largest discretionary line item to real oversight — accounting standards, performance metrics, contractor accountability."
+  - title: "Arms transfer transparency"
+    body: "Real congressional review of major arms sales. Conditions on transfers to governments using them against civilians or their own people. Public disclosure of end-use violations."
+  - title: "Invest in diplomacy"
+    body: "State Department staffing and funding restored. USAID protected. Climate, pandemic, and humanitarian work treated as core diplomacy, not a discretionary line item."
+  - title: "Constrain covert action"
+    body: "Real congressional oversight of intelligence-community covert action. Sunset provisions on authorities that lack public justification."
+facts:
+  - "The 2001 AUMF, passed in the immediate aftermath of 9/11, has been used by four administrations to justify military action in over a dozen countries far beyond its original scope."
+  - "The Department of Defense has never produced a clean financial audit, despite the requirement having been law since 1990."
+  - "US arms transfers approved each year typically exceed $100B, with disclosure to the public usually limited to top-line dollar figures rather than recipient or end-use detail."
+  - "The State Department's budget is roughly 5% of the Pentagon's; foreign assistance is below 1% of the federal budget despite repeated polling showing voters believe it's much larger."
+  - "The US has been continuously at war or engaged in significant military operations for the entire post-Cold War period."
+  - "Congress has not declared war since 1942. Subsequent military actions have proceeded under AUMFs, the War Powers Resolution's narrow exceptions, or unilateral executive action."
+  - "Several recent Republican and Democratic congressional efforts to repeal stale AUMFs have produced bipartisan majorities but have not yet enacted full repeal."
+subtopics:
+  - slug: "war-powers"
+    title: "War powers"
+    summary: "How four administrations stretched a 9/11 authorization across two decades and many countries."
+    body: "The Constitution assigns Congress the authority to declare war and the President the role of Commander in Chief. The 1973 War Powers Resolution attempted to restore congressional authority after the Vietnam-era expansion of executive war-making. In practice, every administration since has treated the WPR as a notification requirement rather than a constraint, and Congress has rarely tested it. The 2001 Authorization for Use of Military Force, passed three days after 9/11, authorized force against those responsible for the attacks and those who 'harbored' them. Four administrations have stretched it to authorize force against ISIS, AQAP in Yemen, al-Shabaab in Somalia, and various other groups across more than a dozen countries — many of which did not exist in 2001 and had no operational connection to the original authorization. The 2002 Iraq AUMF and the 1991 Gulf War authorization remain technically in force despite the operations they authorized having ended decades ago. Repeal proposals for these stale authorizations have produced bipartisan majorities in both chambers in recent sessions, with broad agreement that authorities must be matched to current operations and time-limited. Modernization of the War Powers Resolution itself — clarifying the introduction-of-forces threshold, requiring affirmative congressional approval for sustained operations, ending the rolling-extension pattern — is a longer-running fight."
+  - slug: "pentagon-accountability"
+    title: "Pentagon accountability"
+    summary: "What it means that the largest discretionary line item has never passed an audit."
+    body: "The Department of Defense has been required to produce a clean financial audit since the Chief Financial Officers Act of 1990. It has never done so. Annual audit attempts since 2018 have produced repeated failures, with auditors unable to verify trillions of dollars in assets and transactions. The pattern has implications well beyond accounting: weapons-system cost overruns are pervasive, contractor accountability is weak, and Congress cannot meaningfully oversee what it funds. Reform options span scales. Substantive cost reform: full-scope audits with consequences for failure, performance-based budgeting that ties continued funding to demonstrated outcomes, restoration of the comptroller's office to meaningful authority. Contractor accountability: stricter rules on cost-plus contracts, real penalties for performance failures, executive accountability for major program failures, expanded use of fixed-price contracts where feasible. Strategic reform: smaller, more capable forces oriented to actual current threats rather than legacy postures. The fiscal stakes are large — Pentagon spending is roughly half of the federal discretionary budget. Even modest efficiency gains free substantial resources for other public priorities."
+  - slug: "arms-transfers"
+    title: "Arms transfers and end-use"
+    summary: "What's actually subject to congressional review, and what isn't."
+    body: "The Arms Export Control Act creates a tiered review process for foreign military sales: notifications, holds by the chairs and ranking members of the relevant committees, and floor procedures for the largest transfers. In practice, the system has eroded. Most transfers proceed without meaningful congressional examination. Notifications often arrive after key political windows have closed. End-use monitoring — the requirement that recipient governments use US weapons consistent with stated purposes — is structurally weak; documented violations rarely produce halts in subsequent transfers. The substantive policy options: stricter Leahy Law enforcement (the existing prohibition on transfers to units credibly accused of gross human rights violations), modernization of the AECA review process, public disclosure of recipient and end-use information that's currently classified, conditions on transfers to specific governments based on humanitarian and strategic concerns, and Senate-confirmed accountability for the State Department officials who certify transfers."
+  - slug: "diplomacy-and-development"
+    title: "Diplomacy and development"
+    summary: "Why the State Department and USAID are perpetually under-resourced for the work they're asked to do."
+    body: "The State Department's annual budget is roughly 5% of the Pentagon's. USAID's budget is below 1% of the federal budget. Both agencies are routinely staffed below authorized levels, with hiring freezes, attrition, and political appointments compounding workforce gaps. The asymmetry has consequences. When diplomacy fails, the alternative is often military action that costs orders of magnitude more. When development fails, the alternative includes humanitarian crises, refugee flows, and conflict that subsequent intervention has to address. Reform options: substantial Foreign Service hiring and retention investment, USAID protection from the budget pressure that has hollowed it out over recent administrations, climate diplomacy and pandemic preparedness as core State Department functions rather than discretionary add-ons, multilateral institution funding (UN, WHO, IMF) defended against repeated political attacks, and integration of public diplomacy and information operations into a coherent strategy rather than fragmented across multiple agencies."
+  - slug: "covert-action-oversight"
+    title: "Covert action oversight"
+    summary: "What the intelligence committees can and can't see, and what reforms are on the table."
+    body: "Covert action — operations the US government conducts without acknowledging — is governed by the National Security Act and a network of presidential findings, briefings, and committee notifications. The system was reformed substantially after the Church Committee revelations of the 1970s, but the post-9/11 expansion of intelligence authorities and the increasing use of military and intelligence community capabilities for what would historically have been covert activity have outpaced the oversight infrastructure. The substantive reforms: real-time notification requirements (rather than after-the-fact briefings), expanded Gang-of-Eight access to operational details, sunset provisions on authorities that lack public justification, declassification of major findings after specified periods, and limitations on the use of military forces in covert capacities. The political constraint is bipartisan: members of both parties have generally been reluctant to actively challenge intelligence community equities. Civil society pressure and limited but persistent congressional minority work have produced incremental reforms that aggregate over time."
+keyBills:
+  - name: "AUMF Repeal Act (2001 / 2002)"
+    chamber: "federal"
+    summary: "Repeal of the 2001 and 2002 Authorizations for Use of Military Force; replacement framework for current operations."
+    status: "Bipartisan majorities in both chambers in recent sessions; partial enactment (2002 AUMF) advanced; 2001 still pending"
+  - name: "War Powers Resolution Modernization Act"
+    chamber: "federal"
+    summary: "Strengthens the War Powers Resolution: expedited withdrawal procedures, clearer hostilities definitions, sunset provisions on use of force."
+    status: "Reintroduced multiple sessions"
+  - name: "DOD Audit Transparency and Accountability Act"
+    chamber: "federal"
+    summary: "Strengthens DOD audit requirements with consequences for repeated failures; expands public reporting."
+    status: "In committee"
+  - name: "Foreign Aid Accountability Act / Leahy Law strengthening"
+    chamber: "federal"
+    summary: "Stricter enforcement of human-rights conditions on military assistance; expanded public disclosure of vetting decisions."
+    status: "Periodic enactments in NDAA and appropriations"
+  - name: "Yemen War Powers Resolution"
+    chamber: "federal"
+    summary: "Periodic resolutions to direct removal of US forces from hostilities in Yemen-related operations."
+    status: "Multiple votes; 2019 version vetoed; subsequent versions not advanced"
+  - name: "Restoring Congressional Authority Act"
+    chamber: "federal"
+    summary: "Multiple proposals to restore the legislative branch's role in war powers, treaty-making, and major arms transfers."
+    status: "In committee"
+  - name: "State Department Authorization Act"
+    chamber: "federal"
+    summary: "Periodic State Department authorization legislation; recent versions have included Foreign Service reform and personnel modernization."
+    status: "Enacted periodically as part of NDAA-adjacent vehicles"
+glossary:
+  - term: "AUMF (Authorization for Use of Military Force)"
+    definition: "Statutory authorization from Congress to the executive to use military force. Distinct from a formal declaration of war (last issued in 1942). The 2001 and 2002 AUMFs have been stretched far beyond their original scope."
+  - term: "War Powers Resolution"
+    definition: "1973 federal law requiring the President to consult with Congress before introducing US forces into hostilities and to withdraw them within 60 days unless Congress authorizes continuation. In practice, treated as a notification requirement."
+  - term: "Foreign Military Sales (FMS)"
+    definition: "Government-to-government arms transfers, processed through DOD with State Department approval. Subject to congressional notification and potential hold under the Arms Export Control Act."
+  - term: "Direct Commercial Sales (DCS)"
+    definition: "Arms transfers from US companies directly to foreign governments or entities, with State Department licensing. Subject to lighter congressional review than FMS."
+  - term: "Leahy Law"
+    definition: "Federal prohibition on military assistance and training for foreign units credibly accused of gross human rights violations. Implemented through State Department and DOD vetting processes."
+  - term: "Title 10 / Title 50"
+    definition: "Title 10 of US Code governs the armed forces (Pentagon). Title 50 governs the intelligence community. Operations under Title 50 have less stringent congressional oversight; the post-9/11 trend has been a blurring of the line."
+  - term: "Gang of Eight"
+    definition: "The eight congressional leaders briefed on the most sensitive intelligence operations: the Speaker, House Minority Leader, Senate Majority and Minority Leaders, and the chairs and ranking members of the Intelligence Committees."
+  - term: "Continuing Resolution / NDAA"
+    definition: "The National Defense Authorization Act is the annual policy bill for DOD; appropriations are separate. NDAA is one of the most reliable bipartisan vehicles in Congress and is often used for adjacent foreign-policy reforms."
+  - term: "USAID"
+    definition: "United States Agency for International Development, the primary federal foreign-assistance agency. Independently established but historically integrated with State Department under various administrative arrangements."
+  - term: "ITAR / EAR"
+    definition: "International Traffic in Arms Regulations and Export Administration Regulations. The two main US export-control regimes, governing weapons (ITAR) and dual-use goods (EAR)."
+whoAffected: |
+  US foreign policy and military spending affect populations both within and outside the United States in patterns that don't always align with the political conversation around them.
+
+  US service members and their families bear the immediate cost of military deployments and operations. Veterans returning from extended deployments face documented health, mental-health, and economic consequences that intersect the Veterans issue cluster directly. National Guard and Reserve members, mobilized at much higher rates than in earlier eras, face particular family and employment disruption.
+
+  Civilians in countries where US military operations occur — Yemen, Somalia, Iraq, Syria, Pakistan, others — bear the direct human cost. Civilian casualty data has improved with each administration's reforms but remains substantially incomplete. End-use violations of US-supplied weapons have produced civilian harm that US arms-transfer policy has been slow to address.
+
+  US taxpayers bear the fiscal cost of Pentagon spending and the opportunity cost of public dollars not invested in domestic priorities. Pentagon spending is roughly half of federal discretionary spending; even modest efficiency gains free substantial resources.
+
+  Diplomatic and development underinvestment falls heaviest on populations whose interests would be served by US engagement that prioritizes diplomacy over military tools. Climate-vulnerable nations, populations in conflict-adjacent regions, communities at risk of mass atrocities all benefit when the State Department is funded and staffed adequately for the work it's asked to do.
+
+  The benefits of the current pattern flow to defense contractors, weapons exporters, and the political ecosystem that benefits from a permanent emergency posture. The asymmetry between concentrated benefits and diffuse costs is structural — and is the reason foreign-policy reform proceeds slowly even when bipartisan majorities support specific changes.
+timeline:
+  - date: "1942"
+    event: "Last formal congressional declaration of war (Bulgaria, Hungary, Romania)."
+  - date: "1947"
+    event: "National Security Act creates CIA, NSC, and the modern intelligence-policy infrastructure."
+  - date: "1973"
+    event: "War Powers Resolution passes over Nixon's veto."
+  - date: "1976"
+    event: "Church Committee report leads to substantial intelligence-community reforms and creation of permanent congressional oversight committees."
+  - date: "1990"
+    event: "Chief Financial Officers Act requires DOD financial audits (DOD has never produced a clean one)."
+  - date: "1991"
+    event: "Persian Gulf War AUMF (still technically in force)."
+  - date: "1997"
+    event: "Leahy Law enacted, prohibiting military assistance to units credibly accused of gross human rights violations."
+  - date: "2001"
+    event: "Post-9/11 AUMF passes; Patriot Act expands surveillance and law-enforcement authorities."
+  - date: "2002"
+    event: "Iraq War AUMF (still technically in force)."
+  - date: "2003-2011"
+    event: "Iraq War. Subsequent reviews substantially question original justification."
+  - date: "2014"
+    event: "Coalition operations against ISIS begin; executive branch claims authority under 2001 AUMF despite ISIS's distinct origin."
+  - date: "2018-present"
+    event: "Annual DOD audits begin; consistent failures."
+  - date: "2019"
+    event: "Yemen War Powers Resolution passes both chambers; vetoed by Trump."
+  - date: "2021-2024"
+    event: "Repeated bipartisan AUMF repeal efforts; 2002 AUMF repeal advances; 2001 AUMF repeal not yet enacted."
+  - date: "2025"
+    event: "Continued state-of-the-permanent-emergency, ongoing AUMF and Pentagon-audit fights, repeated arms-transfer review failures."
+relatedBriefs: []
+relatedLetters: []
+relatedActions: []
+---
+
+Foreign policy is not a side issue for a domestic-focused project. It is shaped by, and shapes, almost every other public priority. Pentagon spending of roughly $850 billion annually is half the federal discretionary budget — half the resource pool from which housing, healthcare, education, and climate investment must come. Wars and military operations, when they occur, reshape national politics for decades. Arms transfers create alliances and grievances that outlast the administrations that approved them.
+
+The five sub-topics below — war powers, Pentagon accountability, arms transfers, diplomacy and development, and covert action oversight — are the load-bearing fights. The first restores congressional authority that has been ceded to the executive over half a century. The second subjects the largest line item in federal spending to the kind of scrutiny everything else gets. The third makes meaningful the existing statutory framework for arms-transfer review. The fourth invests in the alternative to military force. The fifth puts a constitutional check on activities the executive branch is otherwise inclined to expand.
+
+What unites these is a basic premise: a republic at war, or in a permanent posture of war, is harder to keep democratic. The more decisions move from public deliberation to executive discretion, the less the public's role in foreign policy can function as the consent of the governed. The work of restoration is unromantic, slow, and bipartisan in its most successful moments. We try to support the people doing it.

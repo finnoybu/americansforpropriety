@@ -1,0 +1,125 @@
+---
+title: "Economy & Tax Fairness"
+short: "Economy & tax fairness"
+eyebrow: "Issue area"
+summary: "An economy where productivity gains lift wages, where corporations pay their share, and where concentrated wealth doesn't translate into concentrated political power."
+accent: "coral"
+order: 1
+headline: "An economy that works for the people who actually run it."
+stance: "Tax codes, antitrust enforcement, and corporate governance rules are public choices, not natural laws. We support tax fairness, vigorous antitrust, and rules that route productivity gains to the workers who produce them."
+pillars:
+  - title: "Progressive taxation"
+    body: "Reverse decades of upward redistribution by restoring meaningful taxation of high incomes, capital gains, and inheritances over $10M."
+  - title: "Real antitrust"
+    body: "Break up monopolies in tech, agriculture, and healthcare. Concentrated markets concentrate political power."
+  - title: "Public investment"
+    body: "Direct public capital toward housing, transit, care infrastructure, and clean energy — not subsidies for incumbent rentiers."
+  - title: "Corporate governance"
+    body: "Workers on boards. Limits on stock buybacks. Disclosure of effective tax rates and political spending."
+  - title: "Strong public goods"
+    body: "Universal pre-K, paid family leave, child tax credits indexed to cost of living. The basic infrastructure of a modern economy."
+facts:
+  - "The top 1% of US households now hold more wealth than the bottom 90% combined."
+  - "Corporate tax revenue as a share of GDP has fallen by more than half since 1965."
+  - "Productivity has risen ~80% since 1979; median hourly wages have risen ~15%."
+  - "US billionaires saw their combined wealth roughly double during the 2020-2024 period; median household wealth grew much more slowly."
+  - "Effective federal tax rates on the top 0.01% are now lower than the rates on most middle-income workers, after accounting for capital gains preferences."
+  - "Stock buybacks by S&P 500 companies have averaged over $700B annually in recent years — money not invested in wages, R&D, or capacity."
+subtopics:
+  - slug: "tax-fairness"
+    title: "Tax fairness"
+    summary: "How the federal tax code became a one-way ratchet for upward redistribution."
+    body: "The federal tax code has shifted decisively in favor of capital over labor over the past four decades. Top marginal rates have fallen, capital gains have been taxed at preferential rates, the estate tax has been steadily weakened, and corporate rates have been cut without offsetting base-broadening. The 2017 Tax Cuts and Jobs Act pushed this further: it lowered the corporate rate from 35% to 21%, opened pass-through deductions worth hundreds of billions to high-income filers, and roughly doubled the estate tax exemption. The cost was financed largely through deficits, which are then used as justification for cutting public spending. Restoring tax fairness means reversing the most regressive of these choices, taxing capital gains and wages at comparable rates, restoring meaningful estate taxation above $10M, and closing the most exploited pass-through and carried-interest loopholes."
+  - slug: "antitrust"
+    title: "Antitrust enforcement"
+    summary: "Why concentrated markets are a structural problem, not just an economic one."
+    body: "For roughly forty years, federal antitrust operated under a doctrine — the consumer-welfare standard — that effectively retired most enforcement. Mergers were waved through unless prosecutors could prove short-run consumer price effects with quantitative precision. The result is the most concentrated US economy in living memory: in healthcare, agriculture, technology, banking, and live-event ticketing, a small number of firms dominate prices, terms, and conditions of work. The 2023 federal merger guidelines reintroduced concerns about labor monopsony, vertical foreclosure, and serial acquisitions. Cases have been brought against incumbents long thought untouchable. State attorneys general now bring antitrust cases that materially shape outcomes. The work is uneven and the courts are skeptical, but the direction has shifted for the first time in a generation."
+  - slug: "corporate-governance"
+    title: "Corporate governance"
+    summary: "What the rules require companies to do — and who gets a seat at the table when they decide."
+    body: "American corporate governance is unusual among advanced economies. Workers have no formal representation on boards (unlike Germany's codetermination model). Stock buybacks, restricted before 1982, are now the largest single use of corporate cash flow. Executive pay is benchmarked against peers, ratcheting upward in a closed loop. Disclosure of political spending, climate risk, and effective tax rates is contested at every step. Reform options range from incremental (mandate political-spending disclosure, restrict buybacks during layoffs) to structural (codetermination, federal corporate charters for the largest firms). The throughline is that the rules of corporate decision-making are public choices — and the current set has produced an economy where capital flows reliably to shareholders and slowly, if at all, to workers."
+  - slug: "public-investment"
+    title: "Public investment"
+    summary: "Where public capital actually goes — and where it should."
+    body: "The Inflation Reduction Act, CHIPS Act, and Bipartisan Infrastructure Law collectively committed roughly a trillion dollars in public investment. That's the largest deliberate industrial-policy push in two generations. The question is no longer whether to deploy public capital — it's how to do it well. Strong cases for public investment: housing supply, transit, care infrastructure (childcare, eldercare), clean energy and transmission, R&D pipelines that private capital won't fund. Weaker cases: subsidies that flow to incumbents without conditions, tax credits without labor or community-benefit standards, corporate handouts dressed up as competitiveness measures. The principle: public money should buy public benefit, with explicit conditions, transparency, and clawbacks when commitments aren't met."
+keyBills:
+  - name: "Build Back Better (House-passed, 2021)"
+    chamber: "federal"
+    summary: "Original framework included child tax credit expansion, paid leave, ACA subsidy expansion, and child care funding. Broken apart in the Senate."
+    status: "Effectively dead; components survived in IRA"
+  - name: "Inflation Reduction Act (PL 117-169)"
+    chamber: "federal"
+    summary: "Corporate minimum tax (15% on book income for largest firms), 1% buyback excise tax, IRS enforcement funding, Medicare drug negotiation."
+    status: "Enacted Aug 2022. IRS funding partially clawed back since."
+  - name: "Pro-Growth Manufacturing Act (proposed)"
+    chamber: "federal"
+    summary: "Various proposals to expand the corporate minimum tax, raise the buyback excise to 4%, and condition tax credits on labor standards."
+    status: "Multiple versions in committee"
+  - name: "Wealth tax proposals (Warren / Sanders)"
+    chamber: "federal"
+    summary: "Annual tax of 2-3% on net worth above $50M, with a higher rate above $1B. Constitutional questions remain unresolved."
+    status: "Reintroduced multiple sessions; not advanced to floor"
+  - name: "State-level wealth tax bills (CA, NY, IL, WA, others)"
+    chamber: "state"
+    summary: "Several states have proposed annual wealth taxes or one-time wealth-floor taxes on residents above $50M-$100M."
+    status: "Active in committee in multiple states"
+  - name: "Stop Wall Street Looting Act"
+    chamber: "federal"
+    summary: "Reins in private equity: limits dividend recapitalizations, restores worker priority in bankruptcy, requires PE firms to share liability for portfolio company debts."
+    status: "Reintroduced; not advanced"
+glossary:
+  - term: "Marginal tax rate"
+    definition: "The rate paid on the next dollar of income, not the rate paid on every dollar. Top marginal rates affect only income above a threshold; effective rates (taxes paid divided by total income) are typically much lower."
+  - term: "Capital gains"
+    definition: "Income from selling assets — stocks, real estate, businesses — for more than you paid. Long-term capital gains are taxed at preferential rates (0%, 15%, or 20%) compared to ordinary income (up to 37%)."
+  - term: "Carried interest"
+    definition: "Compensation paid to private equity and hedge fund managers, taxed at the lower capital gains rate even though it functions like a performance fee for labor. The most exploited loophole in the federal code."
+  - term: "Pass-through entity"
+    definition: "Business structures (S-corps, LLCs, partnerships) where profits flow directly to owners' personal returns, taxed at individual rates. The 2017 TCJA created a 20% deduction for pass-through income that disproportionately benefits high-income filers."
+  - term: "Stock buyback"
+    definition: "When a company uses cash to repurchase its own shares, raising the price of remaining shares. Often used to inflate executive pay tied to share price. Restricted before 1982; now the largest single use of S&P 500 cash flow."
+  - term: "Monopsony"
+    definition: "Market with few buyers, especially of labor. A monopsonistic labor market gives employers power to suppress wages because workers have few alternatives. Distinct from monopoly, which is about few sellers."
+  - term: "Vertical integration"
+    definition: "When a company owns its supply chain — production, distribution, retail. Antitrust historically scrutinized vertical mergers because they can foreclose competitors from inputs or distribution. Doctrine softened from the 1980s onward; reinstating scrutiny is a 2023 guidelines priority."
+  - term: "Effective tax rate"
+    definition: "Total taxes paid divided by total income. Distinct from the statutory rate (the rate written in law). Wealthy filers often have effective rates well below statutory rates because most of their income is capital gains, taxed preferentially."
+whoAffected: |
+  Concentrated wealth and weak antitrust don't show up evenly. Working families pay the price first, because wage stagnation in concentrated industries means real incomes fall while costs rise. Small businesses pay it next, because they cannot match the input prices, distribution access, or political clout of dominant firms. Renters and prospective homebuyers pay it through institutional investor concentration in residential real estate. Patients, farmers, and gig workers pay it through monopsony power in healthcare staffing, food processing, and platform labor.
+
+  The benefits, by contrast, accumulate at the very top. The top 0.01% of households — roughly 18,000 families — captured the majority of post-tax income gains during the 2010s. The top 1% holds the majority of corporate stock by value, so buybacks are largely a transfer to them. Estate-tax weakening primarily benefits multi-generational wealth holders. The pass-through deduction in the 2017 TCJA is structured so that 60%+ of its value flows to filers earning over $1M.
+
+  The political consequences track the economic ones. Concentrated wealth funds concentrated political action — through PACs, dark money, lobbying, and ownership of media and platform infrastructure. The result is not just economic inequality but a feedback loop in which the people who benefit from current rules have the most resources to defend them.
+timeline:
+  - date: "1981"
+    event: "Top federal marginal income tax rate cut from 70% to 50% under the Economic Recovery Tax Act."
+  - date: "1982"
+    event: "SEC Rule 10b-18 adopted, providing safe harbor for stock buybacks. Buybacks become routine corporate practice."
+  - date: "1986"
+    event: "Tax Reform Act lowers top marginal rate further (to 28%) but broadens the base. Capital gains rate equalized with ordinary income — the closest the US ever came to true tax parity."
+  - date: "1997"
+    event: "Capital gains preferential rate restored. Tax parity reversed."
+  - date: "2001-2003"
+    event: "Bush tax cuts lower top rates, reduce capital gains rate to 15%, and phase down the estate tax."
+  - date: "2010"
+    event: "Citizens United v. FEC rules that corporate political spending is protected speech."
+  - date: "2017"
+    event: "Tax Cuts and Jobs Act cuts corporate rate to 21%, doubles estate tax exemption, creates 199A pass-through deduction."
+  - date: "2022"
+    event: "Inflation Reduction Act introduces 15% corporate minimum tax, 1% buyback excise, and Medicare drug negotiation."
+  - date: "2023"
+    event: "DOJ and FTC issue new merger guidelines reintroducing labor monopsony, serial acquisition, and vertical foreclosure as enforcement priorities."
+  - date: "2024"
+    event: "Federal courts begin ruling on first wave of post-2023-guidelines antitrust cases. Outcomes mixed; doctrine still in flux."
+  - date: "2025"
+    event: "Several state legislatures advance wealth-tax and inheritance-tax floor proposals as the federal estate tax exemption remains historically high."
+relatedBriefs: []
+relatedLetters: []
+relatedActions: []
+---
+
+A fair economy is not a giveaway. It's the baseline that lets a republic function. When wages stagnate while productivity soars, when corporate concentration translates into political concentration, when tax codes are written for the people who can afford lobbyists — the result is not just inequality. It's a slow erosion of the consent that holds public institutions together.
+
+Our work on this issue focuses on three intersections: how concentrated wealth becomes concentrated power, how the tax code rewards extraction over production, and how antitrust enforcement can be restored as a check on private government.
+
+The four sub-topics below — tax fairness, antitrust, corporate governance, and public investment — are the levers most likely to bend the trajectory back toward something that resembles a shared economy. None of them are partisan in the technical sense; antitrust, in particular, has had bipartisan champions in every generation. What unites them is the conviction that the rules of the economy are public choices, and that the current set of rules produces an economy that does not, in fact, work for the people who run it.

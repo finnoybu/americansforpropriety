@@ -1,0 +1,152 @@
+---
+title: "Housing"
+short: "Housing"
+eyebrow: "Issue area"
+summary: "Affordable, stable housing as a public commitment — through supply expansion, tenant protection, and limits on extraction by corporate landlords."
+accent: "leaf"
+order: 4
+headline: "Shelter is infrastructure. The market alone won't supply it."
+stance: "We support large-scale public investment in affordable housing supply, zoning reform that allows multifamily construction, federal renter protections, and meaningful limits on corporate consolidation of single-family rental markets."
+pillars:
+  - title: "Build the supply"
+    body: "Public investment in social housing. Federal financing for affordable construction. Zoning reform at the state and local level that allows multifamily and small-lot development."
+  - title: "Protect tenants"
+    body: "Just-cause eviction protections. Federal Section 8 voucher reform with funding floor. Right to counsel in eviction proceedings. Rent stabilization in tight markets."
+  - title: "Limit corporate extraction"
+    body: "Disclosure of beneficial ownership for residential real estate. Tax disincentives for institutional acquisition of single-family rentals. Limits on private equity in mobile home parks and manufactured housing."
+  - title: "Address homelessness as a housing problem"
+    body: "Housing First, with adequate funding. Federal homelessness programs that don't punish people for being unhoused. Resist criminalization of homelessness."
+  - title: "Public banks and finance"
+    body: "Federal and state-level public banking that can finance affordable housing on terms private capital won't offer."
+facts:
+  - "The US has a shortage of roughly 4-7 million affordable rental units, depending on counting methodology — among the largest housing shortages in the developed world relative to need."
+  - "Roughly half of US renters are cost-burdened (paying more than 30% of income on housing); a quarter are severely cost-burdened (over 50%)."
+  - "Institutional investors now own a meaningful and growing share of single-family rental homes in many metro areas, particularly in the Sun Belt."
+  - "Federal housing assistance reaches only about 1 in 4 eligible households; the rest are on waiting lists, often for years."
+  - "Public housing construction has been roughly halted at the federal level since 1998 (the Faircloth Amendment); existing public housing has been allowed to decay."
+  - "Homelessness in the US has risen significantly in recent years, with sharp increases in unsheltered homelessness and family homelessness."
+  - "The 2023 Supreme Court ruling in Grants Pass v. Johnson allowed cities to criminalize sleeping outdoors even when no shelter is available."
+subtopics:
+  - slug: "supply"
+    title: "Supply"
+    summary: "Why the housing shortage is a policy choice, and what would actually move the needle."
+    body: "The US housing shortage is geographically uneven but structurally consistent. High-demand metro areas — coastal California, the Northeast corridor, Seattle, Denver, Austin, increasingly the Sun Belt — face supply shortages of millions of units relative to job and population growth. The cause is twofold: restrictive zoning that prohibits multifamily construction in most residential land, and chronically inadequate public investment in non-market housing. Reform at the local level (zoning) and federal level (financing) are both necessary; neither is sufficient alone. State-level zoning preemption (California, Oregon, Washington, Massachusetts, others have all moved in this direction) is one of the most promising tools — overriding local exclusionary zoning where it would otherwise paralyze construction. Federal financing reform — restoring meaningful Section 8 supply funding, expanding Low-Income Housing Tax Credit, lifting the Faircloth Amendment cap on public housing — is the federal-level companion."
+  - slug: "tenant-protections"
+    title: "Tenant protections"
+    summary: "What just-cause eviction, rent stabilization, and right to counsel actually do."
+    body: "US tenant law is remarkably weak by comparison with most peer countries. Most US tenants have no just-cause protection — landlords can decline to renew leases for any reason or no reason. Rent increases are largely uncapped outside a small set of jurisdictions. Eviction proceedings are typically rapid; tenants are usually unrepresented while landlords have counsel. The combination produces a high-churn rental market in which most tenants live one rent increase or non-renewal away from displacement. Reform options span scales. Just-cause protections (which require landlords to identify a specific cause for non-renewal: nonpayment, lease violation, owner move-in, etc.) are the single most consequential tenant-protection reform; they shift power back toward tenants without the supply-side concerns rent control raises. Right to counsel in eviction proceedings (NYC, San Francisco, Cleveland, Newark, Philadelphia, others) measurably reduces eviction rates. Rent stabilization (capping annual increases) is more contested — empirical effects depend heavily on design and market conditions."
+  - slug: "corporate-extraction"
+    title: "Corporate landlords and consolidation"
+    summary: "What changes when private equity buys single-family rental homes at scale."
+    body: "Through 2010, single-family rental homes in the US were predominantly owned by individual landlords — mom-and-pop owners with one to a few properties. Post-2008, institutional buyers (Invitation Homes, American Homes 4 Rent, Tricon, Pretium Partners, others) acquired hundreds of thousands of foreclosed single-family homes at scale. They have continued buying since. The post-acquisition pattern is consistent: aggressive rent increases, fee proliferation (application fees, late fees, pet fees, maintenance fees), reduced maintenance responsiveness, faster eviction filings. The rental experience for tenants of institutional landlords measurably differs from that of individual landlords on most quality and stability metrics. Reform options: disclosure of beneficial ownership for residential real estate (currently opaque through LLC layering), federal tax disincentives for institutional acquisition above a threshold, state-level limits on the number of single-family homes a single entity can own, and antitrust scrutiny of consolidation in specific metro markets."
+  - slug: "homelessness"
+    title: "Homelessness"
+    summary: "Why Housing First works, and what's wrong with the alternative."
+    body: "Homelessness in the US has been rising steadily, with particularly sharp increases in unsheltered homelessness and family homelessness in recent years. The causes are well understood — primarily, housing costs that have outpaced wages and Social Security disability and SSI benefits. The solutions that work are also well understood: Housing First (offering permanent supportive housing without preconditions like sobriety or treatment), adequate emergency shelter capacity, robust homelessness-prevention programs that intervene before eviction. The empirical record on Housing First is among the strongest in social policy — it produces better outcomes at lower cost than the alternative of long-term emergency-shelter use. The alternative agenda — criminalizing sleeping in public, sweeping encampments without offering housing, restricting service providers — has been gaining ground in many cities. The 2024 Supreme Court ruling in Grants Pass v. Johnson eliminated a key constitutional check on enforcement (which had previously prohibited prosecuting unsheltered people for sleeping outdoors when no shelter was available). The federal lever — HUD funding, USICH coordination, defense of Housing First as the federally preferred approach — remains substantial."
+  - slug: "public-finance"
+    title: "Public banking and housing finance"
+    summary: "What a serious federal-level housing investment would look like."
+    body: "The federal housing budget is roughly $50-60 billion annually — modest relative to the scale of the housing crisis. Most of it flows through Section 8 vouchers, which are tenant-side subsidies that can chase market rents but don't expand supply. The Low-Income Housing Tax Credit, the largest supply-side federal program, finances roughly 100,000 affordable units per year — useful but inadequate to the shortage. Larger-scale options exist. Social housing programs (Vienna's model is the best-known international example) provide permanently affordable housing to a broad income range, paid for through public investment and rents. State-level versions (California's Social Housing Authority, Maryland's Social Housing Act, Seattle's social housing developer) are early experiments. Federal versions would require lifting the Faircloth Amendment cap and substantial appropriations — politically difficult but technically feasible. Public banking, at federal and state levels, could finance affordable housing construction on terms private capital won't offer; the Bank of North Dakota provides a working model."
+keyBills:
+  - name: "Housing for All Act"
+    chamber: "federal"
+    summary: "Universal Section 8 voucher access for eligible households (vs. current 1-in-4 reach), expanded LIHTC, federal social housing fund."
+    status: "Reintroduced multiple sessions; not advanced"
+  - name: "Faircloth Amendment repeal"
+    chamber: "federal"
+    summary: "Removes the 1998 cap on net new public housing construction. Various proposals."
+    status: "Not yet advanced"
+  - name: "Tenant Protections Act"
+    chamber: "federal"
+    summary: "Just-cause eviction protections, federal right to counsel funding, anti-source-of-income discrimination."
+    status: "In committee"
+  - name: "Stop Predatory Investing Act"
+    chamber: "federal"
+    summary: "Tax disincentives for institutional acquisition of single-family rentals; restricts mortgage interest deduction for large-scale SFR portfolios."
+    status: "Reintroduced; not advanced"
+  - name: "Homes Act / Affordable Housing Bond Act"
+    chamber: "federal"
+    summary: "Federal financing for affordable housing construction with labor standards and community benefit conditions."
+    status: "Various proposals in committee"
+  - name: "California SB 9 / SB 10 / Housing Element Reform"
+    chamber: "state"
+    summary: "State-level zoning preemption allowing duplexes and small multifamily on single-family lots; mandatory local affordable housing planning."
+    status: "Enacted; implementation ongoing"
+  - name: "Oregon HB 2001"
+    chamber: "state"
+    summary: "Statewide elimination of single-family-only zoning; allows up to four-plexes in most residential zones in larger cities."
+    status: "Enacted 2019; implementation through 2022-23"
+  - name: "Washington HB 1110"
+    chamber: "state"
+    summary: "Statewide middle-housing legalization; allows duplexes, fourplexes, and sixplexes in most residential zones."
+    status: "Enacted 2023"
+glossary:
+  - term: "Section 8 / Housing Choice Voucher"
+    definition: "Federal rental assistance program providing portable vouchers tenants can use with participating private landlords. Reaches roughly 1 in 4 eligible households due to funding constraints."
+  - term: "LIHTC (Low-Income Housing Tax Credit)"
+    definition: "Federal tax credit program that finances most new affordable housing construction. Allocated to states; states distribute to developers via competitive process. Largest supply-side federal housing program."
+  - term: "Faircloth Amendment"
+    definition: "1998 amendment capping net new public housing units at the level extant in 1999. Effectively prohibited federal investment in new public housing for 25+ years."
+  - term: "Just-cause eviction"
+    definition: "Legal requirement that landlords identify a specific cause for non-renewal (nonpayment, lease violation, owner move-in, etc.) rather than declining to renew at will. The single most consequential tenant protection."
+  - term: "Rent stabilization / rent control"
+    definition: "Caps on annual rent increases. 'Stabilization' usually refers to milder versions allowing market-rate increases on vacancy; 'control' to stricter versions. Empirical effects depend on design."
+  - term: "Right to counsel"
+    definition: "Public legal representation for tenants in eviction proceedings. Implemented in NYC, San Francisco, Cleveland, Newark, Philadelphia, and a growing list of cities. Measurably reduces eviction rates."
+  - term: "Housing First"
+    definition: "Approach to homelessness that provides permanent supportive housing without preconditions (sobriety, treatment compliance). Strong empirical record; lower long-term cost than chronic emergency-shelter alternatives."
+  - term: "Exclusionary zoning"
+    definition: "Local land-use rules that prohibit multifamily construction, require large minimum lot sizes, or otherwise restrict housing supply. The dominant pattern in most US suburban areas; primary local-level cause of housing shortage."
+  - term: "AMI (Area Median Income)"
+    definition: "The median household income in a metro area, used as the eligibility benchmark for most affordable housing programs. 'Affordable at 60% AMI' means rents priced for households earning 60% of the area's median."
+  - term: "Build-to-rent / SFR investor"
+    definition: "Institutional ownership of single-family rental homes (existing or purpose-built). Distinct from mom-and-pop landlords; concentrated in Sun Belt metros."
+whoAffected: |
+  Housing costs and instability fall heaviest on renters, low-income households, people of color, people with disabilities, single-parent families, formerly incarcerated people, and people aging out of foster care or transitioning from institutional settings.
+
+  Renters in tight markets (coastal California, the Northeast, Seattle, Denver, Austin, parts of the Sun Belt) face the sharpest cost-burden patterns. Renters in markets with significant institutional-investor presence face additional pressures from corporate-landlord business practices. Renters with Section 8 vouchers face source-of-income discrimination in many jurisdictions, where landlords legally refuse to accept vouchers.
+
+  People with disabilities face among the worst affordability gaps because Social Security disability and SSI benefits are well below market rents in most metros. Older Americans on fixed incomes face accelerating displacement as long-term rentals are converted, sold, or repriced. People exiting prison face structural barriers to rental access; nearly all face background-check screens that exclude them from most market-rate housing.
+
+  Homeowners benefit, on net, from housing scarcity — rising prices increase paper wealth, even as that wealth becomes harder to monetize without further constraining supply. The intergenerational pattern matters: homeowners who bought before the late-1990s price runup have benefited substantially; their children and grandchildren face structurally higher cost-to-income ratios for entering the market.
+
+  The benefits of the current pattern flow to residential landlords (especially institutional ones), homebuilders that benefit from supply-constrained markets, mortgage lenders, and the political ecosystem that benefits from a population too cost-burdened to engage extensively in civic life. The asymmetry between concentrated benefits and diffuse costs is the structural reason housing reform is hard.
+timeline:
+  - date: "1937"
+    event: "Wagner-Steagall Act creates federal public housing authority."
+  - date: "1949"
+    event: "Housing Act commits to 'a decent home and suitable living environment for every American family' (commitment has been substantially unmet)."
+  - date: "1968"
+    event: "Fair Housing Act passes."
+  - date: "1986"
+    event: "Tax Reform Act creates Low-Income Housing Tax Credit, the basis of most subsequent affordable-housing construction."
+  - date: "1996"
+    event: "Welfare reform restricts federal benefits including some housing assistance for non-citizens."
+  - date: "1998"
+    event: "Faircloth Amendment caps net new public housing construction; effective end of large-scale federal public housing investment."
+  - date: "2008-2010"
+    event: "Foreclosure crisis. Institutional investors begin acquiring single-family rentals at scale."
+  - date: "2017"
+    event: "Tax Cuts and Jobs Act caps state and local tax deduction (SALT cap) and reduces mortgage interest deduction; modest effects on housing market."
+  - date: "2019-2023"
+    event: "Wave of state-level zoning reform: Oregon, California, Washington, Massachusetts, Montana, others enact some form of multifamily legalization."
+  - date: "2020"
+    event: "Pandemic eviction moratorium (CDC); subsequent expiration produces eviction surge."
+  - date: "2022"
+    event: "Inflation Reduction Act includes modest housing provisions; broader Build Back Better housing package not enacted."
+  - date: "2024"
+    event: "Supreme Court Grants Pass v. Johnson allows criminalization of sleeping outdoors. Wave of state and local enforcement-focused homelessness laws."
+  - date: "2025"
+    event: "State zoning reforms continue advancing; federal social housing proposals in committee."
+relatedBriefs: []
+relatedLetters: []
+relatedActions: []
+---
+
+Housing in the United States has been treated as a market commodity that the public sector backstops only at the margins, and even then only inconsistently. The result, a generation later, is the pattern we live in: a national affordable-housing shortage of millions of units, chronic homelessness at levels that would shame most peer countries, and a renter population for whom one rent increase or non-renewal is the difference between stability and crisis.
+
+The five sub-topics below — supply, tenant protections, corporate landlords, homelessness, and public finance — are the load-bearing fights. The first two work in tandem at the local and state level. The third names what's happened to single-family rental markets since the foreclosure crisis. The fourth is the most visible failure of the system. The fifth is what serious federal investment would actually look like.
+
+Housing reform is unusual among progressive priorities in that the binding constraint is often *local* — exclusionary zoning, neighborhood opposition to multifamily construction, restrictive lending. Federal action matters substantially, but state-level zoning preemption and well-designed local rules are where most of the work happens. The political terrain is also unusual: pro-housing coalitions cross conventional left-right lines, with libertarians, environmentalists, and labor finding common ground on supply expansion that doesn't always extend to tenant protections or public ownership.
+
+We try to be honest about that complexity. Housing is not a single issue with a single answer. It is a set of related fights at multiple levels of government, and meaningful progress requires winning many of them at once.

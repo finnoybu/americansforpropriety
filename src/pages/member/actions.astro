@@ -1,0 +1,94 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import MemberNav from "~/components/MemberNav.astro";
+import { getSupabase } from "~/lib/supabase";
+
+export const prerender = false;
+
+if (!Astro.locals.user) return Astro.redirect("/signin?next=/member/actions");
+
+const supabase = getSupabase(Astro);
+const { data: actions } = await supabase
+  .from("action_log")
+  .select("id, action_type, topic, representative_name, representative_office, occurred_at, notes")
+  .eq("user_id", Astro.locals.user.id)
+  .order("occurred_at", { ascending: false })
+  .limit(200);
+
+const { data: letters } = await supabase
+  .from("generated_letters")
+  .select("id, representative_name, representative_office, topic, body, used_web_search, created_at")
+  .eq("user_id", Astro.locals.user.id)
+  .order("created_at", { ascending: false })
+  .limit(50);
+---
+<BaseLayout title="Action log">
+  <section class="container-page py-12 md:py-16">
+    <p class="eyebrow">Member · Action log</p>
+    <h1 class="mt-2">What you've done.</h1>
+    <p class="mt-3 max-w-2xl text-[color:var(--color-ink-muted)]">
+      A private record of letters drafted and actions logged. Nobody else sees this.
+    </p>
+
+    <MemberNav />
+
+    <section class="mt-8">
+      <h2 class="text-xl">Logged actions</h2>
+      {(actions?.length ?? 0) === 0 && (
+        <p class="mt-3 text-sm text-[color:var(--color-ink-muted)]">No actions logged yet.</p>
+      )}
+      {actions && actions.length > 0 && (
+        <ul class="mt-4">
+          {actions.map((a: any) => (
+            <li class="grid gap-2 border-t border-[color:var(--color-rule)] py-4 md:grid-cols-12">
+              <time class="md:col-span-2 text-xs text-[color:var(--color-ink-muted)]">
+                {new Date(a.occurred_at).toLocaleDateString("en-US", {
+                  year: "numeric", month: "short", day: "numeric",
+                })}
+              </time>
+              <div class="md:col-span-10">
+                <p>
+                  <strong>{a.action_type.replace(/_/g, " ")}</strong>
+                  {a.topic && <span class="text-[color:var(--color-ink-muted)]"> · {a.topic}</span>}
+                </p>
+                {a.representative_name && (
+                  <p class="text-sm text-[color:var(--color-ink-muted)]">
+                    {a.representative_name} {a.representative_office && `· ${a.representative_office}`}
+                  </p>
+                )}
+                {a.notes && <p class="mt-1 text-sm">{a.notes}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+
+    <section class="mt-16">
+      <h2 class="text-xl">Drafts you've generated</h2>
+      {(letters?.length ?? 0) === 0 && (
+        <p class="mt-3 text-sm text-[color:var(--color-ink-muted)]">No drafts yet.</p>
+      )}
+      {letters && letters.length > 0 && (
+        <ul class="mt-4 space-y-4">
+          {letters.map((l: any) => (
+            <li class="border-t border-[color:var(--color-rule)] pt-4">
+              <details>
+                <summary class="cursor-pointer">
+                  <span class="font-semibold">{l.representative_name}</span>
+                  <span class="text-[color:var(--color-ink-muted)]"> · {l.topic}</span>
+                  <time class="ml-3 text-xs text-[color:var(--color-ink-muted)]">
+                    {new Date(l.created_at).toLocaleDateString("en-US", {
+                      month: "short", day: "numeric", year: "numeric",
+                    })}
+                  </time>
+                </summary>
+                <pre class="mt-3 max-w-3xl whitespace-pre-wrap bg-[color:var(--color-paper-warm)] p-4 font-display text-base leading-relaxed">{l.body}</pre>
+              </details>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  </section>
+</BaseLayout>
