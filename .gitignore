@@ -8,6 +8,9 @@ Thumbs.db
 !.vscode/extensions.json
 .idea/
 
+# Claude Code harness config (local, not site content)
+.claude/
+
 # Node (future-proofing, safe even if unused)
 node_modules/
 npm-debug.log*
