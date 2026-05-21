@@ -14,9 +14,11 @@ const issues = homepageIssueOrder
   .map((slug) => allIssues.find((i) => i.id === slug))
   .filter((i): i is NonNullable<typeof i> => Boolean(i));
 
-const briefs = (await getCollection("briefs", ({ data }) => !data.draft))
-  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
-  .slice(0, 4);
+const publishedBriefs = (await getCollection("briefs", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+const latestBriefs = publishedBriefs.slice(0, 4);
+
+const letters = await getCollection("letters");
 
 const posts = (await getCollection("posts", ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
@@ -51,9 +53,9 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
   <!-- STATS BAND -->
   <StatsBand
     items={[
-      { value: "14", label: "issue clusters" },
-      { value: "31", label: "sourced policy briefs" },
-      { value: "26", label: "letter templates", emphasis: true },
+      { value: String(allIssues.length), label: "issue clusters" },
+      { value: String(publishedBriefs.length), label: "sourced policy briefs" },
+      { value: String(letters.length), label: "letter templates", emphasis: true },
       { value: "0", label: "trackers, ads, or harvested data" },
     ]}
   />
@@ -83,10 +85,10 @@ const posts = (await getCollection("posts", ({ data }) => !data.draft))
   <!-- LATEST BRIEFS -->
   <Section eyebrow="Latest research" title="Briefs" tone="warm">
     <div>
-      {briefs.length === 0 && (
+      {latestBriefs.length === 0 && (
         <p class="text-ink-muted">No briefs published yet.</p>
       )}
-      {briefs.map((b) => (
+      {latestBriefs.map((b) => (
         <PostCard
           href={`/briefs/${b.id}`}
           eyebrow={`Brief · ${b.data.issue.replace(/-/g, " ")}`}
