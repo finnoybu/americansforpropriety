@@ -1,12 +1,17 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import MemberNav from "~/components/MemberNav.astro";
+import { getEnv } from "~/lib/env";
 
 export const prerender = false;
 
 if (!Astro.locals.user) return Astro.redirect("/signin?next=/member/setup");
 
 const profile = Astro.locals.profile;
+
+// Representative lookup depends on the Geocodio API key. Until it's set,
+// surface a calm notice rather than letting members submit into a failure.
+const geocodioReady = Boolean(getEnv(Astro).GEOCODIO_API_KEY);
 ---
 <BaseLayout title="Set up your account">
   <section class="container-page max-w-3xl py-12 md:py-16">
@@ -21,6 +26,13 @@ const profile = Astro.locals.profile;
           We use this to find your federal and state representatives. We store the ZIP, your state, and your district numbers — not your full address.
         </p>
 
+        {!geocodioReady && (
+          <p class="mt-4 border-l-2 border-coral bg-paper-warm p-3 text-sm leading-relaxed">
+            Representative lookup is still being set up and isn't available yet.
+            Your account works fine in the meantime — check back soon to add your ZIP.
+          </p>
+        )}
+
         <form id="zip-form" class="mt-6 space-y-3">
           <label class="block">
             <span class="eyebrow">ZIP code</span>
@@ -30,12 +42,13 @@ const profile = Astro.locals.profile;
               inputmode="numeric"
               pattern="[0-9]{5}"
               maxlength="5"
-              class="mt-2 w-40 border border-rule bg-paper px-3 py-2 font-mono text-lg focus:border-ink focus:outline-none"
+              disabled={!geocodioReady}
+              class="mt-2 w-40 border border-rule bg-paper px-3 py-2 font-mono text-lg focus:border-ink focus:outline-none disabled:opacity-50"
               value={profile?.zip ?? ""}
               placeholder="10001"
             />
           </label>
-          <button class="btn btn-ink" type="submit">Save & look up reps</button>
+          <button class="btn btn-ink disabled:opacity-50" type="submit" disabled={!geocodioReady}>Save & look up reps</button>
           <p id="zip-status" class="text-sm"></p>
         </form>
       </section>

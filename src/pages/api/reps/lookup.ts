@@ -27,7 +27,14 @@ export const POST: APIRoute = async (ctx) => {
 
   const env = getEnv(ctx);
   if (!env.GEOCODIO_API_KEY) {
-    return json({ error: "geocodio_not_configured" }, 500);
+    return json(
+      {
+        error: "geocodio_not_configured",
+        message:
+          "Representative lookup isn't available yet — this is on our end, not your ZIP. Please check back soon.",
+      },
+      503,
+    );
   }
 
   let result;
