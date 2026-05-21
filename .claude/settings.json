@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:libertystreeteconomics.newyorkfed.org)",
+      "WebFetch(domain:ramirez.house.gov)",
+      "WebFetch(domain:www.dol.gov)",
+      "WebFetch(domain:www.waterverge.com)",
+      "WebFetch(domain:www.cgdev.org)",
+      "WebFetch(domain:www.aapd.com)",
+      "WebFetch(domain:www.hhs.gov)",
+      "WebFetch(domain:www.commondreams.org)",
+      "WebFetch(domain:www.mayerbrown.com)",
+      "WebFetch(domain:www.justice.gov)",
+      "WebFetch(domain:www.federalregister.gov)",
+      "WebFetch(domain:www.ftc.gov)",
+      "WebFetch(domain:www.adatitleiii.com)",
+      "WebFetch(domain:www.nbcnews.com)",
+      "WebFetch(domain:www.ed.gov)",
+      "WebFetch(domain:www.duanemorris.com)",
+      "WebFetch(domain:www.cbsnews.com)",
+      "WebFetch(domain:salazar.house.gov)",
+      "WebFetch(domain:perkinscoie.com)"
+    ]
+  }
+}
