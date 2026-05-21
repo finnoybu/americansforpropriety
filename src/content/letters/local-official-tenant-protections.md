@@ -10,9 +10,9 @@ updatedAt: 2025-04-04
 
 ---
 
-**Dear [Council Member / Supervisor / Commissioner] [Last Name],**
+**Dear [Council Member / Supervisor / Commissioner] {{rep_last_name}},**
 
-I'm writing as a resident of [city/town/county] to ask you to support local just-cause eviction protections and right to counsel in eviction proceedings.
+I'm writing as a resident of {{my_city}}, {{my_state}} to ask you to support local just-cause eviction protections and right to counsel in eviction proceedings.
 
 US tenant law is unusually weak by comparison with most peer countries. Most US tenants have no just-cause protection — landlords can decline to renew leases for any reason or no reason. Most US tenants face eviction proceedings without legal representation while landlords have counsel. The cumulative effect is a high-churn rental market in which most tenants live one rent increase or non-renewal away from displacement.
 
@@ -31,7 +31,7 @@ Both reforms have:
 
 [Personalize: name a specific local concern. Examples: "Our [neighborhood/building] has seen [specific pattern]"; "A neighbor / friend / family member faced [specific eviction or non-renewal]"; "Local rent increases have run [specific data] over the past [period]"; "I'm a [tenant/landlord/social worker/legal aid attorney] with direct experience".]
 
-I'd appreciate knowing your position on specific local proposals on these reforms and on the broader local agenda for tenant protection. If [city/county] doesn't currently have a proposal on the table, I'd encourage you to introduce or co-sponsor one.
+I'd appreciate knowing your position on specific local proposals on these reforms and on the broader local agenda for tenant protection. If {{my_city}} doesn't currently have a proposal on the table, I'd encourage you to introduce or co-sponsor one.
 
 Thank you for your service to our community.
 

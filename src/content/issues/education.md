@@ -21,8 +21,9 @@ pillars:
 facts:
   - "US public-school funding remains one of the most unequal among advanced economies, with per-pupil spending varying by 2-3x across districts within the same state."
   - "Total US student loan debt now exceeds $1.7 trillion across 44 million borrowers."
-  - "Voucher programs have expanded significantly in roughly 15 states since 2020, with state spending in the billions diverted from public school systems."
-  - "The Public Service Loan Forgiveness program, after years of mismanagement, has now discharged debt for over a million borrowers since reforms began in 2021."
+  - "Voucher programs have expanded significantly in more than 15 states since 2020, with state spending in the billions diverted from public school systems; Texas launched a roughly $1 billion program in 2026."
+  - "The Public Service Loan Forgiveness program discharged debt for over a million borrowers after 2021 reforms, but a 2026 rule allowing the Education Secretary to disqualify employers takes effect July 1, 2026 and is being challenged in court."
+  - "Student-loan defaults surged in 2025-26 after the collections pause ended, with delinquency near 25% and roughly 3.6 million borrowers in default across two quarters."
   - "Research consistently shows public investment in early childhood education produces some of the highest long-term ROI of any public spending."
   - "Adjusted for inflation, state appropriations per public-college student in many states remain below 2008 levels."
 subtopics:
@@ -41,7 +42,7 @@ subtopics:
   - slug: "student-debt"
     title: "Student debt"
     summary: "What broad cancellation, IDR reform, and PSLF together would do."
-    body: "Total US student loan debt now exceeds $1.7 trillion across 44 million borrowers — larger than the credit card debt and auto loan markets, smaller only than mortgages. The structural problem is that debt has accumulated faster than wages have grown for the workers expected to repay it, and the standard repayment options (10-year fixed) are unaffordable for many. Three reform tracks: (1) broad cancellation, attempted by executive action under the 2003 HEROES Act and largely struck down by the Supreme Court in 2023; subsequent narrower cancellation has continued through targeted programs (PSLF, borrower defense, total and permanent disability discharge). (2) Income-driven repayment reform, including the SAVE plan, which substantially reduces monthly payments and accelerates forgiveness; in active litigation. (3) Public Service Loan Forgiveness, which after years of mismanagement now functions and has discharged over a million borrowers' debt since 2021 reforms. Defending and expanding all three is the active agenda."
+    body: "Total US student loan debt now exceeds $1.7 trillion across 44 million borrowers — larger than the credit card debt and auto loan markets, smaller only than mortgages. The structural problem is that debt has accumulated faster than wages have grown for the workers expected to repay it, and the standard repayment options (10-year fixed) are unaffordable for many. Three reform tracks: (1) broad cancellation, attempted by executive action under the 2003 HEROES Act and largely struck down by the Supreme Court in 2023; subsequent narrower cancellation has continued through targeted programs (PSLF, borrower defense, total and permanent disability discharge). (2) Income-driven repayment reform, including the SAVE plan, which substantially reduced monthly payments and accelerated forgiveness but was struck down — ended by a December 2025 settlement and an 8th Circuit ruling in March 2026. (3) Public Service Loan Forgiveness, which after 2021 reforms had discharged over a million borrowers' debt, though a 2026 rule taking effect July 1, 2026 lets the Education Secretary disqualify employers and is now in litigation. Defending and expanding all three is the active agenda."
   - slug: "early-childhood"
     title: "Universal pre-K and child care"
     summary: "Where public investment produces the highest long-term return."
@@ -54,11 +55,11 @@ keyBills:
   - name: "Public Service Loan Forgiveness reforms"
     chamber: "federal"
     summary: "Administrative overhauls (2021-2023) that fixed the program. Subsequent legislation would codify the fixes and expand eligibility."
-    status: "Administrative reforms in effect; statutory codification pending"
+    status: "2026 rule lets the Education Secretary disqualify employers (eff. July 1, 2026); multi-state and union lawsuits pending"
   - name: "SAVE Plan / IDR reform"
     chamber: "federal"
     summary: "Income-driven repayment overhaul reducing payments to 5% of discretionary income above an expanded threshold; faster forgiveness."
-    status: "In active litigation; partial implementation"
+    status: "Struck down; ended by Dec 2025 settlement and 8th Circuit ruling (Mar 2026)"
   - name: "PRO-Educator Act / federal teacher pay floor"
     chamber: "federal"
     summary: "Federal grants conditioned on minimum teacher salaries; loan forgiveness for teachers in high-need schools."
@@ -131,6 +132,12 @@ timeline:
     event: "Wave of state ESA/voucher programs enacted in AZ, FL, IA, IN, WV, others. State ballot measures repeatedly defeat voucher expansions when put to voters."
   - date: "2024-2025"
     event: "SAVE plan implementation paused by litigation; partial IDR reforms continue. State adequacy lawsuits in NY, PA, others advance."
+  - date: "2026"
+    event: "A December 2025 settlement ends the SAVE plan; the 8th Circuit eliminates it outright in March."
+  - date: "2026"
+    event: "Student-loan defaults surge after the collections pause ends; the New York Fed reports 2.6 million defaults in the first quarter."
+  - date: "2026"
+    event: "OBBBA student-loan provisions (the Repayment Assistance Plan, Pell restrictions, Workforce Pell) take effect July 1."
 relatedBriefs: []
 relatedLetters: []
 relatedActions: []

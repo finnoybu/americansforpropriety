@@ -25,7 +25,7 @@ facts:
   - "Federal housing assistance reaches only about 1 in 4 eligible households; the rest are on waiting lists, often for years."
   - "Public housing construction has been roughly halted at the federal level since 1998 (the Faircloth Amendment); existing public housing has been allowed to decay."
   - "Homelessness in the US has risen significantly in recent years, with sharp increases in unsheltered homelessness and family homelessness."
-  - "The 2023 Supreme Court ruling in Grants Pass v. Johnson allowed cities to criminalize sleeping outdoors even when no shelter is available."
+  - "The 2024 Supreme Court ruling in Grants Pass v. Johnson allowed cities to criminalize sleeping outdoors even when no shelter is available."
 subtopics:
   - slug: "supply"
     title: "Supply"
@@ -42,7 +42,7 @@ subtopics:
   - slug: "homelessness"
     title: "Homelessness"
     summary: "Why Housing First works, and what's wrong with the alternative."
-    body: "Homelessness in the US has been rising steadily, with particularly sharp increases in unsheltered homelessness and family homelessness in recent years. The causes are well understood — primarily, housing costs that have outpaced wages and Social Security disability and SSI benefits. The solutions that work are also well understood: Housing First (offering permanent supportive housing without preconditions like sobriety or treatment), adequate emergency shelter capacity, robust homelessness-prevention programs that intervene before eviction. The empirical record on Housing First is among the strongest in social policy — it produces better outcomes at lower cost than the alternative of long-term emergency-shelter use. The alternative agenda — criminalizing sleeping in public, sweeping encampments without offering housing, restricting service providers — has been gaining ground in many cities. The 2024 Supreme Court ruling in Grants Pass v. Johnson eliminated a key constitutional check on enforcement (which had previously prohibited prosecuting unsheltered people for sleeping outdoors when no shelter was available). The federal lever — HUD funding, USICH coordination, defense of Housing First as the federally preferred approach — remains substantial."
+    body: "Homelessness in the US has been rising steadily, with particularly sharp increases in unsheltered homelessness and family homelessness in recent years. The causes are well understood — primarily, housing costs that have outpaced wages and Social Security disability and SSI benefits. The solutions that work are also well understood: Housing First (offering permanent supportive housing without preconditions like sobriety or treatment), adequate emergency shelter capacity, robust homelessness-prevention programs that intervene before eviction. The empirical record on Housing First is among the strongest in social policy — it produces better outcomes at lower cost than the alternative of long-term emergency-shelter use. The alternative agenda — criminalizing sleeping in public, sweeping encampments without offering housing, restricting service providers — has been gaining ground in many cities. The 2024 Supreme Court ruling in Grants Pass v. Johnson eliminated a key constitutional check on enforcement (which had previously prohibited prosecuting unsheltered people for sleeping outdoors when no shelter was available). The federal lever — HUD funding, USICH coordination — remains substantial, though HUD has since 2025 moved away from Housing First as the federally preferred approach and redirected program funding accordingly."
   - slug: "public-finance"
     title: "Public banking and housing finance"
     summary: "What a serious federal-level housing investment would look like."
@@ -60,10 +60,10 @@ keyBills:
     chamber: "federal"
     summary: "Just-cause eviction protections, federal right to counsel funding, anti-source-of-income discrimination."
     status: "In committee"
-  - name: "Stop Predatory Investing Act"
+  - name: "21st Century ROAD to Housing Act"
     chamber: "federal"
-    summary: "Tax disincentives for institutional acquisition of single-family rentals; restricts mortgage interest deduction for large-scale SFR portfolios."
-    status: "Reintroduced; not advanced"
+    summary: "Bipartisan housing package; bars large institutional investors (350+ homes) from buying single-family homes. Largely supersedes the earlier Stop Predatory Investing Act."
+    status: "Senate passed 89-10 (March 2026); House passed amended 396-13 (May 2026)"
   - name: "Homes Act / Affordable Housing Bond Act"
     chamber: "federal"
     summary: "Federal financing for affordable housing construction with labor standards and community benefit conditions."
@@ -140,7 +140,9 @@ timeline:
   - date: "2024"
     event: "Supreme Court Grants Pass v. Johnson allows criminalization of sleeping outdoors. Wave of state and local enforcement-focused homelessness laws."
   - date: "2025"
-    event: "State zoning reforms continue advancing; federal social housing proposals in committee."
+    event: "State zoning reforms continue advancing; federal social housing proposals in committee. HUD begins shifting away from Housing First and redirecting homelessness program funding."
+  - date: "2026"
+    event: "Congress passes the bipartisan 21st Century ROAD to Housing Act, including a ban on large institutional investors buying single-family homes. Twenty states sue over HUD's redirected Continuum of Care funds."
 relatedBriefs: []
 relatedLetters: []
 relatedActions: []

@@ -10,9 +10,9 @@ updatedAt: 2025-07-15
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the Freedom to Vote Act and the DISCLOSE Act, and to advance both for floor consideration this session.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Freedom to Vote Act and the DISCLOSE Act, and to advance both for floor consideration this session.
 
 The case for federal action on voting access and dark-money disclosure is well-established. Since the Supreme Court gutted Voting Rights Act preclearance in 2013, dozens of states have enacted voting restrictions that would previously have required federal review. Roughly half of all federal political spending now flows through entities that disclose little or nothing about their donors.
 

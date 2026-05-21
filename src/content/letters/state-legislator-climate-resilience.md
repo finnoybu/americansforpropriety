@@ -10,9 +10,9 @@ updatedAt: 2025-08-08
 
 ---
 
-**Dear [Senator/Representative] [Last Name],**
+**Dear [Senator/Representative] {{rep_last_name}},**
 
-I'm writing as a resident of [city/town] to ask you to support legislation addressing the climate-driven insurance crisis and the broader resilience challenges facing [state name].
+I'm writing as a resident of {{my_city}}, {{my_state}} to ask you to support legislation addressing the climate-driven insurance crisis and the broader resilience challenges facing {{my_state}}.
 
 Major insurers are withdrawing from offering homeowners coverage in California wildfire zones, Florida hurricane corridors, Louisiana flood zones, and an expanding list of other climate-exposed regions. Where insurance is still available, premiums have risen sharply — annual increases of 30-50% have been common in high-risk zones. The risk is being transferred to state-backed insurers of last resort, to the federal flood insurance program, and to homeowners themselves through deductibles, exclusions, and coverage gaps.
 
@@ -32,7 +32,7 @@ Several state-level reforms would meaningfully address the situation:
 
 I understand insurance regulation is technical and politically complicated. I'm asking you to engage with it seriously because the alternative — continued private-market withdrawal, growing state-pool exposure, and homeowners absorbing risk individually — produces worse outcomes for everyone.
 
-I'd appreciate knowing your position on specific bills under consideration in [state legislature].
+I'd appreciate knowing your position on specific bills under consideration in the {{my_state}} legislature.
 
 Thank you for your service.
 

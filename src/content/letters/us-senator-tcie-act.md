@@ -10,9 +10,9 @@ updatedAt: 2025-03-29
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the Transformation to Competitive Integrated Employment Act and the federal phase-out of section 14(c) subminimum-wage authority for disabled workers.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Transformation to Competitive Integrated Employment Act and the federal phase-out of section 14(c) subminimum-wage authority for disabled workers.
 
 Section 14(c) of the Fair Labor Standards Act, enacted in 1938, still authorizes the Secretary of Labor to issue special certificates allowing payment of disabled workers below the federal minimum wage. Workers employed under 14(c) certificates earn, on average, well below the federal minimum wage; some earn pennies per hour. The framework concentrates and retains workers in segregated workshop settings rather than serving as a pathway to competitive integrated employment.
 

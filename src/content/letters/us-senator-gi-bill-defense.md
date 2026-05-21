@@ -10,9 +10,9 @@ updatedAt: 2025-05-19
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to defend the Post-9/11 GI Bill against the for-profit-college practices that have systematically targeted veterans for decades.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to defend the Post-9/11 GI Bill against the for-profit-college practices that have systematically targeted veterans for decades.
 
 The Post-9/11 GI Bill is one of the most generous federal education benefits programs in American history. It has also been a magnet for predatory practices by certain for-profit colleges, in a pattern shaped by a structural quirk in federal regulation — the 90/10 rule that previously excluded GI Bill payments from the federal-aid revenue cap, creating a strong incentive for for-profits to enroll veterans regardless of program-veteran fit.
 

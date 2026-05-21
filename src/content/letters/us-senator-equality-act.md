@@ -10,9 +10,9 @@ updatedAt: 2025-08-26
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the Equality Act and to advance it for floor consideration in the current session.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Equality Act and to advance it for floor consideration in the current session.
 
 The Supreme Court's 2020 Bostock v. Clayton County ruling held that Title VII's prohibition on sex discrimination in employment includes sexual orientation and gender identity. The 2022 Respect for Marriage Act gave federal statutory protection to same-sex and interracial marriages. Both were important wins. Both were also incomplete.
 

@@ -1,33 +1,35 @@
 ---
-title: "To a US Senator: defend the IRA clean energy tax credits"
-summary: "Connect the credits to specific investments and jobs in your state. The political case for defending them is strongest where the investments have already landed."
+title: "To a US Senator: defend the clean energy credits that survived OBBBA"
+summary: "The One Big Beautiful Bill Act already rolled back much of the IRA's clean energy package. Connect the credits that remain — and the projects racing the wind/solar construction deadline — to specific investments and jobs in your state."
 audience: "US Senator"
 issue: "climate-and-energy"
-updatedAt: 2025-09-25
+updatedAt: 2026-05-21
 ---
 
-> The most effective letters on this issue connect the IRA credits to specific investments and jobs in your state or district. If you live near an IRA-funded facility — solar manufacturing, EV battery production, semiconductor fabs, transmission projects — name it. The political environment for defending the credits is strongest among representatives whose constituents see the jobs.
+> The most effective letters on this issue connect the clean energy credits to specific investments and jobs in your state or district. If you live near a clean energy facility — solar manufacturing, EV battery production, semiconductor fabs, transmission projects — name it. The political environment for defending the remaining credits is strongest among representatives whose constituents see the jobs.
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to defend the Inflation Reduction Act's clean energy tax credits against the repeated efforts to repeal or weaken them.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to defend what remains of the Inflation Reduction Act's clean energy tax credits — and to protect the clean energy projects already underway in our state.
 
-The IRA's clean energy provisions are the largest US climate investment ever enacted. They have driven hundreds of billions in private investment in clean energy manufacturing and deployment across the United States, with substantial concentration in red and purple states (Georgia, Tennessee, Texas, Arizona, Michigan, Ohio, North Carolina, others).
+The IRA's clean energy provisions were the largest US climate investment ever enacted. They drove hundreds of billions in private investment in clean energy manufacturing and deployment across the United States, with substantial concentration in red and purple states (Georgia, Tennessee, Texas, Arizona, Michigan, Ohio, North Carolina, others).
 
-[Personalize: name specific IRA-funded investments in your state or district. Examples: "The [specific facility] in [city/town] is creating [number] jobs and represents [investment amount] in capital investment that the IRA credits made possible." If you don't have specific local knowledge, you can substitute: "I've watched the IRA produce real economic activity in our state — [type of project] in [region] is a concrete example."]
+The One Big Beautiful Bill Act, signed July 4, 2025, has already rolled much of that back. The consumer EV tax credits ended September 30, 2025. The residential clean energy credit for homeowners ends December 31, 2025. And the production and investment tax credits for wind and solar now phase out for projects that begin construction after July 4, 2026 — a hard cutoff that puts every wind and solar project not yet under construction in a race against the clock.
 
-The credits have been targeted for repeal or weakening at every legislative opportunity since their enactment. Tax-extender packages, debt-ceiling deals, end-of-year omnibus bills, and reconciliation vehicles have all been used as potential vehicles for clawbacks. The political pressure has been donor-driven and well-funded.
+[Personalize: name specific clean energy investments in your state or district. Examples: "The [specific facility] in [city/town] is creating [number] jobs and represents [investment amount] in capital investment that these credits made possible." If you don't have specific local knowledge, you can substitute: "I've watched these credits produce real economic activity in our state — [type of project] in [region] is a concrete example."]
+
+This is no longer a fight to head off a future repeal. The repeal already happened. The fight now is over the credits still on the books, the projects already in the pipeline, and whether further rollbacks chase them down too.
 
 I'm asking you to:
 
-1. **Defend the credits in any reconciliation or tax-extender vehicle** that comes before the Senate.
-2. **Resist proposals to narrow eligibility** in ways that would defund clean energy projects already underway.
-3. **Support full implementation** of the credits as Congress originally enacted them, including the labor-standards and domestic-content conditions that were carefully negotiated.
-4. **Push back against rhetoric** framing IRA implementation as wasteful — the empirical record on private investment, jobs, and emissions reduction is increasingly strong.
+1. **Defend the clean energy credits that survived OBBBA** — including the technology-neutral credits for geothermal, storage, nuclear, and other generation — against further rollback in any reconciliation or tax-extender vehicle.
+2. **Protect projects already underway**, and resist any move to pull the July 4, 2026 wind and solar construction-start deadline forward or to narrow what counts as beginning construction.
+3. **Support full implementation** of the credits that remain, including the labor-standards and domestic-content conditions that were carefully negotiated.
+4. **Push back against rhetoric** framing the surviving credits as wasteful — the empirical record on private investment, jobs, and emissions reduction is strong.
 
-The economic case for the credits is now visible in many congressional districts as actual factories, jobs, and tax revenue. The principled case is environmental. Both point in the same direction.
+The economic case for the credits is visible in many congressional districts as actual factories, jobs, and tax revenue — investment that the OBBBA timelines now put at risk. The principled case is environmental. Both point in the same direction.
 
 I'd appreciate knowing your position on IRA defense and any specific provisions you see as priority targets.
 

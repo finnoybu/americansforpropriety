@@ -10,13 +10,13 @@ updatedAt: 2025-05-22
 
 ---
 
-**Dear [Senator/Representative] [Last Name],**
+**Dear [Senator/Representative] {{rep_last_name}},**
 
-I'm writing as a resident of [city/town] to ask you to support [specific zoning reform bill, if known; otherwise: "state-level zoning reform legislation"] in [state name].
+I'm writing as a resident of {{my_city}}, {{my_state}} to ask you to support [specific zoning reform bill, if known; otherwise: "state-level zoning reform legislation"] in {{my_state}}.
 
 The empirical case for state-level zoning preemption is now well-established. Oregon, California, Washington, Massachusetts, Montana, Vermont, and a growing list of states have enacted laws that override exclusionary local zoning to allow duplexes, fourplexes, and small multifamily construction in residential areas. The early evidence is encouraging: permit data is up where reforms have taken effect; multifamily projects are advancing in jurisdictions where they would have been illegal three years ago; political durability has held.
 
-The substantive case for [state] joining this list:
+The substantive case for {{my_state}} joining this list:
 
 1. **Housing supply.** Our state has [specific housing-shortage data if available, or general statement: "a documented housing shortage that has driven rents and home prices well above what local incomes support"]. Restrictive local zoning is the binding constraint on supply expansion.
 
@@ -30,7 +30,7 @@ The substantive case for [state] joining this list:
 
 I understand zoning reform is locally contested. I'm asking you to engage with it on the substantive merits rather than allowing local opposition to block what the empirical record now strongly supports.
 
-I'd appreciate knowing your position on specific bills in [state legislature] and on the broader question of state-level zoning preemption.
+I'd appreciate knowing your position on specific bills in the {{my_state}} legislature and on the broader question of state-level zoning preemption.
 
 Thank you for your service.
 

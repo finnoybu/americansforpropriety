@@ -63,11 +63,11 @@ keyBills:
   - name: "Department of Labor independent contractor rule (2024)"
     chamber: "federal"
     summary: "Restored multi-factor economic-realities test for distinguishing employees from contractors."
-    status: "Final rule effective March 2024; subject to ongoing litigation"
+    status: "DOL proposed rescinding the 2024 rule (Feb 2026), reverting toward the narrower 2021 test"
   - name: "Heat injury and illness prevention standard (proposed)"
     chamber: "federal"
     summary: "Federal OSHA standard for outdoor and indoor heat exposure, including water/rest/shade requirements and acclimatization."
-    status: "Proposed rule; not finalized as of late 2025"
+    status: "Proposed rule stalled with no final-action date; OSHA's Heat enforcement program lapsed Apr 2026"
   - name: "California AB 5 / Proposition 22"
     chamber: "state"
     state: "California"
@@ -127,6 +127,10 @@ timeline:
     event: "DOL final rule on independent contractor classification reinstates strict multi-factor test."
   - date: "2025"
     event: "Multiple states (NY, NJ, IL, others) introduce state-level analogues to the PRO Act and federal heat standards."
+  - date: "2026"
+    event: "DOL issues a proposed rule to rescind the 2024 independent contractor rule and revert toward the narrower 2021 contractor test."
+  - date: "2026"
+    event: "The Living Wage for All Act is introduced, proposing a $25/hr federal minimum wage phased in over the following decade."
 relatedBriefs: []
 relatedLetters: []
 relatedActions: []

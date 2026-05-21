@@ -10,9 +10,9 @@ updatedAt: 2025-04-08
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support mandatory funding for the Indian Health Service.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support mandatory funding for the Indian Health Service.
 
 The Indian Health Service is the federal agency responsible for healthcare for federally recognized American Indian and Alaska Native tribal members — a federal trust obligation rooted in treaties and federal law dating to the 19th century. Per-capita IHS funding has historically been less than half of comparable federal health programs (Medicare, the Veterans Health Administration, Medicaid). The result has been measurable: Native Americans face among the worst chronic-disease outcomes in the developed world, with diabetes, cardiovascular disease, and substance-use disorders at rates the IHS system is structurally underfunded to address.
 

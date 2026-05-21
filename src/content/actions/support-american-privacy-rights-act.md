@@ -1,27 +1,27 @@
 ---
-title: "Support the American Privacy Rights Act"
-summary: "The US is the largest economy without a comprehensive federal privacy law. APRA is closer to passage than any predecessor."
+title: "Support comprehensive federal privacy legislation"
+summary: "The US is the largest economy without a comprehensive federal privacy law. APRA lapsed without reintroduction. Push for a federal privacy floor that does not preempt stronger state laws."
 issue: "tech-and-data-rights"
 cta: "Find a letter template"
 href: "/letters"
 urgency: "medium"
 ---
 
-The American Privacy Rights Act would establish the comprehensive federal privacy law the United States has lacked since the consumer internet emerged. The bill includes:
+The United States remains the largest economy in the world without a comprehensive federal privacy law. Personal data is collected, combined, and sold under a fragmented sectoral patchwork — HIPAA, FERPA, GLBA, COPPA — with everything else left to general FTC consumer-protection authority.
 
-- Data minimization requirements
-- Affirmative consent for sensitive data (health, biometric, location, demographic)
+The American Privacy Rights Act was the most recent serious attempt at a federal framework. It lapsed when the 118th Congress ended and was not reintroduced. New proposals have appeared in the 119th Congress, but the cause is bigger than any single bill: the country still needs a federal privacy law worth having.
+
+A federal privacy law worth supporting would include:
+
+- A federal floor that does not preempt stronger state laws
+- Data minimization — collection and use limited to what is reasonably necessary
+- Affirmative consent for sensitive data (health, biometric, precise location, government identifiers)
 - Individual rights: access, correction, deletion, portability
-- FTC primary enforcement with state attorney general parallel enforcement
-- Limited private right of action for serious violations
-- Specific protections for users under 17
+- A meaningful private right of action so individuals can enforce their own rights
+- Adequate FTC enforcement capacity
 
-The bill has gotten further than its predecessors — bipartisan committee versions have advanced; substantial industry, civil society, and state AG engagement; broad agreement on the substantive policy framework.
+The recurring sticking point is preemption — whether federal law displaces state law on the same subject. In the federal vacuum, roughly twenty states have enacted comprehensive privacy laws. Industry generally favors broad preemption; some current federal proposals would erase any state law that merely "relates to" the federal scheme, and omit a private right of action. Trading a real patchwork for a single weak national standard would leave Americans worse protected than they are today.
 
-The recurring sticking point is preemption — whether federal law preempts state law on the same subject matter. Civil society and state-level privacy advocates favor a federal floor that does not preempt state laws (preserving California's CCPA, the Delete Act, and similar state-level innovations). Industry generally favors broad preemption (replacing the 50-state patchwork with a single federal standard).
+Letters to your senators and representatives — particularly those on the Commerce, Energy & Commerce, and Judiciary committees — push federal privacy legislation toward a version that sets a meaningful floor, preserves state authority, and provides for real enforcement.
 
-Letters to your senators and representatives — particularly those on Commerce, Energy & Commerce, and Judiciary committees — push the bill toward a version that sets a meaningful federal floor without preempting state-level innovation.
-
-The substantive case for federal privacy legislation is strong. The political coalition has matured. Constituent pressure on the specific provisions where the bill could be substantially better — preserving state authority, ensuring real enforcement, protecting civil rights — adds to the work that's gotten APRA this far.
-
-If you've been affected by a data breach, identity-related fraud, or a privacy concern that would have been addressed under stronger federal law, your perspective has weight. If you live in a state with strong state-level privacy protection (CA, CO, VA, others), advocating for federal-floor-without-preemption is particularly valuable.
+If you've been affected by a data breach, identity-related fraud, or a privacy concern that would have been addressed under stronger federal law, your perspective has weight. If you live in a state with strong state-level privacy protection (CA, CO, VA, others), advocating for a federal-floor-without-preemption is particularly valuable.

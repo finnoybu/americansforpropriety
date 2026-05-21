@@ -10,9 +10,9 @@ updatedAt: 2025-04-18
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the Better Care Better Jobs Act and to advance substantial federal Home and Community-Based Services funding in the next legislative vehicle that comes available.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Better Care Better Jobs Act and to advance substantial federal Home and Community-Based Services funding in the next legislative vehicle that comes available.
 
 More than 700,000 disabled Americans are on Medicaid HCBS waiting lists across 38 states. Many wait five to ten years or more. The federal-right-to-services architecture established by Olmstead v. L.C. (1999) functions, in practice, as a federal-right-to-be-on-a-list.
 

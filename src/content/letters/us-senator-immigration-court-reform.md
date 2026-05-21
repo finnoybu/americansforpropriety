@@ -10,9 +10,9 @@ updatedAt: 2025-08-15
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support immigration court reform — both increased operational funding and structural reform under Article I of the Constitution.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support immigration court reform — both increased operational funding and structural reform under Article I of the Constitution.
 
 The US immigration court backlog has crossed three million pending cases. Many people wait years for a hearing. The current operational pattern means the system is failing on multiple measures: people with weak claims who would have lost their cases get to stay for years and build lives; people with strong claims who would have won live in legal precarity for years; and the public's confidence in the immigration system is undermined regardless of substantive policy preference.
 

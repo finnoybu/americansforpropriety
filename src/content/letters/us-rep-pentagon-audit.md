@@ -10,9 +10,9 @@ updatedAt: 2025-03-04
 
 ---
 
-**Dear Representative [Last Name],**
+**Dear Representative {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town/district] to ask you to support meaningful Pentagon audit accountability and to push for reforms that produce a clean financial audit on a defined timeline.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support meaningful Pentagon audit accountability and to push for reforms that produce a clean financial audit on a defined timeline.
 
 The Department of Defense has been required to produce a clean financial audit since the Chief Financial Officers Act of 1990. It has never done so. Annual audit attempts since 2018 have produced repeated failures, with auditors unable to verify trillions of dollars in assets and transactions. The Pentagon's roughly $850 billion annual budget is half of all federal discretionary spending — the largest line item in federal spending cannot, after 35 years of statutory requirement, demonstrate what it has done with the money.
 

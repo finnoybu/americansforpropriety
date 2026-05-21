@@ -25,12 +25,13 @@ facts:
   - "The State Department's budget is roughly 5% of the Pentagon's; foreign assistance is below 1% of the federal budget despite repeated polling showing voters believe it's much larger."
   - "The US has been continuously at war or engaged in significant military operations for the entire post-Cold War period."
   - "Congress has not declared war since 1942. Subsequent military actions have proceeded under AUMFs, the War Powers Resolution's narrow exceptions, or unilateral executive action."
-  - "Several recent Republican and Democratic congressional efforts to repeal stale AUMFs have produced bipartisan majorities but have not yet enacted full repeal."
+  - "Congress repealed the 1991 and 2002 AUMFs in the FY2026 NDAA (signed December 2025) — the first congressional clawback of a war authorization since 1971; only the 2001 AUMF remains."
+  - "The FY2026 NDAA authorizes $900.6 billion in defense spending; the Department of Defense failed its eighth consecutive financial audit in FY2025."
 subtopics:
   - slug: "war-powers"
     title: "War powers"
     summary: "How four administrations stretched a 9/11 authorization across two decades and many countries."
-    body: "The Constitution assigns Congress the authority to declare war and the President the role of Commander in Chief. The 1973 War Powers Resolution attempted to restore congressional authority after the Vietnam-era expansion of executive war-making. In practice, every administration since has treated the WPR as a notification requirement rather than a constraint, and Congress has rarely tested it. The 2001 Authorization for Use of Military Force, passed three days after 9/11, authorized force against those responsible for the attacks and those who 'harbored' them. Four administrations have stretched it to authorize force against ISIS, AQAP in Yemen, al-Shabaab in Somalia, and various other groups across more than a dozen countries — many of which did not exist in 2001 and had no operational connection to the original authorization. The 2002 Iraq AUMF and the 1991 Gulf War authorization remain technically in force despite the operations they authorized having ended decades ago. Repeal proposals for these stale authorizations have produced bipartisan majorities in both chambers in recent sessions, with broad agreement that authorities must be matched to current operations and time-limited. Modernization of the War Powers Resolution itself — clarifying the introduction-of-forces threshold, requiring affirmative congressional approval for sustained operations, ending the rolling-extension pattern — is a longer-running fight."
+    body: "The Constitution assigns Congress the authority to declare war and the President the role of Commander in Chief. The 1973 War Powers Resolution attempted to restore congressional authority after the Vietnam-era expansion of executive war-making. In practice, every administration since has treated the WPR as a notification requirement rather than a constraint, and Congress has rarely tested it. The 2001 Authorization for Use of Military Force, passed three days after 9/11, authorized force against those responsible for the attacks and those who 'harbored' them. Four administrations have stretched it to authorize force against ISIS, AQAP in Yemen, al-Shabaab in Somalia, and various other groups across more than a dozen countries — many of which did not exist in 2001 and had no operational connection to the original authorization. The 2002 Iraq AUMF and the 1991 Gulf War authorization were repealed in the FY2026 NDAA, signed in December 2025 — the first congressional clawback of a war authorization since 1971. Only the 2001 AUMF now remains in force, and a standalone repeal effort for it has produced bipartisan support, with broad agreement that authorities must be matched to current operations and time-limited. Modernization of the War Powers Resolution itself — clarifying the introduction-of-forces threshold, requiring affirmative congressional approval for sustained operations, ending the rolling-extension pattern — is a longer-running fight."
   - slug: "pentagon-accountability"
     title: "Pentagon accountability"
     summary: "What it means that the largest discretionary line item has never passed an audit."
@@ -51,7 +52,11 @@ keyBills:
   - name: "AUMF Repeal Act (2001 / 2002)"
     chamber: "federal"
     summary: "Repeal of the 2001 and 2002 Authorizations for Use of Military Force; replacement framework for current operations."
-    status: "Bipartisan majorities in both chambers in recent sessions; partial enactment (2002 AUMF) advanced; 2001 still pending"
+    status: "1991 and 2002 AUMFs repealed in the FY2026 NDAA (signed Dec 2025); only the 2001 AUMF remains"
+  - name: "H.R.6751 — 2001 AUMF repeal (Jayapal-Massie)"
+    chamber: "federal"
+    summary: "Standalone bipartisan bill to repeal the remaining 2001 Authorization for Use of Military Force."
+    status: "Introduced Dec 2025; in committee"
   - name: "War Powers Resolution Modernization Act"
     chamber: "federal"
     summary: "Strengthens the War Powers Resolution: expedited withdrawal procedures, clearer hostilities definitions, sunset provisions on use of force."
@@ -140,12 +145,18 @@ timeline:
     event: "Repeated bipartisan AUMF repeal efforts; 2002 AUMF repeal advances; 2001 AUMF repeal not yet enacted."
   - date: "2025"
     event: "Continued state-of-the-permanent-emergency, ongoing AUMF and Pentagon-audit fights, repeated arms-transfer review failures."
+  - date: "2025-12"
+    event: "FY2026 NDAA, signed December 2025, repeals the 1991 and 2002 AUMFs — the first congressional clawback of a war authorization since 1971."
+  - date: "2026-03"
+    event: "US and Israel launch strikes on Iran in March 2026 without prior congressional authorization."
+  - date: "2026-05"
+    event: "Senate advances an Iran war powers resolution for the first time, 50-47."
 relatedBriefs: []
 relatedLetters: []
 relatedActions: []
 ---
 
-Foreign policy is not a side issue for a domestic-focused project. It is shaped by, and shapes, almost every other public priority. Pentagon spending of roughly $850 billion annually is half the federal discretionary budget — half the resource pool from which housing, healthcare, education, and climate investment must come. Wars and military operations, when they occur, reshape national politics for decades. Arms transfers create alliances and grievances that outlast the administrations that approved them.
+Foreign policy is not a side issue for a domestic-focused project. It is shaped by, and shapes, almost every other public priority. Pentagon spending of roughly $900 billion annually is half the federal discretionary budget — half the resource pool from which housing, healthcare, education, and climate investment must come. Wars and military operations, when they occur, reshape national politics for decades. Arms transfers create alliances and grievances that outlast the administrations that approved them.
 
 The five sub-topics below — war powers, Pentagon accountability, arms transfers, diplomacy and development, and covert action oversight — are the load-bearing fights. The first restores congressional authority that has been ceded to the executive over half a century. The second subjects the largest line item in federal spending to the kind of scrutiny everything else gets. The third makes meaningful the existing statutory framework for arms-transfer review. The fourth invests in the alternative to military force. The fifth puts a constitutional check on activities the executive branch is otherwise inclined to expand.
 

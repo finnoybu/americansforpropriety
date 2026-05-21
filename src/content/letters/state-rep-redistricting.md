@@ -10,9 +10,9 @@ updatedAt: 2026-01-30
 
 ---
 
-**Dear Representative [Last Name],**
+**Dear Representative {{rep_last_name}},**
 
-I'm writing as a resident of [city/town] in your district. I'd like to ask you to support legislation establishing an independent redistricting commission for [state]'s congressional and state legislative maps ahead of the next census cycle.
+I'm writing as a resident of {{my_city}}, {{my_state}} in your district. I'd like to ask you to support legislation establishing an independent redistricting commission for {{my_state}}'s congressional and state legislative maps ahead of the next census cycle.
 
 In the last cycle, [reference specific gerrymandering concern in your state — e.g., "the western part of the state was split across three districts in a way that has no demographic justification"]. The result is districts that don't represent communities, and elections that don't function as meaningful contests.
 

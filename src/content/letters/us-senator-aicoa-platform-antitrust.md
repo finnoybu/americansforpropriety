@@ -10,9 +10,9 @@ updatedAt: 2025-02-04
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the American Innovation and Choice Online Act and to defend the structural-remedies trajectory in the major platform antitrust cases now in active proceedings.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the American Innovation and Choice Online Act and to defend the structural-remedies trajectory in the major platform antitrust cases now in active proceedings.
 
 US antitrust enforcement against major technology platforms is the most active in a generation. The DOJ's 2024 victory in the Google search case was the most significant antitrust ruling against a US technology company in decades. The remedies fight will determine whether the substantive ruling produces structural change. Several parallel cases — DOJ v. Google (AdTech), FTC v. Meta, DOJ v. Apple, FTC v. Amazon — are at various stages.
 

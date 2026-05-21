@@ -10,9 +10,9 @@ updatedAt: 2025-09-12
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town]. I want to ask you to support proposals to expand the corporate alternative minimum tax (CAMT) that was enacted in the 2022 Inflation Reduction Act.
+I'm writing as a constituent in {{my_city}}, {{my_state}}. I want to ask you to support proposals to expand the corporate alternative minimum tax (CAMT) that was enacted in the 2022 Inflation Reduction Act.
 
 The CAMT — the 15% minimum tax on book income for corporations earning over $1 billion in average book income — is one of the most structurally significant changes to the federal tax code in a generation. Two years into implementation, it is collecting meaningful revenue from a small number of very large firms whose effective tax rates had been historically far below the statutory rate. It is a structural floor that does not depend on the legislative branch policing every loophole as it appears.
 

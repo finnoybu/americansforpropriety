@@ -10,9 +10,9 @@ updatedAt: 2025-03-10
 
 ---
 
-**Dear Representative [Last Name],**
+**Dear Representative {{rep_last_name}},**
 
-I'm writing as a constituent in [district] to ask you to support sustained VA staffing and appropriations levels that match PACT Act implementation needs.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support sustained VA staffing and appropriations levels that match PACT Act implementation needs.
 
 The 2022 PACT Act expanded VA toxic-exposure benefits to hundreds of thousands of veterans. Two years into implementation, the substantive framework has functioned as designed — over a million additional benefit claims have been filed, with hundreds of thousands of veterans approved for service-connected disability ratings related to toxic exposure. The expansion has been one of the most successful veterans-policy enactments in recent memory.
 

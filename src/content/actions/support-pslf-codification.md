@@ -11,6 +11,6 @@ Public Service Loan Forgiveness, after a decade of mismanagement, finally functi
 
 The reforms that made it work were administrative — Department of Education rulemakings, servicer-contract changes, account-adjustment processes. A subsequent administration could, in principle, reverse them through new rulemaking. The PSLF Reform Act and similar proposals would codify the reforms in statute, making them durable across administrations.
 
-Income-driven repayment reform faces parallel pressure. The SAVE plan substantially reduced monthly payments and accelerated forgiveness for IDR borrowers; ongoing litigation has paused parts of it. Defending IDR generosity is a related federal priority.
+Income-driven repayment faces parallel pressure. The SAVE plan, which had substantially reduced monthly payments and accelerated forgiveness for IDR borrowers, was eliminated through a December 2025 settlement and a March 2026 Eighth Circuit ruling. Defending and codifying generous IDR options is a related federal priority.
 
 Letters to senators and representatives — particularly those on Education and Workforce committees and HELP committees — carry weight on these issues. If you, a family member, or a colleague has benefited from PSLF, naming that in your letter makes the policy concrete. If you're a teacher, nurse, social worker, public defender, or other public-service worker counting on the program, your perspective is especially valuable.

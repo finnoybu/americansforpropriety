@@ -10,9 +10,9 @@ updatedAt: 2025-04-30
 
 ---
 
-**Dear [Senator/Representative] [Last Name],**
+**Dear [Senator/Representative] {{rep_last_name}},**
 
-I'm writing as a resident of [city/town] to ask you to oppose [specific voucher or ESA bill, if known; otherwise: "voucher / ESA expansion legislation"] in [state name].
+I'm writing as a resident of {{my_city}}, {{my_state}} to ask you to oppose [specific voucher or ESA bill, if known; otherwise: "voucher / ESA expansion legislation"] in {{my_state}}.
 
 Voucher and ESA programs have expanded in roughly 15 states since 2020. The political framing is "school choice." The fiscal pattern is something different. Universal voucher programs — those without income or prior-private-school requirements — overwhelmingly serve families that were already enrolled in private schools. The state-budget effect is to divert hundreds of millions to over a billion dollars annually from public school systems to private (often religious) schools, with most enrollment growth coming from families that did not need public help to access private schooling.
 
@@ -24,7 +24,7 @@ The public school cost is real. Universal voucher programs in mid-sized states h
 
 When voucher expansions have been put to voters directly, they have lost — Kentucky 2024, Nebraska 2024 (twice), Colorado 2024. The pattern is consistent: voters, when given a clear choice, reject voucher expansions even in states where the legislature has supported them. Where they advance through legislatures, the political pressure has been donor-driven and well-funded.
 
-I'm asking you to oppose voucher / ESA expansion in our state and to support adequate funding for the public school system that serves the majority of [state]'s students.
+I'm asking you to oppose voucher / ESA expansion in our state and to support adequate funding for the public school system that serves the majority of {{my_state}}'s students.
 
 I'd appreciate knowing your position.
 

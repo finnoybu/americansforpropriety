@@ -10,9 +10,9 @@ updatedAt: 2025-04-12
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the Women's Health Protection Act and to advance it for floor consideration in the current session.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Women's Health Protection Act and to advance it for floor consideration in the current session.
 
 The 2022 Dobbs ruling overturned Roe v. Wade after 49 years of constitutional protection for abortion access. The result is a fragmented two-tier system in which abortion is regulated state by state. Roughly 14 states have enacted near-total bans. Travel for abortion across state lines has increased substantially. The patchwork is not stable; access is moving in real time, in both directions, in ways that depend on where someone happens to live or travel.
 

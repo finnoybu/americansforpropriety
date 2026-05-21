@@ -10,9 +10,9 @@ updatedAt: 2025-08-20
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the Stop Wall Street Looting Act and to advance its key provisions through any legislative vehicle that becomes available.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Stop Wall Street Looting Act and to advance its key provisions through any legislative vehicle that becomes available.
 
 The private equity playbook in healthcare, retail, and other sectors typically ends with a portfolio company bankruptcy that wipes out workers' pensions, severance, and back wages — while the PE owner has already extracted dividends, fees, and real-estate value during the hold period. The financial structure is designed so that the legal person who owes the workers (the portfolio company) has no money, and the legal person with the money (the PE fund) is shielded from the obligation.
 

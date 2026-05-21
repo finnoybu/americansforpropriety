@@ -62,7 +62,7 @@ keyBills:
   - name: "DISCLOSE Act"
     chamber: "federal"
     summary: "Requires donor disclosure for major political spenders, including 501(c)(4)s and super PACs."
-    status: "Reintroduced multiple sessions; not advanced"
+    status: "Reintroduced March 2026 with updated text; not advanced"
   - name: "Fair Elections Now Act / FENA"
     chamber: "federal"
     summary: "Public matching funds (6:1) for small-dollar donations to congressional candidates."
@@ -70,7 +70,7 @@ keyBills:
   - name: "State independent redistricting amendments"
     chamber: "state"
     summary: "Constitutional amendments establishing independent commissions; passed in CA, MI, AZ, CO, others; ongoing campaigns elsewhere."
-    status: "Multiple states active"
+    status: "Posture now defensive; Utah repeal initiative pending, CA Prop 50 mid-decade map upheld"
   - name: "Election worker protection bills"
     chamber: "state"
     summary: "Criminal and civil penalties for threats against election officials; protections against doxxing."
@@ -129,6 +129,12 @@ timeline:
     event: "Several state independent redistricting commission ballot measures advance."
   - date: "2025"
     event: "John R. Lewis VRA Advancement Act and Freedom to Vote Act reintroduced; active state-level fights over mail voting and certification."
+  - date: "2026"
+    event: "Supreme Court rejects a challenge to California's Prop 50 mid-decade map (Feb), having earlier stayed a block on Texas's new map (Dec 2025)."
+  - date: "2026"
+    event: "Louisiana v. Callais narrows VRA Section 2; the Court then vacates the Allen v. Milligan injunction and remands the Mississippi and North Dakota redistricting cases (Apr-May)."
+  - date: "2026"
+    event: "Tennessee and Florida enact new maps dismantling majority-Black districts."
 relatedBriefs: []
 relatedLetters: []
 relatedActions: []

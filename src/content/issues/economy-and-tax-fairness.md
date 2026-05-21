@@ -62,7 +62,7 @@ keyBills:
   - name: "State-level wealth tax bills (CA, NY, IL, WA, others)"
     chamber: "state"
     summary: "Several states have proposed annual wealth taxes or one-time wealth-floor taxes on residents above $50M-$100M."
-    status: "Active in committee in multiple states"
+    status: "Washington enacted a 9.9% tax on income over $1M (Mar 2026); CA billionaire-tax measure headed to Nov 2026 ballot"
   - name: "Stop Wall Street Looting Act"
     chamber: "federal"
     summary: "Reins in private equity: limits dividend recapitalizations, restores worker priority in bankruptcy, requires PE firms to share liability for portfolio company debts."
@@ -113,6 +113,10 @@ timeline:
     event: "Federal courts begin ruling on first wave of post-2023-guidelines antitrust cases. Outcomes mixed; doctrine still in flux."
   - date: "2025"
     event: "Several state legislatures advance wealth-tax and inheritance-tax floor proposals as the federal estate tax exemption remains historically high."
+  - date: "2026"
+    event: "Washington enacts a 9.9% tax on income over $1M (effective tax year 2028) — the first state to act on a high-income surtax after years of proposals."
+  - date: "2026"
+    event: "A California ballot initiative for a 5% one-time tax on net worth above $1B qualifies for the November 2026 ballot."
 relatedBriefs: []
 relatedLetters: []
 relatedActions: []

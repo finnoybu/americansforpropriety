@@ -10,9 +10,9 @@ updatedAt: 2025-02-25
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the Truth and Healing Commission on Indian Boarding School Policies Act and to advance it for floor consideration in the current session.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Truth and Healing Commission on Indian Boarding School Policies Act and to advance it for floor consideration in the current session.
 
 The Indian boarding school system, operating from the late 19th century into the late 20th century, was a federal policy designed to assimilate Native children by removing them from their families, languages, and cultures. The Department of the Interior's 2022-2024 investigation documented hundreds of federally funded boarding schools, the deaths of thousands of Native children at those schools, and the institutional patterns of physical, sexual, and emotional abuse that affected generations of Native families.
 

@@ -59,7 +59,7 @@ keyBills:
   - name: "Truth and Healing Commission on Indian Boarding School Policies Act"
     chamber: "federal"
     summary: "Establishes federal commission to investigate the boarding school era; provides for comprehensive historical record and survivor support."
-    status: "Reintroduced; not advanced"
+    status: "S.761 cleared Senate Indian Affairs Committee, on Senate calendar; House companion H.R.7325 introduced Feb 2026"
   - name: "Native American Voting Rights Act"
     chamber: "federal"
     summary: "Targeted protections for Native American voting access, including ID requirements, mail voting, and polling place access on reservations."
@@ -148,6 +148,10 @@ timeline:
     event: "Haaland v. Brackeen upholds ICWA against constitutional challenge."
   - date: "2024-2025"
     event: "Continued tribal infrastructure spending implementation; ongoing federal Indian law litigation; MMIW data infrastructure development."
+  - date: "2026"
+    event: "Minnesota Supreme Court rejects a constitutional challenge to ICWA; Supreme Court denies cert in Stroble v. Oklahoma Tax Commission, allowing state income tax on tribal citizens living on-reservation."
+  - date: "2026"
+    event: "Supreme Court vacates Turtle Mountain Band v. Howe and remands for reconsideration in light of Louisiana v. Callais."
 relatedBriefs: []
 relatedLetters: []
 relatedActions: []

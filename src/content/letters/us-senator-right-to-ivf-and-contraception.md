@@ -10,9 +10,9 @@ updatedAt: 2025-01-26
 
 ---
 
-**Dear Senator [Last Name],**
+**Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in [city/town] to ask you to support the Right to IVF Act and the Right to Contraception Act, and to advance both for floor consideration in the current session.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Right to IVF Act and the Right to Contraception Act, and to advance both for floor consideration in the current session.
 
 The 2022 Dobbs ruling did not directly address contraception or IVF. State-level fetal-personhood frameworks have brought both into legal pressure. The 2024 Alabama Supreme Court ruling treating embryos as "extrauterine children" temporarily halted IVF treatment in the state and prompted federal protective legislation. Justice Thomas's Dobbs concurrence explicitly invited reconsideration of Griswold v. Connecticut, the 1965 ruling protecting contraception access.
 
