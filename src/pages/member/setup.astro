@@ -76,9 +76,20 @@ const geocodioReady = Boolean(getEnv(Astro).GEOCODIO_API_KEY);
           </div>
         </dl>
 
-        <p class="mt-6 text-xs text-ink-muted">
-          Want your account deleted? Email <code>privacy@americansforpropriety.org</code>. We'll erase your row and any drafts within 7 days.
-        </p>
+        <div class="mt-8 border-t border-rule pt-4">
+          <h3 class="text-sm font-semibold">Delete account</h3>
+          <p class="mt-1 text-xs leading-relaxed text-ink-muted">
+            Permanently deletes your account and everything tied to it — your ZIP, district, cached representatives, and action log. It happens immediately and cannot be undone.
+          </p>
+          <button
+            type="button"
+            id="delete-account"
+            class="btn btn-ghost mt-3 text-coral-deep disabled:opacity-50"
+          >
+            Delete my account
+          </button>
+          <p id="delete-status" class="mt-2 text-sm" role="status"></p>
+        </div>
       </section>
     </div>
   </section>
@@ -106,5 +117,58 @@ const geocodioReady = Boolean(getEnv(Astro).GEOCODIO_API_KEY);
       status.className = "text-sm text-leaf";
       setTimeout(() => location.reload(), 700);
     });
+  </script>
+
+  <script>
+    import { signOut } from "~/lib/auth-client";
+
+    const btn = document.getElementById("delete-account") as HTMLButtonElement | null;
+    const status = document.getElementById("delete-status");
+
+    if (btn) {
+      btn.addEventListener("click", async () => {
+        const ok = window.confirm(
+          "This permanently deletes your account and all your data — your ZIP, " +
+            "district, cached representatives, and action log. It cannot be undone.\n\n" +
+            "Delete your account?",
+        );
+        if (!ok) return;
+
+        btn.disabled = true;
+        if (status) {
+          status.textContent = "Deleting your account…";
+          status.className = "mt-2 text-sm text-ink-muted";
+        }
+
+        let res: Response | null = null;
+        try {
+          res = await fetch("/api/me/delete", { method: "POST" });
+        } catch {
+          res = null;
+        }
+
+        if (!res || !res.ok) {
+          btn.disabled = false;
+          if (status) {
+            status.textContent =
+              "Couldn't delete your account — please try again, or email privacy@americansforpropriety.org.";
+            status.className = "mt-2 text-sm text-coral-deep";
+          }
+          return;
+        }
+
+        if (status) {
+          status.textContent = "Account deleted. Signing you out…";
+          status.className = "mt-2 text-sm text-leaf";
+        }
+        // The account row is gone server-side; clear the dead session cookie and leave.
+        try {
+          await signOut();
+        } catch {
+          /* session already removed — nothing left to clear */
+        }
+        window.location.href = "/";
+      });
+    }
   </script>
 </BaseLayout>
