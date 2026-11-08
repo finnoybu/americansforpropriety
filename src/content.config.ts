@@ -76,6 +76,25 @@ const letters = defineCollection({
     billNumber: z.string().optional(),
     committee: z.string().optional(),
     vehicle: z.string().optional(),
+    // Time-sensitive letters. When `deadline` is set and still in the future,
+    // the letter is featured at the top of /letters, soonest first.
+    // `deadlineLabel` says what the date is ("Caucus vote Nov 18").
+    deadline: z.coerce.date().optional(),
+    deadlineLabel: z.string().optional(),
+    // Sender's-choice fields. Each one renders as an editable text input in
+    // the personalize panel, prefilled with `default`, and substitutes into
+    // the body as {{token}}. Use for letters where the sender picks a name
+    // or position (e.g. who they want as Speaker).
+    choices: z
+      .array(
+        z.object({
+          token: z.string().regex(/^[a-z][a-z0-9_]*$/),
+          label: z.string(),
+          default: z.string(),
+          hint: z.string().optional(),
+        }),
+      )
+      .default([]),
   }),
 });
 

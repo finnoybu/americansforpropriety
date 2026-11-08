@@ -3,7 +3,7 @@ title: "To a US Senator: support the Freedom to Vote Act and DISCLOSE Act"
 summary: "Federal voting access protections and dark-money disclosure. Both have been introduced repeatedly; Senate procedural posture is the binding constraint."
 audience: "US Senator"
 issue: "democracy-and-voting"
-updatedAt: 2025-07-15
+updatedAt: 2026-11-08
 ---
 
 > Personalize. If your state has been particularly affected by post-Shelby voting changes or by dark-money political spending, mention it. The bills have been close to passage multiple times; constituent pressure on senators on the Senate Rules Committee and Judiciary Committee carries particular weight.
@@ -12,7 +12,7 @@ updatedAt: 2025-07-15
 
 **Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Freedom to Vote Act and the DISCLOSE Act, and to advance both for floor consideration this session.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Freedom to Vote Act and the DISCLOSE Act, and to advance both for floor consideration in the 120th Congress that convenes in January.
 
 The case for federal action on voting access and dark-money disclosure is well-established. Since the Supreme Court gutted Voting Rights Act preclearance in 2013, dozens of states have enacted voting restrictions that would previously have required federal review. Roughly half of all federal political spending now flows through entities that disclose little or nothing about their donors.
 
@@ -28,7 +28,7 @@ The DISCLOSE Act, separately or as part of the Freedom to Vote Act, would requir
 
 [Personalize: connect to specific concerns about voting access or political spending in your state. Examples: "Voters in [state] have faced [specific recent restriction]"; "Recent elections in [state] saw [substantial dark-money spending pattern]"; "The 2020 changes to mail voting in [state] have produced [specific effect]".]
 
-Both bills have had floor votes in prior sessions; both have stalled on Senate procedural grounds. I'm asking you to support the substantive provisions, to support the procedural movement required to advance them, and to resist the framing that these are partisan reforms — the underlying provisions enjoy broad public support across party lines, including in many states whose legislatures have moved in the opposite direction.
+The case is stronger after the Supreme Court's 2026 ruling in *Louisiana v. Callais*, which left Section 2 of the Voting Rights Act with little force against discriminatory maps. Both bills have had floor votes in prior sessions; both have stalled on Senate procedural grounds. With a new majority taking over the Senate in January, that is now a choice about Senate rules, not an excuse. I'm asking you to support the substantive provisions, to support the procedural movement required to advance them, and to resist the framing that these are partisan reforms — the underlying provisions enjoy broad public support across party lines, including in many states whose legislatures have moved in the opposite direction.
 
 I'd appreciate knowing your position and what procedural paths you see as plausible.
 
