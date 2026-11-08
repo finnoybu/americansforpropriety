@@ -125,7 +125,7 @@ const choices = letter.data.choices;
             <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-ink-muted">
               {choices.map((c) => (
                 <li>
-                  <code>{`{{${c.token}}}`}</code>: {c.label} (suggested: {c.default})
+                  <code>{`{{${c.token}}}`}</code>: {c.label}{c.default && <> (suggested: {c.default})</>}
                 </li>
               ))}
             </ul>

@@ -11,17 +11,17 @@ vehicle: "House Democratic Caucus leadership election (November 18, 2026) and Ho
 choices:
   - token: "speaker_choice"
     label: "Your choice for Speaker of the House"
-    default: "Alexandria Ocasio-Cortez"
-    hint: "Suggested by the site's editor, not the AI. Change this to your own pick."
+    default: ""
+    hint: "Any member or member-elect of the House. Type the name of the person you want."
 ---
 
 > **Two votes, two audiences.** The Speaker is chosen in two steps. On **November 18**, House Democrats vote by secret ballot on whom to nominate. On **January 3, 2027**, the full House votes on the floor, and every member, from either party, can vote for anyone. A Democratic representative votes in both. A Republican representative votes only on the floor. This letter works for both; delete the sentence that doesn't fit.
 >
 > **Your representative-elect counts too.** Newly elected members vote in the caucus election and on the floor. If your district elected someone new on November 3, send this to them through their campaign or transition contact. Your current representative may be leaving in January.
 >
-> **Where things stand (November 8, 2026).** Hakeem Jeffries formally launched his bid for Speaker on November 4 and is the clear favorite. The nomination needs a simple majority of the caucus; the floor vote needs a majority of members voting, which is 218 if all 435 vote. A letter for someone other than the front-runner still tells the incoming majority what its voters expect.
+> **Where things stand (November 8, 2026).** Hakeem Jeffries formally launched his bid for Speaker on November 4 and is the clear favorite. The nomination needs a simple majority of the caucus; the floor vote needs a majority of members voting, which is 218 if all 435 vote. Your letter is worth sending whoever you support, including the front-runner: it tells the incoming majority what its voters expect from the person who holds the gavel.
 >
-> **Personalize** the paragraph about your choice. If you kept the suggested choice, see the example paragraph below.
+> **Personalize** the paragraph about your choice.
 
 ---
 
@@ -38,7 +38,7 @@ I want a Speaker who will:
 3. Run oversight that is serious, public, and aimed at the abuse of power rather than at headlines.
 4. Keep members from every part of the caucus in the room when the agenda is written.
 
-[Explain why {{speaker_choice}} is the right person for the job. Use your own words. Example if you kept the suggested choice: "Representative Ocasio-Cortez has spent this Congress co-chairing House Democrats' health care working group on the affordability agenda, and she has built a national coalition of voters who feel the party has not been fighting for them. I want a Speaker who can bring those voters into the work of governing."]
+[Explain why {{speaker_choice}} is the right person for the job. Use your own words. One or two concrete reasons work best: their record on the issues you care about, how they have used the power they already have, and what you expect them to do with the job.]
 
 I'd appreciate knowing how you plan to vote.
 
