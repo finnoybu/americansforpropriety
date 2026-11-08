@@ -3,7 +3,7 @@ title: "To a US Senator: defend the clean energy credits that survived OBBBA"
 summary: "The One Big Beautiful Bill Act already rolled back much of the IRA's clean energy package. Connect the credits that remain — and the projects racing the wind/solar construction deadline — to specific investments and jobs in your state."
 audience: "US Senator"
 issue: "climate-and-energy"
-updatedAt: 2026-05-21
+updatedAt: 2026-11-08
 ---
 
 > The most effective letters on this issue connect the clean energy credits to specific investments and jobs in your state or district. If you live near a clean energy facility — solar manufacturing, EV battery production, semiconductor fabs, transmission projects — name it. The political environment for defending the remaining credits is strongest among representatives whose constituents see the jobs.
@@ -16,7 +16,7 @@ I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to defend w
 
 The IRA's clean energy provisions were the largest US climate investment ever enacted. They drove hundreds of billions in private investment in clean energy manufacturing and deployment across the United States, with substantial concentration in red and purple states (Georgia, Tennessee, Texas, Arizona, Michigan, Ohio, North Carolina, others).
 
-The One Big Beautiful Bill Act, signed July 4, 2025, has already rolled much of that back. The consumer EV tax credits ended September 30, 2025. The residential clean energy credit for homeowners ends December 31, 2025. And the production and investment tax credits for wind and solar now phase out for projects that begin construction after July 4, 2026 — a hard cutoff that puts every wind and solar project not yet under construction in a race against the clock.
+The One Big Beautiful Bill Act, signed July 4, 2025, has already rolled much of that back. The consumer EV tax credits ended September 30, 2025. The residential clean energy credit for homeowners ends December 31, 2025. And the production and investment tax credits for wind and solar were cut off for projects that had not begun construction by July 4, 2026. That deadline has now passed, so the projects that made it are the ones left to protect.
 
 [Personalize: name specific clean energy investments in your state or district. Examples: "The [specific facility] in [city/town] is creating [number] jobs and represents [investment amount] in capital investment that these credits made possible." If you don't have specific local knowledge, you can substitute: "I've watched these credits produce real economic activity in our state — [type of project] in [region] is a concrete example."]
 
@@ -25,7 +25,7 @@ This is no longer a fight to head off a future repeal. The repeal already happen
 I'm asking you to:
 
 1. **Defend the clean energy credits that survived OBBBA** — including the technology-neutral credits for geothermal, storage, nuclear, and other generation — against further rollback in any reconciliation or tax-extender vehicle.
-2. **Protect projects already underway**, and resist any move to pull the July 4, 2026 wind and solar construction-start deadline forward or to narrow what counts as beginning construction.
+2. **Protect projects already underway**, resist any move to narrow after the fact what counted as beginning construction before the July 4, 2026 cutoff, and support restoring the wind and solar credits for new projects in the next Congress.
 3. **Support full implementation** of the credits that remain, including the labor-standards and domestic-content conditions that were carefully negotiated.
 4. **Push back against rhetoric** framing the surviving credits as wasteful — the empirical record on private investment, jobs, and emissions reduction is strong.
 

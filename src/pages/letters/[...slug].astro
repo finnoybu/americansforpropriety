@@ -71,6 +71,8 @@ const frontmatterContext: Record<string, string> = {};
 if (letter.data.billNumber) frontmatterContext.bill_number = letter.data.billNumber;
 if (letter.data.committee) frontmatterContext.committee = letter.data.committee;
 if (letter.data.vehicle) frontmatterContext.vehicle = letter.data.vehicle;
+
+const choices = letter.data.choices;
 ---
 <BaseLayout
   title={letter.data.title}
@@ -117,6 +119,15 @@ if (letter.data.vehicle) frontmatterContext.vehicle = letter.data.vehicle;
           <p class="mt-2 text-sm text-ink-muted">
             You don't have to sign in — you can also copy the template manually and edit it yourself. The placeholders in the body (<code>{`{{rep_name}}`}</code>, <code>{`{{my_city}}`}</code>, etc.) tell you what to swap in.
           </p>
+          {choices.length > 0 && (
+            <ul class="mt-3 list-disc space-y-1 pl-5 text-sm text-ink-muted">
+              {choices.map((c) => (
+                <li>
+                  <code>{`{{${c.token}}}`}</code>: {c.label} (suggested: {c.default})
+                </li>
+              ))}
+            </ul>
+          )}
         </>
       )}
 
@@ -156,6 +167,23 @@ if (letter.data.vehicle) frontmatterContext.vehicle = letter.data.vehicle;
           <p class="mt-3 text-sm text-ink-muted">
             Picking a representative fills <code>{`{{rep_name}}`}</code>, <code>{`{{rep_office}}`}</code>, and your local context (<code>{`{{my_city}}`}</code>, <code>{`{{my_state}}`}</code>, <code>{`{{my_district}}`}</code>) into the personalized version below.
           </p>
+
+          {choices.length > 0 && (
+            <div class="mt-6 grid max-w-md gap-4" data-choices>
+              {choices.map((c) => (
+                <label class="block">
+                  <span class="eyebrow">{c.label}</span>
+                  <input
+                    type="text"
+                    data-choice-token={c.token}
+                    value={c.default}
+                    class="mt-2 w-full border border-rule bg-paper px-3 py-2 focus:border-ink focus:outline-none"
+                  />
+                  {c.hint && <span class="mt-1 block text-sm text-ink-muted">{c.hint}</span>}
+                </label>
+              ))}
+            </div>
+          )}
 
           {memberProfile && (
             <p
@@ -254,8 +282,31 @@ if (letter.data.vehicle) frontmatterContext.vehicle = letter.data.vehicle;
           my_state: memberState,
           my_district: memberDistrict,
           ...frontmatter,
+          ...choiceTokens(),
         };
         personalized.value = interpolate(sourceText, tokens);
+      }
+
+      // Sender's-choice inputs (e.g. "Your choice for Speaker"). Empty inputs
+      // are left out so the {{token}} stays visible as a prompt to fill in.
+      const choiceInputs = Array.from(
+        panel.querySelectorAll<HTMLInputElement>("[data-choice-token]"),
+      );
+      function choiceTokens(): Tokens {
+        const out: Tokens = {};
+        for (const input of choiceInputs) {
+          const key = input.dataset.choiceToken;
+          const val = input.value.trim();
+          if (key && val) out[key] = val;
+        }
+        return out;
+      }
+      for (const input of choiceInputs) {
+        input.addEventListener("input", () => {
+          const opt = repPicker?.options[repPicker.selectedIndex];
+          const repName = opt?.getAttribute("data-rep-name") ?? "";
+          if (repName) renderForRep(repName, opt?.getAttribute("data-rep-office") ?? "");
+        });
       }
 
       repPicker?.addEventListener("change", () => {

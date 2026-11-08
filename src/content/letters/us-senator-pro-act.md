@@ -3,7 +3,7 @@ title: "To a US Senator: support the PRO Act"
 summary: "Restore card-check, end captive-audience meetings, require first-contract arbitration, override state right-to-work laws. The most consequential pro-labor legislation since the 1930s."
 audience: "US Senator"
 issue: "labor-and-wages"
-updatedAt: 2025-10-12
+updatedAt: 2026-11-08
 ---
 
 > Personalize at minimum the open and one body paragraph. Reference your own work or a workplace you know if possible — first-person voice carries weight on this issue. If your senator is undecided or formally opposed, your letter is especially valuable; if they're already a co-sponsor, thanks are appropriate but not the highest-value advocacy.
@@ -12,7 +12,7 @@ updatedAt: 2025-10-12
 
 **Dear Senator {{rep_last_name}},**
 
-I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Protecting the Right to Organize Act and to advance it for floor consideration this session.
+I'm writing as a constituent in {{my_city}}, {{my_state}} to ask you to support the Protecting the Right to Organize Act and to advance it for floor consideration in the 120th Congress that convenes in January.
 
 The PRO Act is the most consequential pro-labor legislation seriously considered in the United States since the 1930s. The substantive case for it is straightforward: union density in the US has fallen from 35% of workers in the 1950s to under 10% today, even as polling on union approval has reached multi-decade highs. The gap between approval and density is the gap that the PRO Act is designed to close.
 
@@ -28,7 +28,7 @@ The bill would, in concrete terms:
 
 [If applicable: I'm a worker in [industry/role], or I work alongside people whose ability to organize is currently constrained by [specific aspect of current labor law]. Connect to your own experience or knowledge.]
 
-The bill has passed the House twice. The binding constraint has been Senate procedural posture. I'm asking you to support the bill on the merits and to support whatever procedural movement is required to bring it to a meaningful vote.
+The bill has passed the House twice. The binding constraint has been Senate procedural posture. With a new majority taking over the Senate in January, that constraint is now a choice about Senate rules, not an excuse. I'm asking you to support the bill on the merits and to support whatever procedural movement is required to bring it to a meaningful vote.
 
 I'd appreciate knowing your position.
 

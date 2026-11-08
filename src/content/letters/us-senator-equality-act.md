@@ -3,7 +3,7 @@ title: "To a US Senator: support the Equality Act"
 summary: "Closes the federal civil-rights gap left after Bostock by extending Title VII, Fair Housing Act, and other federal protections to sexual orientation and gender identity."
 audience: "US Senator"
 issue: "civil-rights-and-immigration"
-updatedAt: 2025-08-26
+updatedAt: 2026-11-08
 ---
 
 > Personalize. Letters from people who have lived in the protection gap (LGBTQ+ Americans denied housing, fired, refused service) carry particular weight. If your senator is undecided or formally opposed, your letter is especially valuable.
@@ -26,7 +26,7 @@ The Equality Act would close those gaps systematically:
 
 [Personalize: name a specific concern if applicable. Examples: "I'm an LGBTQ+ constituent who has experienced [specific discrimination]"; "My family member faced [specific situation] when [moving/working/applying for housing]"; "Our [community/workplace] has dealt with [specific issue]". Specific personal experience makes this letter substantially more effective than abstract policy argument.]
 
-The Equality Act has passed the US House multiple times. It has stalled in the Senate. Polling shows broad and durable public support for the substantive protections, including in states whose legislatures have moved in the opposite direction.
+The Equality Act has passed the US House multiple times. It has stalled in the Senate. With new majorities taking over both chambers in January, the 120th Congress has a real chance to pass it. Polling shows broad and durable public support for the substantive protections, including in states whose legislatures have moved in the opposite direction.
 
 I'm asking you to support the bill on the merits, to advocate for floor consideration, and to resist amendments that would weaken its core protections.
 
