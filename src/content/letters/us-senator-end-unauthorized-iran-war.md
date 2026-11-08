@@ -3,6 +3,7 @@ title: "To a US Senator: end the unauthorized war with Iran"
 summary: "The US and Israel began striking Iran on February 28, 2026. Congress never authorized the war, the 60-day War Powers clock ran out on May 1, and a fragile ceasefire is not a peace. Ask your senator to keep voting to end it and to make it a first order of business in the new majority."
 audience: "US Senator"
 issue: "foreign-policy-and-war-powers"
+aiDrafted: true
 updatedAt: 2026-11-08
 vehicle: "Iran war powers resolutions under the War Powers Resolution of 1973"
 ---

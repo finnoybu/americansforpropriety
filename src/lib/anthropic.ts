@@ -4,8 +4,9 @@
 // produce weekly research briefs from a topic + news hook. Editor reviews
 // before publication.
 //
-// On-demand letter generation has been removed — the project now uses
-// hand-written letter templates with placeholder substitution at /letters/[slug].
+// On-demand letter generation has been removed. Letter templates are content
+// files (some AI-drafted, flagged with `aiDrafted`) with placeholder
+// substitution at /letters/[slug]. See /editorial-standards#ai.
 
 const ANTHROPIC_VERSION = "2023-06-01";
 const DEFAULT_MODEL = "claude-opus-4-7";

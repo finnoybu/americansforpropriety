@@ -13,7 +13,7 @@ import Section from "~/components/Section.astro";
         How we source, how we verify, how we disclose.
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-        Principle 06 says accountability runs both ways. This page makes that concrete: the standards a brief, a letter template, or a news post on this site is supposed to clear before it goes up.
+        Principle 06 says accountability runs both ways. This page makes that concrete: the standards a brief, a letter template, or a news post on this site is held to.
       </p>
     </div>
   </section>
@@ -46,16 +46,22 @@ import Section from "~/components/Section.astro";
     </div>
   </Section>
 
-  <Section eyebrow="03" title="Use of AI in our drafting">
+  <Section eyebrow="03" title="Use of AI on this site" id="ai">
     <div class="prose-editorial">
       <p>
-        Some research briefs on this site are drafted with assistance from a large language model and labeled accordingly on the page. Drafting with AI does not lower the bar; it raises it. Every AI-drafted brief is reviewed by an editor against the same sourcing and verification standards above before it is published. Footnotes and links are checked. Numerical claims are checked. Quotes are checked.
+        Much of this site is now researched, written, and updated by an AI system: Claude, a large language model made by Anthropic. That includes new letter templates, news posts and recaps, routine updates to existing letters, and some research briefs. We want to be plain about that, and about how it works.
       </p>
       <p>
-        AI is not used for opinion or framing. The frame of a brief — what's important, who is affected, what the stakes are — is an editorial decision made by a person.
+        <strong>How it works.</strong> On a regular schedule (weekly, plus extra runs around known votes and deadlines), the AI reviews what has happened since the last update. It updates or retires letters whose facts have changed, drafts new letters and posts, and publishes them. Before anything goes live, separate AI review agents check the work independently. One checks the factual claims against current sources. One checks the draft against the standards on this page. One confirms the site builds and every changed page loads. Claims the fact-checking agent can't verify against a current source are removed before publishing.
       </p>
       <p>
-        We do not republish AI output as the work of a named author. AI-drafted material is bylined "Editorial team" and labeled on the page.
+        <strong>The role of a person.</strong> AI-drafted letters and posts are not reviewed by a person before they are published. The site's editor reviews them after they go live and corrects any errors found. AI-drafted research briefs are different: an editor reviews each one and publishes it by hand. The AI works from the positions we publish on our <a href="/issues">Issues</a> and <a href="/principles">Principles</a> pages and applies them to new events, which means it also decides which developments to cover and how to frame them. Those positions, and the rules the AI follows, are set by a person.
+      </p>
+      <p>
+        <strong>Labeling.</strong> Letters and posts drafted by AI carry a "Drafted by AI" note at the top of the page. AI-drafted research briefs are labeled "Weekly brief · AI-drafted." We do not publish AI output under a named person's byline; AI-drafted posts are bylined "Editorial team." Routine AI updates to existing letter templates, such as a bill's status, change the template's updated date. Substantive updates are also noted at the top of the piece, as described in section 07.
+      </p>
+      <p>
+        <strong>The bar is the same.</strong> Sections 01 and 02 apply in full to AI-drafted work. If you find an error, report it through the <a href="/corrections">Corrections</a> page. If we confirm it, we'll fix it and log it there.
       </p>
     </div>
   </Section>
@@ -63,7 +69,7 @@ import Section from "~/components/Section.astro";
   <Section eyebrow="04" title="Independence" tone="warm">
     <div class="prose-editorial">
       <p>
-        Americans for Propriety is not affiliated with a political party, a campaign committee, a 527, or any candidate for public office. We do not endorse candidates and we do not coordinate our publication schedule with one.
+        Americans for Propriety is not affiliated with a political party, a campaign committee, a 527, or any candidate for public office. We do not endorse candidates in elections decided by voters, and we do not coordinate our publication schedule with any candidate. There is one stated exception, for leadership votes in Congress, described in section 06.
       </p>
       <p>
         We have policy views — they are stated openly on the site, on our <a href="/issues">Issues</a> pages and in our <a href="/principles">Principles</a>. We do not pretend those views are neutral. We expect readers to bring their own.
@@ -80,6 +86,9 @@ import Section from "~/components/Section.astro";
         If an editor has a personal, professional, or financial relationship that would reasonably be considered a conflict on a story we are publishing — a family member at the agency in question, recent paid work for an advocacy group quoted in the piece, a financial interest in a company affected — that editor recuses from the piece. When recusal isn't practical, the conflict is disclosed on the page.
       </p>
       <p>
+        No person reviews AI-drafted letters and posts before they go live, so recusal does not apply to them. If the editor finds a conflict when reviewing a piece after publication, it is disclosed on the page.
+      </p>
+      <p>
         We disclose institutional relationships as well. Vendor and infrastructure providers material to our operations are listed on our <a href="/funding">Funding and disclosures</a> page.
       </p>
     </div>
@@ -93,13 +102,16 @@ import Section from "~/components/Section.astro";
       <p>
         Each template names its intended audience (US Senator, US Representative, State Legislator, Local Official, Federal Agency) and the issue it addresses. It cites the underlying bill, rule, or proceeding it is responding to.
       </p>
+      <p>
+        Two templates ask who should lead a chamber of Congress: Senate Majority Leader and Speaker of the House. Those are votes by members of Congress, not by voters, and we treat them as an exception to section 04. The suggested names in those templates were chosen by the site's editor, a person, not by the AI, and they reflect the editor's preference. Replace the name with your own before you send.
+      </p>
     </div>
   </Section>
 
   <Section eyebrow="07" title="Updates and corrections">
     <div class="prose-editorial">
       <p>
-        Briefs and posts are updated when an underlying claim becomes outdated (a bill advances, a court ruling lands, an agency finalizes a rule). Substantive updates are dated and noted at the top of the piece.
+        Briefs, posts, and letter templates are updated when an underlying claim becomes outdated (a bill advances, a court ruling lands, an agency finalizes a rule). Substantive updates are dated and noted at the top of the piece.
       </p>
       <p>
         Errors are corrected. We log them publicly on the <a href="/corrections">Corrections</a> page rather than silently editing. Pieces that contain a correction carry a note linking back to the log.
@@ -113,7 +125,7 @@ import Section from "~/components/Section.astro";
         <li>Material we cannot verify, presented as if we had.</li>
         <li>A claim sourced solely to an anonymous figure when the same claim could be made on the record by someone else.</li>
         <li>A quote stripped of context that would change its meaning.</li>
-        <li>A piece written to advance a candidate's campaign rather than to inform a policy question.</li>
+        <li>A piece written to advance a candidate's campaign in an election decided by voters, rather than to inform a policy question.</li>
         <li>A piece any of our editors has been paid by an interested outside party to publish.</li>
       </ul>
     </div>

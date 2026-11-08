@@ -3,6 +3,7 @@ title: "To a US Representative: vote for my choice for Speaker of the House"
 summary: "Democrats won the House on November 3. The caucus nominates its Speaker candidate on November 18, and the full House elects the Speaker on January 3. Tell your representative who you want and why."
 audience: "US Representative"
 issue: "democracy-and-voting"
+aiDrafted: true
 updatedAt: 2026-11-08
 deadline: 2027-01-03
 deadlineLabel: "Democratic Caucus votes Nov 18; full House votes Jan 3"
@@ -11,7 +12,7 @@ choices:
   - token: "speaker_choice"
     label: "Your choice for Speaker of the House"
     default: "Alexandria Ocasio-Cortez"
-    hint: "Any member of the House. Change this to your own pick."
+    hint: "Suggested by the site's editor, not the AI. Change this to your own pick."
 ---
 
 > **Two votes, two audiences.** The Speaker is chosen in two steps. On **November 18**, House Democrats vote by secret ballot on whom to nominate. On **January 3, 2027**, the full House votes on the floor, and every member, from either party, can vote for anyone. A Democratic representative votes in both. A Republican representative votes only on the floor. This letter works for both; delete the sentence that doesn't fit.

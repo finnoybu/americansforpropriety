@@ -3,6 +3,7 @@ title: "To a US Senator: vote for my choice for Senate Majority Leader"
 summary: "Democrats won the Senate on November 3. The caucus picks its leader by secret ballot in early December, and that person becomes Majority Leader in January. Tell your senator who you want in the job and why."
 audience: "US Senator"
 issue: "democracy-and-voting"
+aiDrafted: true
 updatedAt: 2026-11-08
 deadline: 2026-12-01
 deadlineLabel: "Senate Democratic leadership vote expected early December"
@@ -11,7 +12,7 @@ choices:
   - token: "leader_choice"
     label: "Your choice for Senate Majority Leader"
     default: "Bernie Sanders"
-    hint: "Any senator or senator-elect who caucuses with Democrats. Change this to your own pick."
+    hint: "Suggested by the site's editor, not the AI. Change this to your own pick."
 ---
 
 > **Who this is for.** Only senators in the Democratic caucus vote for Majority Leader. That includes independents who caucus with Democrats, and it includes the senators-elect who won on November 3 and take office in January. If both of your senators are Republicans, they don't get a vote. Send this to a Democratic senator-elect from your state instead, through their campaign or transition contact, if you have one.

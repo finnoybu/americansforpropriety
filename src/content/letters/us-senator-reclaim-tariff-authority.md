@@ -3,6 +3,7 @@ title: "To a US Senator: take back Congress's power over tariffs"
 summary: "The Supreme Court ruled in February that the emergency-powers tariffs were unlawful because only Congress can tax imports. The administration shifted to other statutes the same day. Ask your senator to require congressional approval for new tariffs."
 audience: "US Senator"
 issue: "economy-and-tax-fairness"
+aiDrafted: true
 updatedAt: 2026-11-08
 vehicle: "Tariff-authority legislation in the 120th Congress (for example, a successor to the Trade Review Act)"
 ---

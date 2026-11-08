@@ -3,6 +3,7 @@ title: "To a US Representative: restore the ACA tax credits and reverse the Medi
 summary: "The enhanced ACA premium tax credits expired at the end of 2025, and the 2025 reconciliation law's Medicaid cuts, including work requirements, are phasing in. House Democrats campaigned on fixing both. Hold the new majority to it."
 audience: "US Representative"
 issue: "healthcare"
+aiDrafted: true
 updatedAt: 2026-11-08
 deadline: 2027-01-03
 deadlineLabel: "New Congress convenes Jan 3; Medicaid work requirements start in early 2027"

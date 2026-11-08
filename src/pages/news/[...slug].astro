@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import AiDisclosure from "~/components/AiDisclosure.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
@@ -31,6 +32,7 @@ const dateLabel = post.data.publishedAt.toLocaleDateString("en-US", {
     {post.data.authors.length > 0 && (
       <p class="mt-4 text-sm text-ink-muted">By {post.data.authors.join(", ")}</p>
     )}
+    {post.data.aiDrafted && <AiDisclosure kind="post" />}
 
     <hr class="my-10" />
 

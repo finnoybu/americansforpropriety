@@ -79,6 +79,9 @@ const letters = defineCollection({
     // Time-sensitive letters. When `deadline` is set and still in the future,
     // the letter is featured at the top of /letters, soonest first.
     // `deadlineLabel` says what the date is ("Caucus vote Nov 18").
+    // True when the template was researched and drafted by AI. Renders the
+    // "Drafted by AI" disclosure on the page (see editorial standards, 03).
+    aiDrafted: z.boolean().default(false),
     deadline: z.coerce.date().optional(),
     deadlineLabel: z.string().optional(),
     // Sender's-choice fields. Each one renders as an editable text input in
@@ -120,6 +123,7 @@ const posts = defineCollection({
     authors: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    aiDrafted: z.boolean().default(false),
   }),
 });
 

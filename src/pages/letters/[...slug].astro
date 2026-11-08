@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import AiDisclosure from "~/components/AiDisclosure.astro";
 import { eq } from "drizzle-orm";
 import { getDb, isDbConfigured } from "~/db";
 import { profile as profileTable } from "~/db/schema";
@@ -92,6 +93,7 @@ const choices = letter.data.choices;
         {letter.data.issue.replace(/-/g, " ")}
       </a>
     </div>
+    {letter.data.aiDrafted && <AiDisclosure kind="letter template" />}
 
     <hr class="my-10" />
 
