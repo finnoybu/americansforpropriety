@@ -13,7 +13,17 @@ const letters = (await getCollection("letters")).sort(
   (a, b) => b.data.updatedAt.getTime() - a.data.updatedAt.getTime(),
 );
 
-const issueCounts = letters.reduce<Record<string, number>>((acc, l) => {
+// Time-sensitive letters: deadline still ahead at build time, soonest first.
+// The page is prerendered, so a small script below also hides any whose
+// deadline passes between deploys.
+const buildTime = Date.now();
+const timeSensitive = letters
+  .filter((l) => l.data.deadline && l.data.deadline.getTime() + 24 * 60 * 60 * 1000 >= buildTime)
+  .sort((a, b) => a.data.deadline!.getTime() - b.data.deadline!.getTime());
+const fmtDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+
+const issueCounts =letters.reduce<Record<string, number>>((acc, l) => {
   acc[l.data.issue] = (acc[l.data.issue] ?? 0) + 1;
   return acc;
 }, {});
@@ -57,6 +67,35 @@ const audienceOptions = Object.entries(audienceCounts)
     />
   </Hero>
 
+  {timeSensitive.length > 0 && (
+    <Section>
+      <div data-time-sensitive>
+        <p class="eyebrow text-coral-deep">Time-sensitive</p>
+        <h2 class="mt-2 text-2xl font-semibold">Send these first</h2>
+        <p class="mt-2 max-w-2xl text-sm text-ink-muted">
+          These letters are tied to a vote or deadline coming up soon. After the date passes they drop back into the full list below.
+        </p>
+        <ul class="mt-6 grid list-none gap-4 p-0 md:grid-cols-2">
+          {timeSensitive.map((l) => (
+            <li data-deadline={l.data.deadline!.toISOString()}>
+              <a
+                href={`/letters/${l.id}`}
+                class="block h-full border-l-4 border-coral bg-paper-warm p-6 no-underline"
+              >
+                <p class="eyebrow">
+                  Act by {fmtDate(l.data.deadline!)}
+                  {l.data.deadlineLabel && <> · {l.data.deadlineLabel}</>}
+                </p>
+                <h3 class="mt-2 text-xl font-semibold leading-snug">{l.data.title}</h3>
+                <p class="mt-2 text-sm text-ink-muted">{l.data.summary}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Section>
+  )}
+
   <Section>
     {letters.length === 0 ? (
       <p>No letters yet.</p>
@@ -95,4 +134,21 @@ const audienceOptions = Object.entries(audienceCounts)
       </SearchFilter>
     )}
   </Section>
+
+  <script>
+    // Hide time-sensitive cards whose deadline passed since the last deploy.
+    // A deadline counts through the end of that day (UTC).
+    const box = document.querySelector("[data-time-sensitive]");
+    if (box) {
+      const now = Date.now();
+      const cards = box.querySelectorAll<HTMLElement>("[data-deadline]");
+      let visible = 0;
+      cards.forEach((card) => {
+        const end = new Date(card.dataset.deadline ?? "").getTime() + 24 * 60 * 60 * 1000;
+        if (Number.isFinite(end) && end < now) card.hidden = true;
+        else visible++;
+      });
+      if (visible === 0) (box.closest("section") ?? box).setAttribute("hidden", "");
+    }
+  </script>
 </BaseLayout>

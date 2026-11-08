@@ -4,6 +4,8 @@ summary: "The enhanced ACA premium tax credits expired at the end of 2025, and t
 audience: "US Representative"
 issue: "healthcare"
 updatedAt: 2026-11-08
+deadline: 2027-01-03
+deadlineLabel: "New Congress convenes Jan 3; Medicaid work requirements start in early 2027"
 vehicle: "120th Congress first-100-days affordability agenda"
 ---
 

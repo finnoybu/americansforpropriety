@@ -4,6 +4,8 @@ summary: "Democrats won the House on November 3. The caucus nominates its Speake
 audience: "US Representative"
 issue: "democracy-and-voting"
 updatedAt: 2026-11-08
+deadline: 2027-01-03
+deadlineLabel: "Democratic Caucus votes Nov 18; full House votes Jan 3"
 vehicle: "House Democratic Caucus leadership election (November 18, 2026) and House floor vote for Speaker (January 3, 2027)"
 choices:
   - token: "speaker_choice"

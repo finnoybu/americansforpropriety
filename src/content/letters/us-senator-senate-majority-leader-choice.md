@@ -4,6 +4,8 @@ summary: "Democrats won the Senate on November 3. The caucus picks its leader by
 audience: "US Senator"
 issue: "democracy-and-voting"
 updatedAt: 2026-11-08
+deadline: 2026-12-01
+deadlineLabel: "Senate Democratic leadership vote expected early December"
 vehicle: "Senate Democratic caucus leadership election (secret ballot, expected early December 2026)"
 choices:
   - token: "leader_choice"
