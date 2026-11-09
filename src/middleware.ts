@@ -16,6 +16,25 @@ export const onRequest = defineMiddleware(async (ctx, next) => {
   // Don't try to talk to the DB during prerender — there's no request context.
   if (ctx.isPrerendered) return next();
 
+  // One URL per page: the site's canonical form ends in a trailing slash
+  // (prerendered pages are served that way by the static asset handler).
+  // On-demand pages (briefs, letters, member) would otherwise answer at both
+  // /x and /x/, which Google treats as duplicates. Redirect page GETs only;
+  // never API routes or files, so POSTs and auth calls are untouched.
+  {
+    const { pathname, search } = ctx.url;
+    const method = ctx.request.method;
+    if (
+      (method === "GET" || method === "HEAD") &&
+      pathname !== "/" &&
+      !pathname.endsWith("/") &&
+      !pathname.startsWith("/api/") &&
+      !/\.[a-z0-9]+$/i.test(pathname)
+    ) {
+      return ctx.redirect(`${pathname}/${search}`, 301);
+    }
+  }
+
   const env = getEnv(ctx);
 
   // Skip auth entirely if D1 / auth secret aren't configured. Lets the dev

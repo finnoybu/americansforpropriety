@@ -20,7 +20,13 @@ const {
 } = Astro.props;
 
 const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`;
-const canonical = new URL(Astro.url.pathname, site.url).toString();
+// Canonical URLs always use the trailing-slash form, whichever form the
+// request arrived in, so each page declares exactly one address.
+const canonicalPath =
+  Astro.url.pathname.endsWith("/") || /\.[a-z0-9]+$/i.test(Astro.url.pathname)
+    ? Astro.url.pathname
+    : `${Astro.url.pathname}/`;
+const canonical = new URL(canonicalPath, site.url).toString();
 const ogImageUrl = new URL(ogImage, site.url).toString();
 ---
 <!doctype html>

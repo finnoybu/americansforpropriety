@@ -100,7 +100,7 @@ const ISSUES = [
             {briefs.map((b) => (
               <tr class="border-b border-rule align-top">
                 <td class="py-3 pr-4">
-                  <a href={`/admin/briefs/${b.id}`} class="font-semibold underline">{b.title}</a>
+                  <a href={`/admin/briefs/${b.id}/`} class="font-semibold underline">{b.title}</a>
                   <p class="text-xs text-ink-muted">{b.summary}</p>
                 </td>
                 <td class="py-3 pr-4">{b.issue.replace(/-/g, " ")}</td>
@@ -116,7 +116,7 @@ const ISSUES = [
                   {b.createdAt?.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
                 </td>
                 <td class="py-3 pr-4 text-right">
-                  <a href={`/admin/briefs/${b.id}`} class="text-sm font-semibold underline">Edit</a>
+                  <a href={`/admin/briefs/${b.id}/`} class="text-sm font-semibold underline">Edit</a>
                 </td>
               </tr>
             ))}

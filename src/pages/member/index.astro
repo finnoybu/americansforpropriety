@@ -58,7 +58,7 @@ if (profile?.userId) {
         <p class="mt-1 text-sm text-ink-muted">
           We need your ZIP to find your representatives. We don't store a full address.
         </p>
-        <a href="/member/setup" class="btn btn-primary mt-4">Add your ZIP <span aria-hidden>→</span></a>
+        <a href="/member/setup/" class="btn btn-primary mt-4">Add your ZIP <span aria-hidden>→</span></a>
       </div>
     )}
 
@@ -83,26 +83,26 @@ if (profile?.userId) {
             <dd>{repCount}</dd>
           </div>
         </dl>
-        <a href="/member/setup" class="mt-4 inline-block text-sm font-semibold underline">Update locale</a>
+        <a href="/member/setup/" class="mt-4 inline-block text-sm font-semibold underline">Update locale</a>
       </section>
 
       <section>
         <h2 class="text-xl">Quick actions</h2>
         <ul class="mt-4 space-y-3">
           <li>
-            <a href="/letters" class="block border-t border-rule py-3 no-underline">
+            <a href="/letters/" class="block border-t border-rule py-3 no-underline">
               <span class="font-semibold">Send a letter</span>
               <span class="block text-sm text-ink-muted">Pick a template, personalize it for your representative, copy and send.</span>
             </a>
           </li>
           <li>
-            <a href="/member/representatives" class="block border-t border-rule py-3 no-underline">
+            <a href="/member/representatives/" class="block border-t border-rule py-3 no-underline">
               <span class="font-semibold">See my representatives</span>
               <span class="block text-sm text-ink-muted">Names, offices, and how to contact each one.</span>
             </a>
           </li>
           <li>
-            <a href="/take-action" class="block border-t border-rule py-3 no-underline">
+            <a href="/take-action/" class="block border-t border-rule py-3 no-underline">
               <span class="font-semibold">Browse current asks</span>
               <span class="block text-sm text-ink-muted">Curated calls, testimony submissions, and templates.</span>
             </a>
@@ -125,7 +125,7 @@ if (profile?.userId) {
                 <strong>{a.actionType.replace(/_/g, " ")}</strong>
                 {a.letterTemplateSlug && (
                   <a
-                    href={`/letters/${a.letterTemplateSlug}`}
+                    href={`/letters/${a.letterTemplateSlug}/`}
                     class="text-ink-muted no-underline hover:underline"
                   >
                     {" · "}

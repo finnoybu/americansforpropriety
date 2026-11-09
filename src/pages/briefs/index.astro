@@ -18,7 +18,7 @@ const issueLabels = await getIssueLabels();
 // Static (curated) briefs from the content collection.
 const staticBriefs = (await getCollection("briefs", ({ data }) => !data.draft))
   .map((b) => ({
-    href: `/briefs/${b.id}`,
+    href: `/briefs/${b.id}/`,
     eyebrow: `Brief · ${(issueLabels[b.data.issue] ?? b.data.issue.replace(/-/g, " "))}`,
     title: b.data.title,
     summary: b.data.summary,
@@ -54,7 +54,7 @@ if (isDbConfigured(Astro)) {
       .orderBy(desc(aiBrief.publishedAt));
 
     aiBriefs = aiRows.map((b) => ({
-      href: `/briefs/${b.slug}`,
+      href: `/briefs/${b.slug}/`,
       eyebrow: `Weekly · ${issueLabels[b.issue] ?? b.issue.replace(/-/g, " ")}`,
       title: b.title,
       summary: b.summary,

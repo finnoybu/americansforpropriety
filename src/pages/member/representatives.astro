@@ -58,13 +58,13 @@ function shortenUrl(u: string): string {
     {!profile?.zip && (
       <div class="border-l-4 border-coral bg-paper-warm p-5">
         <p class="font-semibold">Add your ZIP to look up your reps.</p>
-        <a class="btn btn-primary mt-4" href="/member/setup">Go to settings</a>
+        <a class="btn btn-primary mt-4" href="/member/setup/">Go to settings</a>
       </div>
     )}
 
     {profile?.zip && reps.length === 0 && (
       <p class="text-ink-muted">
-        No representatives cached. <a href="/member/setup" class="underline">Re-run the lookup.</a>
+        No representatives cached. <a href="/member/setup/" class="underline">Re-run the lookup.</a>
       </p>
     )}
 
@@ -103,7 +103,7 @@ function shortenUrl(u: string): string {
                   ))}
                 </ul>
                 <a
-                  href="/letters"
+                  href="/letters/"
                   class="mt-4 inline-block text-sm font-semibold underline"
                 >
                   Send {rep.name.split(" ").slice(-1)[0]} a letter →

@@ -48,7 +48,7 @@ const issues = issueOrder
           const factsText = issue.data.facts.join(" ");
           return (
             <IssueCard
-              href={`/issues/${issue.id}`}
+              href={`/issues/${issue.id}/`}
               eyebrow={issue.data.eyebrow}
               title={issue.data.short}
               summary={issue.data.summary}

@@ -10,11 +10,11 @@ export const site = {
 } as const;
 
 export const nav = [
-  { href: "/issues", label: "Issues" },
-  { href: "/briefs", label: "Briefs" },
-  { href: "/letters", label: "Letters" },
-  { href: "/news", label: "News" },
-  { href: "/about", label: "About" },
+  { href: "/issues/", label: "Issues" },
+  { href: "/briefs/", label: "Briefs" },
+  { href: "/letters/", label: "Letters" },
+  { href: "/news/", label: "News" },
+  { href: "/about/", label: "About" },
 ] as const;
 
 export const issueOrder = [
