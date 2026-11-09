@@ -179,7 +179,7 @@ const accentVar = {
       <Section eyebrow="Research" title="Briefs on this issue" tone="warm">
         {briefs.map((b) => (
           <PostCard
-            href={`/briefs/${b.id}`}
+            href={`/briefs/${b.id}/`}
             eyebrow="Brief"
             title={b.data.title}
             summary={b.data.summary}
@@ -198,7 +198,7 @@ const accentVar = {
               <ul class="mt-3 space-y-3">
                 {letters.map((l) => (
                   <li>
-                    <a href={`/letters/${l.id}`} class="block border-t border-rule py-3 no-underline">
+                    <a href={`/letters/${l.id}/`} class="block border-t border-rule py-3 no-underline">
                       <span class="font-semibold">{l.data.title}</span>
                       <span class="block text-sm text-ink-muted">{l.data.summary}</span>
                     </a>

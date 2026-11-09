@@ -36,13 +36,13 @@ export async function GET(context: APIContext) {
       title: p.data.title,
       pubDate: p.data.publishedAt,
       description: p.data.summary,
-      link: `/news/${p.id}`,
+      link: `/news/${p.id}/`,
     })),
     ...briefs.map((b) => ({
       title: `Brief: ${b.data.title}`,
       pubDate: b.data.publishedAt,
       description: b.data.summary,
-      link: `/briefs/${b.id}`,
+      link: `/briefs/${b.id}/`,
     })),
     ...aiRows
       .filter((b) => b.publishedAt !== null)
@@ -50,7 +50,7 @@ export async function GET(context: APIContext) {
         title: `Weekly: ${b.title}`,
         pubDate: b.publishedAt as Date,
         description: b.summary,
-        link: `/briefs/${b.slug}`,
+        link: `/briefs/${b.slug}/`,
       })),
   ].sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 

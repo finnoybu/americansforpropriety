@@ -79,7 +79,7 @@ const audienceOptions = Object.entries(audienceCounts)
           {timeSensitive.map((l) => (
             <li data-deadline={l.data.deadline!.toISOString()}>
               <a
-                href={`/letters/${l.id}`}
+                href={`/letters/${l.id}/`}
                 class="block h-full border-l-4 border-coral bg-paper-warm p-6 no-underline"
               >
                 <p class="eyebrow">
@@ -122,7 +122,7 @@ const audienceOptions = Object.entries(audienceCounts)
                 data-issue={l.data.issue}
                 data-audience={audienceSlug}
               >
-                <a href={`/letters/${l.id}`} class="block border-t border-rule py-6 no-underline">
+                <a href={`/letters/${l.id}/`} class="block border-t border-rule py-6 no-underline">
                   <p class="eyebrow">{l.data.audience} · {issueLabels[l.data.issue] ?? l.data.issue.replace(/-/g, " ")}</p>
                   <h3 class="mt-2 text-xl font-semibold leading-snug">{l.data.title}</h3>
                   <p class="mt-2 max-w-2xl text-sm text-ink-muted">{l.data.summary}</p>

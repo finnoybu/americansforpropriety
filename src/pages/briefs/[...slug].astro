@@ -88,7 +88,7 @@ const StaticContent = view.StaticContent;
 >
   <article class="container-page py-16 md:py-24">
     <p class="eyebrow">
-      <a href={`/issues/${view.issue}`} class="no-underline hover:underline">
+      <a href={`/issues/${view.issue}/`} class="no-underline hover:underline">
         {view.isAI ? "Weekly brief · AI-drafted" : "Brief"} · {issueLabel}
       </a>
     </p>
@@ -119,7 +119,7 @@ const StaticContent = view.StaticContent;
     </div>
 
     <p class="mt-12">
-      <a href="/briefs" class="btn btn-ghost">← All briefs</a>
+      <a href="/briefs/" class="btn btn-ghost">← All briefs</a>
     </p>
   </article>
 
